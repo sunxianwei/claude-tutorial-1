@@ -1,0 +1,20 @@
+{
+  "title": "Claude Code 完整使用指南",
+  "description": "从入门到精通：Claude Code 在实际项目中的应用",
+  "author": "Claude Code Community",
+  "language": "zh-cn",
+  "plugins": [
+    "tbfed-pagefooter",
+    "back-to-top-button",
+    "prism",
+    "-sharing",
+    "highlight"
+  ],
+  "pluginsConfig": {
+    "tbfed-pagefooter": {
+      "copyright": "Copyright &copy Claude Code Guide 2025",
+      "modify_label": "该文件修订时间：",
+      "modify_format": "YYYY-MM-DD HH:mm:ss"
+    }
+  }
+}
