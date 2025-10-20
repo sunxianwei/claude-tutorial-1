@@ -43,7 +43,57 @@
 
 ## MCP 配置步骤
 
-### 步骤 1：创建 MCP 配置文件
+### 方式 1：使用命令行快速添加（推荐）⭐
+
+Claude Code 提供了命令行工具快速管理 MCP 服务器：
+
+```bash
+# 添加 MCP 服务器
+claude mcp add <服务器名称> -- <npm 包命令>
+
+# 删除 MCP 服务器
+claude mcp remove <服务器名称>
+
+# 列出所有已安装的 MCP 服务器
+claude mcp list
+
+# 查看 MCP 服务器详情
+claude mcp info <服务器名称>
+```
+
+**实战示例：**
+
+```bash
+# 添加 Context7 文档查询服务
+claude mcp add context7 -- npx @upstash/context7-mcp
+
+# 添加文件系统访问
+claude mcp add filesystem -- npx @modelcontextprotocol/server-filesystem .
+
+# 添加 Git 集成
+claude mcp add git -- npx @modelcontextprotocol/server-git --repository .
+
+# 添加数据库访问
+claude mcp add postgres -- npx @modelcontextprotocol/server-postgres
+
+# 删除不需要的 MCP 服务器
+claude mcp remove context7
+
+# 查看已安装的服务器
+claude mcp list
+```
+
+**优势：**
+- ✅ 自动配置到 `.claude/mcp-servers.json`
+- ✅ 自动验证配置正确性
+- ✅ 无需手动编辑 JSON 文件
+- ✅ 支持命令补全和错误提示
+
+### 方式 2：手动配置文件
+
+如果你需要更精细的控制，可以手动编辑配置文件。
+
+#### 步骤 1：创建 MCP 配置文件
 
 在项目根目录创建或编辑 `.claude/mcp-servers.json`：
 
@@ -58,7 +108,7 @@
 }
 ```
 
-### 步骤 2：安装 MCP 服务器
+#### 步骤 2：安装 MCP 服务器
 
 根据你要使用的 MCP 服务器安装依赖：
 
@@ -73,7 +123,7 @@ npm install --save-dev @modelcontextprotocol/server-postgres
 npm install --save-dev @modelcontextprotocol/server-git
 ```
 
-### 步骤 3：启动 Claude Code
+#### 步骤 3：启动 Claude Code
 
 ```bash
 claude-code .
@@ -85,10 +135,17 @@ Claude Code 会自动加载所有配置的 MCP 服务器。
 
 ### 📚 官方 MCP 资源
 
+**官方仓库和文档：**
+- **MCP 官方规范**: https://spec.modelcontextprotocol.io
 - **MCP 官方文档**: https://modelcontextprotocol.io
-- **Anthropic MCP Hub**: https://github.com/modelcontextprotocol
-- **MCP 服务器列表**: https://github.com/modelcontextprotocol/servers
-- **npm MCP 包**: https://www.npmjs.com/search?q=%40modelcontextprotocol
+- **官方 MCP 服务器仓库**: https://github.com/modelcontextprotocol/servers
+- **Anthropic MCP 文档**: https://docs.anthropic.com/en/docs/build-with-claude/mcp
+- **npm MCP 包搜索**: https://www.npmjs.com/search?q=%40modelcontextprotocol
+
+**社区资源：**
+- **Awesome MCP Servers**: https://github.com/punkpeye/awesome-mcp-servers
+- **MCP 服务器集合**: https://mcp.so
+- **社区讨论**: https://github.com/modelcontextprotocol/servers/discussions
 
 ### 1️⃣ 文件系统 MCP（必装）
 

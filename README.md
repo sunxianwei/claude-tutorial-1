@@ -30,11 +30,24 @@
 | [11 新项目工作流](docs/11-new-project-workflow.md)   | 20 min | ⭐⭐  | 🔴 必读 |
 | [12 老项目迁移](docs/12-legacy-project-workflow.md) | 20 min | ⭐⭐  | 🟡 推荐 |
 | [13 最佳实践](docs/13-best-practices.md)           | 15 min | ⭐⭐  | 🟡 重要 |
+| [15 命令参考](docs/15-command-reference.md)        | 10 min | ⭐⭐  | 🟡 推荐 |
+| [16 权限管理](docs/16-permissions.md)              | 10 min | ⭐⭐  | 🟡 推荐 |
+| [17 自定义命令和 Hook](docs/17-custom-commands.md)  | 15 min | ⭐⭐⭐ | 🟢 可选 |
+| [18 IDE 集成](docs/18-ide-integration.md)         | 10 min | ⭐⭐  | 🟢 参考 |
+| [19 历史会话管理](docs/19-session-management.md)    | 10 min | ⭐⭐  | 🟢 参考 |
+| [20 可视化工具](docs/20-visualization-tools.md)    | 15 min | ⭐⭐  | 🟢 可选 |
+| [21 老项目开发指南](docs/21-legacy-project-guide.md) | 30 min | ⭐⭐⭐ | 🔴 重要 |
+| [22 MCP 实例配置详解](docs/22-mcp-examples-verified.md) | 20 min | ⭐⭐  | 🟡 推荐 |
+| [23 按岗位使用场景](docs/23-role-based-scenarios.md) | 25 min | ⭐⭐  | 🟡 推荐 |
+| [24 截图指南](docs/24-screenshot-guide.md) | 10 min | ⭐  | 🟢 参考 |
+| [25 验证与测试清单](docs/25-verification-checklist.md) | 15 min | ⭐⭐  | 🟡 推荐 |
+| [26 教程完成报告](docs/26-completion-report.md) | 10 min | ⭐  | 🟢 参考 |
 
 ### 📚 示例项目
 
 - **[前端项目示例](examples/frontend-project/)** - Vue 3 + TypeScript 电商管理系统
 - **[后端项目示例](examples/backend-project/)** - Java + Spring Boot 3.x 电商管理系统
+- **[新项目演示](examples/new-project-demo/)** - 完整的图书管理系统（JDK1.8 + Vue + Playwright）
 
 ### 🛠️ 配置模板
 
@@ -96,6 +109,15 @@
 ---
 
 ## ⚡ 5 分钟快速开始
+
+**想立即开始？选择你的场景：**
+
+- 🆕 **新项目开发**: [查看完整案例](examples/new-project-demo/README.md) - 图书管理系统（JDK1.8 + Vue + Playwright）
+- 🔧 **老项目维护**: [查看详细指南](docs/21-legacy-project-guide.md) - 渐进式接入策略
+
+👉 **[快速开始对比指南](QUICK_START.md)** - 新项目 vs 老项目完整对比
+
+### 通用快速开始
 
 ```bash
 # 1. 安装
