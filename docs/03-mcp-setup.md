@@ -83,9 +83,17 @@ Claude Code 会自动加载所有配置的 MCP 服务器。
 
 ## 常用 MCP 服务器配置
 
+### 📚 官方 MCP 资源
+
+- **MCP 官方文档**: https://modelcontextprotocol.io
+- **Anthropic MCP Hub**: https://github.com/modelcontextprotocol
+- **MCP 服务器列表**: https://github.com/modelcontextprotocol/servers
+- **npm MCP 包**: https://www.npmjs.com/search?q=%40modelcontextprotocol
+
 ### 1️⃣ 文件系统 MCP（必装）
 
 **用途：** 给 Claude 完整的项目文件访问权限
+**官方包**: [@modelcontextprotocol/server-filesystem](https://github.com/modelcontextprotocol/servers/tree/main/src/filesystem)
 
 ```json
 {
@@ -211,6 +219,81 @@ Claude: 列出所有表的关系
 - ✅ 创建 Pull Request
 - ✅ 评论讨论
 - ✅ 自动同步状态
+
+### 5️⃣ᴮ GitLab MCP（公司代码托管）
+
+**官方包**: [@modelcontextprotocol/server-gitlab](https://github.com/modelcontextprotocol/servers/tree/main/src/gitlab)
+
+```json
+{
+  "mcpServers": {
+    "gitlab": {
+      "command": "npx",
+      "args": ["@modelcontextprotocol/server-gitlab"],
+      "env": {
+        "GITLAB_URL": "https://gitlab.yourcompany.com",
+        "GITLAB_TOKEN": "${GITLAB_TOKEN}",
+        "GITLAB_PROJECT_ID": "${PROJECT_ID}"
+      }
+    }
+  }
+}
+```
+
+**Claude 能做的事：**
+- ✅ 查看 Issue、MR（Merge Request）和 Pipeline
+- ✅ 创建和管理 MR
+- ✅ 查看 CI/CD 状态
+- ✅ 同步代码库信息
+
+**使用场景：**
+```bash
+# 查看待处理的 MR
+claude code . "列出所有待审查的 MR"
+
+# 创建新的 MR
+claude code . "基于 feature 分支创建 MR，请求审查"
+
+# 查看 Pipeline 状态
+claude code . "检查最近的构建状态，找出失败原因"
+```
+
+### 5️⃣ᶜ 钉钉 MCP（公司消息通知）
+
+**用途：** 让 Claude 能在开发事件时自动发送钉钉通知
+
+```json
+{
+  "mcpServers": {
+    "dingtalk": {
+      "command": "npx",
+      "args": ["@modelcontextprotocol/server-dingtalk"],
+      "env": {
+        "DINGTALK_WEBHOOK": "${DINGTALK_WEBHOOK_URL}",
+        "DINGTALK_ACCESS_TOKEN": "${DINGTALK_ACCESS_TOKEN}"
+      }
+    }
+  }
+}
+```
+
+**Claude 能做的事：**
+- ✅ 发送开发进度通知
+- ✅ 发送代码审查提醒
+- ✅ 发送测试结果通知
+- ✅ 发送部署成功/失败告警
+
+**使用场景：**
+```bash
+# 功能完成后发送通知
+claude code . "完成用户管理功能，自动在钉钉上通知团队"
+
+# 测试失败告警
+claude code . "测试失败，发送钉钉告警"
+
+# 部署完成通知
+claude code . "部署到测试环境完成，发送钉钉通知"
+```
 
 ### 6️⃣ NPM/PyPI MCP（依赖管理）
 

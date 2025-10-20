@@ -200,54 +200,287 @@ claude code . --subagent=refactor "优化查询性能"
 claude code . --subagent=review "完整代码审查"
 ```
 
-## 自定义 SubAgent
+## 自定义 SubAgent（完整指南）
 
-### 创建项目特定的 Agent
+### 步骤 1：创建 agents.json 配置文件
 
-在 `.claude/agents.json` 中定义：
+在 `.claude/agents.json` 中定义自定义代理：
 
 ```json
 {
   "customAgents": {
-    "apiDeveloper": {
-      "name": "API 开发专家",
-      "description": "专门为 Spring Boot 开发 REST API",
-      "instructions": [
-        "遵循 RESTful 原则",
-        "使用 @RestController 和 @RequestMapping",
-        "实现完整的错误处理",
-        "添加 Swagger 文档",
-        "包含单元测试"
-      ],
+    "javaApiDeveloper": {
+      "name": "Java API 开发专家",
+      "description": "为公司内部系统开发 Spring Boot REST API",
+      "model": "claude-sonnet-4-20250514",
       "tools": ["filesystem", "git", "postgres"],
-      "model": "claude-sonnet-4-20250514"
-    },
-    "frontendDeveloper": {
-      "name": "前端开发专家",
-      "description": "专门为 Vue.js 开发组件",
       "instructions": [
-        "使用 Vue 3 Composition API",
-        "遵循命名规范",
-        "实现响应式设计",
-        "添加单元测试",
-        "编写 Storybook 文档"
+        "使用 Spring Boot 3.x 和 Java 21",
+        "严格遵循 RESTful 设计原则",
+        "实现完整的错误处理和日志记录",
+        "添加详细的 Swagger/OpenAPI 文档",
+        "包含完整的单元测试（JUnit 5 + Mockito）",
+        "测试覆盖率必须 >= 80%",
+        "使用 Lombok @RequiredArgsConstructor 进行依赖注入",
+        "所有 API 响应使用统一的数据结构",
+        "实现请求参数验证和异常处理",
+        "记录关键操作的审计日志",
+        "考虑性能优化（缓存、查询优化等）",
+        "参考本项目的 CLAUDE.md 中定义的规范"
       ],
+      "systemPrompt": "你是一位有 10 年 Java 开发经验的高级后端工程师。你熟悉公司的技术栈和开发规范。生成的代码必须符合企业级应用的质量标准。"
+    },
+
+    "vueFrontendDeveloper": {
+      "name": "Vue 3 前端开发专家",
+      "description": "为公司内部系统开发 Vue 3 组件和页面",
+      "model": "claude-sonnet-4-20250514",
       "tools": ["filesystem", "git", "npm"],
-      "model": "claude-sonnet-4-20250514"
+      "instructions": [
+        "使用 Vue 3 Composition API + TypeScript",
+        "组件文件名使用 PascalCase",
+        "所有 props 都必须有详细的类型定义",
+        "使用 scoped style 隔离样式",
+        "实现响应式设计，支持移动设备",
+        "遵循公司的组件命名规范",
+        "添加单元测试（Vitest + Testing Library）",
+        "测试覆盖率必须 >= 80%",
+        "使用 Pinia 管理全局状态",
+        "实现错误边界和加载态",
+        "添加详细的代码注释和类型文档",
+        "优化性能（memoization、虚拟滚动等）"
+      ],
+      "systemPrompt": "你是一位有 8 年 Vue 开发经验的前端工程师。你关注用户体验和代码可维护性。生成的代码必须符合现代前端开发的最佳实践。"
+    },
+
+    "testingExpert": {
+      "name": "测试专家",
+      "description": "为项目生成完整的测试用例",
+      "model": "claude-sonnet-4-20250514",
+      "tools": ["filesystem", "git"],
+      "instructions": [
+        "分析代码并识别所有关键业务逻辑",
+        "生成全面的单元测试用例",
+        "包括正常案例、边界案例和异常案例",
+        "对于 Java 代码：使用 JUnit 5 + Mockito",
+        "对于前端代码：使用 Vitest + Testing Library",
+        "每个测试必须有清晰的说明注释",
+        "确保测试的可读性和可维护性",
+        "添加集成测试脚本",
+        "生成测试覆盖率报告",
+        "目标覆盖率 >= 80%"
+      ],
+      "systemPrompt": "你是一位 QA 工程师，具有深厚的测试理论知识。你擅长编写全面、高效的测试用例。"
+    },
+
+    "performanceOptimizer": {
+      "name": "性能优化专家",
+      "description": "分析和优化应用性能",
+      "model": "claude-opus-4-1-20250805",
+      "tools": ["filesystem", "git", "postgres"],
+      "instructions": [
+        "分析代码找出性能瓶颈",
+        "识别 N+1 查询问题",
+        "提出数据库索引优化建议",
+        "推荐缓存策略",
+        "分析内存使用情况",
+        "建议代码重构改进性能",
+        "提出前端优化方案（懒加载、代码分割等）",
+        "生成性能测试基准",
+        "提供详细的优化报告和建议"
+      ],
+      "systemPrompt": "你是一位性能优化专家，有丰富的大规模系统优化经验。你能识别性能问题并提出科学的优化方案。"
     }
   }
 }
 ```
 
-### 使用自定义 Agent
+### 步骤 2：使用自定义 SubAgent
+
+#### 方式 A：单个 Agent 使用
 
 ```bash
-# 使用 API 开发专家
-claude code . --subagent=apiDeveloper "创建用户管理 API"
+# 使用 Java API 开发专家
+claude code . --subagent=javaApiDeveloper "为用户管理模块创建完整的 REST API"
 
-# 使用前端开发专家
-claude code . --subagent=frontendDeveloper "创建用户列表组件"
+# 使用 Vue 前端开发专家
+claude code . --subagent=vueFrontendDeveloper "创建用户管理页面，包括列表、搜索、编辑功能"
+
+# 使用测试专家
+claude code . --subagent=testingExpert "为 UserService 生成完整的单元测试"
+
+# 使用性能优化专家
+claude code . --subagent=performanceOptimizer "分析并优化数据库查询性能"
 ```
+
+#### 方式 B：链式执行多个 Agent
+
+```bash
+# 代码生成 → 测试 → 安全审查 → 优化 → 文档
+claude code . \
+  --subagent=javaApiDeveloper \
+  --chain="testingExpert,security,performanceOptimizer,documentation" \
+  "创建订单管理 API，包括查询、创建、更新功能"
+```
+
+### 步骤 3：完整的实战例子
+
+#### 例子 1：开发用户认证 API
+
+**场景：** 为公司系统添加用户认证接口
+
+**代码生成阶段：**
+
+```bash
+claude code . --subagent=javaApiDeveloper \
+  "创建用户认证 API，需求如下：
+
+## 功能需求
+1. 用户登录 - POST /api/v1/auth/login
+   - 输入：username, password
+   - 输出：JWT token, user info
+   - 密码使用 BCrypt 加密
+
+2. 用户注册 - POST /api/v1/auth/register
+   - 输入：username, password, email
+   - 输出：user info
+   - 验证 email 格式和 username 唯一性
+
+3. 刷新 token - POST /api/v1/auth/refresh
+   - 输入：refresh token
+   - 输出：new JWT token
+
+## 技术要求
+- 使用 Spring Security 实现认证
+- JWT token 有效期 1 小时
+- Refresh token 有效期 7 天
+- 实现速率限制防止暴力破解
+- 添加详细的错误处理
+- 生成 Swagger 文档
+"
+```
+
+**测试阶段：**
+
+```bash
+claude code . --subagent=testingExpert \
+  "为上面生成的 AuthController 和 AuthService 生成完整的测试用例"
+```
+
+**优化阶段：**
+
+```bash
+claude code . --subagent=performanceOptimizer \
+  "分析认证代码的性能，特别是关注：
+  - 数据库查询优化
+  - 密码验证的性能
+  - 缓存策略
+  "
+```
+
+#### 例子 2：开发用户管理页面
+
+**场景：** 为后台管理系统创建用户管理页面
+
+**代码生成阶段：**
+
+```bash
+claude code . --subagent=vueFrontendDeveloper \
+  "创建用户管理页面组件，需求如下：
+
+## 功能需求
+1. 用户列表展示
+   - 表格显示：ID、用户名、邮箱、创建时间、操作
+   - 支持分页（每页 20 条）
+   - 支持排序和搜索
+
+2. 用户搜索
+   - 支持按用户名和邮箱搜索
+   - 实时搜索提示
+
+3. 用户操作
+   - 编辑用户信息的模态框
+   - 删除用户（确认对话）
+   - 批量删除
+
+4. 加载和错误状态
+   - 显示加载中...
+   - 显示错误信息
+   - 为空时显示提示
+
+## 技术要求
+- 使用 Vue 3 Composition API
+- TypeScript 类型检查
+- 使用 Element Plus 组件库
+- 响应式设计（支持移动设备）
+- 性能优化（虚拟滚动）
+"
+```
+
+**测试阶段：**
+
+```bash
+claude code . --subagent=testingExpert \
+  "为用户管理页面生成完整的单元测试"
+```
+
+### 步骤 4：添加自定义 Agent 到项目
+
+**项目结构：**
+
+```
+your-project/
+├── .claude/
+│   ├── config.json
+│   ├── agents.json          # ← 放这里
+│   └── mcp-servers.json
+├── CLAUDE.md
+└── src/
+```
+
+**验证配置：**
+
+```bash
+# 查看所有可用的 agent
+claude-code --list-agents
+
+# 显示特定 agent 的详情
+claude-code --agent-info=javaApiDeveloper
+
+# 测试 agent 功能
+claude-code --test-agent=javaApiDeveloper
+```
+
+### 步骤 5：最佳实践
+
+#### 1. 为每个 Agent 添加明确的角色定义
+
+```json
+{
+  "systemPrompt": "你是一位资深的 [职位] 工程师，拥有 [年数] 年的经验..."
+}
+```
+
+#### 2. 在 instructions 中列出具体要求
+
+```json
+{
+  "instructions": [
+    "✅ DO：明确的正向指导",
+    "❌ DON'T：需要避免的行为"
+  ]
+}
+```
+
+#### 3. 定期更新 Agent 配置
+
+根据项目进展，不断改进 Agent 的指导，使其更适合项目需求。
+
+#### 4. 结合规则文件使用
+
+在 `CLAUDE.md` 中定义全局规范，Agent 会自动遵守。
+
+---
 
 ## 链式 Agent 工作流
 

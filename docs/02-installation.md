@@ -1,130 +1,53 @@
-# 02 - 安装配置：让 Claude Code 完全就绪
+# 02 - 配置指南：让 Claude Code 完全就绪
 
-## 系统要求
+> 本章假设你已安装 Claude Code。如未安装，请先参考 [第 01 章快速开始](01-quick-start.md)中的安装部分。
 
-### 必需条件
-- **Node.js**: 16.x 或 18.x+（推荐 18 LTS）
-- **npm**: 8.x 或更新版本
-- **Git**: 2.30+
-- **操作系统**: macOS 10.15+ / Ubuntu 18.04+ / Windows 10+ (WSL2)
+## 快速配置（5分钟）
 
-### 检查系统
+### 步骤 1：配置 API 密钥
 
-```bash
-# 检查 Node.js 版本
-node --version    # 应输出 v18.x.x 或 v20.x.x
-
-# 检查 npm 版本
-npm --version     # 应输出 8.x.x 或更新
-
-# 检查 Git 版本
-git --version     # 应输出 git version 2.30+
-```
-
-## 安装步骤
-
-### 步骤 1：安装 Claude Code CLI
-
-```bash
-# 使用 npm 全局安装
-npm install -g @anthropic-ai/claude-code
-
-# 验证安装成功
-claude-code --version
-
-# 查看帮助信息
-claude-code --help
-```
-
-**国内用户提速：** 如果npm很慢，使用淘宝源：
-```bash
-npm config set registry https://registry.npmmirror.com
-npm install -g @anthropic-ai/claude-code
-```
-
-### 步骤 2：获取 API 密钥
-
-1. 访问 [Anthropic Console](https://console.anthropic.com)
-2. 登录或创建账号
-3. 点击左侧 "API Keys"
-4. 点击 "Create Key"
-5. 复制生成的密钥
-
-⚠️ **重要安全提示：**
-- 密钥只会显示一次，请妥善保管
-- 不要在代码中硬编码密钥
-- 定期轮换密钥
-
-### 步骤 3：配置 API 密钥
-
-#### 方案 A：环境变量（推荐）
+#### 环境变量方式（推荐）
 
 ```bash
 # macOS / Linux
 export ANTHROPIC_API_KEY="sk-ant-xxxxxxxxxxxx"
 
-# 永久保存（添加到 ~/.zshrc 或 ~/.bashrc）
+# 永久保存（添加到 ~/.zshrc）
 echo 'export ANTHROPIC_API_KEY="sk-ant-xxxxxxxxxxxx"' >> ~/.zshrc
 source ~/.zshrc
-
-# Windows (PowerShell)
-$env:ANTHROPIC_API_KEY = "sk-ant-xxxxxxxxxxxx"
-
-# Windows (cmd)
-set ANTHROPIC_API_KEY=sk-ant-xxxxxxxxxxxx
 ```
 
-#### 方案 B：VS Code 配置
+#### VS Code 配置
 
-如果使用 VS Code 插件，在 settings.json 中配置：
+在 settings.json 中配置：
 
 ```json
 {
   "anthropic.apiKey": "sk-ant-xxxxxxxxxxxx",
-  "anthropic.model": "claude-haiku-4-5-20251001"
+  "anthropic.model": "claude-sonnet-4-20250514"
 }
 ```
 
-#### 方案 C：项目级配置（仅作演示用）
-
-在项目根目录创建 `.env` 文件：
+### 步骤 2：初始化项目
 
 ```bash
-# .env
-ANTHROPIC_API_KEY=sk-ant-xxxxxxxxxxxx
-```
-
-然后在使用前加载：
-```bash
-source .env
-claude-code .
-```
-
-### 步骤 4：初始化项目
-
-```bash
-# 进入你的项目目录
 cd your-project
-
-# 初始化 Claude Code
 claude-code init
-
-# 这会创建：
-# - .claude/              # Claude Code 配置目录
-# - CLAUDE.md            # 项目指南和规则
 ```
 
-### 步骤 5：验证安装
+### 步骤 3：验证配置
 
 ```bash
 # 测试 Claude Code 是否可用
 claude-code --version
 
-# 尝试在项目中使用
-claude-code . "Tell me about this project structure"
+# 查看已加载的配置
+claude-code --show-rules
 ```
 
-## 配置选项详解
+---
+
+## 深度配置
 
 ### Claude Code 配置文件结构
 
@@ -139,72 +62,82 @@ your-project/
 └── .claudeignore            # 忽略文件列表
 ```
 
-### 核心配置项
-
-#### `.claude/config.json`
+### .claude/config.json 详解
 
 ```json
 {
-  "model": "claude-haiku-4-5-20251001",
+  "model": "claude-sonnet-4-20250514",
   "temperature": 0.7,
   "maxTokens": 4096,
-  "contextWindow": "大型",
+  "contextWindow": "中",
+  "language": "zh-cn",
   "autoCommit": false,
-  "language": "zh-cn"
+  "contextCompression": {
+    "level": "medium",
+    "ignoreNodeModules": true,
+    "ignoreBuildArtifacts": true
+  }
 }
 ```
 
-**配置说明：**
-- `model`: 使用的模型版本
-  - `claude-opus-4-1-20250805` - 最强（适合复杂任务）
-  - `claude-sonnet-4-20250514` - 平衡（推荐）
-  - `claude-haiku-4-5-20251001` - 快速便宜（日常任务）
+**关键配置说明：**
 
-- `temperature`: 创意度 (0-1)
+- **model**: 使用的模型
+  - `claude-opus-4-1-20250805` - 最强，复杂任务
+  - `claude-sonnet-4-20250514` - 平衡（推荐）⭐
+  - `claude-haiku-4-5-20251001` - 快速便宜
+
+- **temperature**: 创意度 (0-1)
   - `0` - 完全确定性（代码任务推荐）
   - `0.7` - 平衡（默认）
   - `1` - 最创意（创意写作）
 
-- `maxTokens`: 单次回复最大 token 数
-  - 一般 `4096` 即可
-  - 复杂任务可设置 `8192`
-
-- `contextWindow`: 上下文大小
+- **contextWindow**: 上下文大小
   - `小` - 节省成本，适合小项目
-  - `中` - 默认平衡方案
+  - `中` - 默认平衡方案（推荐）
   - `大型` - 包含完整项目上下文
 
-#### `.claudeignore`
-
-类似 `.gitignore`，指定哪些文件 Claude 不应该读取：
+### .claudeignore 最佳实践
 
 ```
-# 依赖目录
+# 依赖和虚拟环境
 node_modules/
 .venv/
+venv/
+env/
 vendor/
+target/
 
 # 构建产物
 dist/
 build/
-*.o
+out/
 *.class
+__pycache__/
+.pytest_cache/
 
-# 敏感文件
-.env*
-.aws/
-*.key
-*.pem
-secrets.json
+# IDE 和编辑器
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
 
-# 临时文件
-*.tmp
+# 系统文件
 .DS_Store
+.git/
+
+# 临时和日志
+logs/
+*.log
+tmp/
+temp/
+.cache/
 ```
 
-### VS Code 配置
+### VS Code 工作区配置
 
-如果使用 VS Code 扩展，在工作区配置中添加：
+在 `.vscode/settings.json` 中配置：
 
 ```json
 {
@@ -215,32 +148,16 @@ secrets.json
     "autoSave": true
   },
   "editor.wordWrap": "on",
-  "editor.formatOnSave": true
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode"
 }
 ```
 
+---
+
 ## 常见问题排查
 
-### 问题 1：找不到 claude-code 命令
-
-**症状：**
-```
-claude-code: command not found
-```
-
-**解决方案：**
-```bash
-# 检查全局安装位置
-npm config get prefix
-
-# 如果不在 PATH 中，手动添加
-export PATH=$PATH:$(npm config get prefix)/bin
-
-# 永久添加到 ~/.zshrc 或 ~/.bashrc
-echo 'export PATH=$PATH:'"$(npm config get prefix)"'/bin' >> ~/.zshrc
-```
-
-### 问题 2：API 密钥无效
+### 问题 1：API 密钥无效
 
 **症状：**
 ```
@@ -255,106 +172,100 @@ Error: Invalid API key. Please check ANTHROPIC_API_KEY environment variable.
 ```bash
 # 验证密钥
 echo $ANTHROPIC_API_KEY
-
 # 应该输出类似：sk-ant-xxxxxxxxxxxxx
 ```
 
-### 问题 3：权限错误
+### 问题 2：找不到 claude-code 命令
 
 **症状：**
 ```
-Permission denied: .claude/config.json
+claude-code: command not found
 ```
 
 **解决方案：**
 ```bash
-# 修复权限
-chmod -R 755 .claude/
-chmod 644 CLAUDE.md
+# 检查全局安装位置
+npm config get prefix
+
+# 如果不在 PATH 中，手动添加
+export PATH=$PATH:$(npm config get prefix)/bin
 ```
 
-### 问题 4：性能问题
+### 问题 3：模型加载缓慢
 
-如果 Claude Code 运行缓慢：
-
+**解决方案：**
 ```bash
-# 1. 减小上下文
-# 在 .claude/config.json 中改为 "contextWindow": "小"
+# 检查网络连接
+ping api.anthropic.com
 
-# 2. 优化 .claudeignore
-# 添加更多无关目录
+# 尝试使用更快的模型
+# 在 config.json 中改为 claude-haiku-4-5-20251001
 
-# 3. 使用更快的模型
-# 改用 claude-haiku-4-5-20251001
+# 减小上下文窗口
+# 在 config.json 中改为 "contextWindow": "小"
 ```
 
-## 高级配置
+---
 
-### MCP 服务器配置
+## 团队协作配置
 
-创建 `.claude/mcp-servers.json`：
+### 项目级规范文件
 
-```json
-{
-  "servers": [
-    {
-      "name": "filesystem",
-      "command": "node",
-      "args": ["./mcp-servers/filesystem.js"]
-    }
-  ]
-}
-```
-
-详见 [第 3 章：MCP 配置指南](03-mcp-setup.md)
-
-### 自定义工具快捷键
-
-创建 `.claude/shortcuts.json`：
-
-```json
-{
-  "test": "npm test && npm run coverage",
-  "build": "npm run clean && npm run build",
-  "deploy": "npm run build && npm run deploy:prod"
-}
-```
-
-### 项目规范
-
-编写 `CLAUDE.md` 定义项目规范：
+在项目根目录创建 `CLAUDE.md`（详见第 06 章）：
 
 ```markdown
 # 项目规范
 
 ## 代码风格
-- 使用 ESLint 和 Prettier
+- 使用 TypeScript 严格模式
 - 2 空格缩进
-- 必须有 TypeScript 类型
+- 使用 ESLint 和 Prettier
+
+## 测试要求
+- 最低覆盖率 80%
+- 使用 Jest 进行单元测试
 
 ## 提交规范
 - Conventional Commits
 - 中文提交信息
 
-## 文件结构
-- src/ - 源代码
-- tests/ - 测试代码
-- docs/ - 文档
+## 工具集成
+- 使用 GitHub Actions 进行 CI/CD
+- PostgreSQL 作为数据库
 ```
 
-详见 [第 6 章：规则文件系统](06-rules-file.md)
+### 环境变量管理
 
-## 下一步
+创建 `.env.example`：
 
-✅ 安装配置完成！
+```bash
+ANTHROPIC_API_KEY=sk-ant-your-key
+DB_PASSWORD=your_password
+GITHUB_TOKEN=your_token
+GITLAB_TOKEN=your_token
+DINGTALK_WEBHOOK=your_webhook_url
+```
 
-选择你要进行的操作：
+**安全提示：** 添加 `.env` 到 `.gitignore`
 
-- 📖 **新手入门** → [新项目工作流](11-new-project-workflow.md)
-- 🔧 **扩展功能** → [MCP 配置指南](03-mcp-setup.md)
-- 📋 **项目迁移** → [老项目迁移](12-legacy-project-workflow.md)
-- 💻 **开始编码** → [内置工具完整列表](08-builtin-tools.md)
+```bash
+echo ".env" >> .gitignore
+echo ".env.local" >> .gitignore
+```
 
 ---
 
-**时间提示：** 本章阅读 10 分钟，配置 5 分钟 ⏱️
+## 下一步
+
+✅ 配置完成！
+
+选择你要进行的操作：
+
+- 📖 **学习规范** → [第 06 章：规则文件系统](06-rules-file.md)
+- 🔧 **扩展工具** → [第 03 章：MCP 配置指南](03-mcp-setup.md)
+- 💻 **开始编码** → [第 11 章：新项目工作流](11-new-project-workflow.md)
+- 🚀 **快速上手** → [第 01 章：快速开始](01-quick-start.md)
+
+---
+
+**时间提示：** 本章配置需要 5-10 分钟 ⏱️
