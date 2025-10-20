@@ -43,12 +43,12 @@ claude-code --list-agents
 
 ### 4 个内置 Agent
 
-| Agent | 用途 | 命令 |
-|------|------|------|
-| `javaApiDeveloper` | Spring Boot API 开发 | `--subagent=javaApiDeveloper` |
-| `vueFrontendDeveloper` | Vue 3 组件开发 | `--subagent=vueFrontendDeveloper` |
-| `testingExpert` | 测试用例生成 | `--subagent=testingExpert` |
-| `performanceOptimizer` | 性能优化 | `--subagent=performanceOptimizer` |
+| Agent                  | 用途                 | 命令                                |
+| ---------------------- | ------------------ | --------------------------------- |
+| `javaApiDeveloper`     | Spring Boot API 开发 | `--subagent=javaApiDeveloper`     |
+| `vueFrontendDeveloper` | Vue 3 组件开发         | `--subagent=vueFrontendDeveloper` |
+| `testingExpert`        | 测试用例生成             | `--subagent=testingExpert`        |
+| `performanceOptimizer` | 性能优化               | `--subagent=performanceOptimizer` |
 
 ---
 

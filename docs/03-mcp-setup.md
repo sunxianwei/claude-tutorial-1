@@ -258,63 +258,424 @@ claude code . "基于 feature 分支创建 MR，请求审查"
 claude code . "检查最近的构建状态，找出失败原因"
 ```
 
-### 5️⃣ᶜ 钉钉 MCP（公司消息通知）
+### 5️⃣ᶜ 钉钉通知（需自行实现或使用第三方）
 
-**用途：** 让 Claude 能在开发事件时自动发送钉钉通知
+**说明：** 钉钉 MCP 暂无官方实现，可以：
+
+**方案 1: 使用 Bash + Webhook**
+
+在提示词中要求使用 curl 发送钉钉 Webhook:
+
+```bash
+claude code . "完成用户管理功能后，使用 curl 发送钉钉 Webhook 通知
+Webhook URL: ${DINGTALK_WEBHOOK}"
+```
+
+**方案 2: 自行实现 MCP 服务器**
+
+参考 [MCP 官方文档](https://modelcontextprotocol.io) 实现钉钉集成
+
+**方案 3: 使用 CI/CD 集成**
+
+在 GitHub Actions 或 GitLab CI 中配置钉钉通知
+
+### 6️⃣ 依赖管理（使用 Bash 替代）
+
+**说明：** NPM MCP 可能不存在官方包，可以通过 bash 命令实现相同功能。
+
+**使用方式：**
+
+```bash
+# 直接在提示词中要求使用 bash 命令
+claude code . "使用 npm 命令检查项目中过期的依赖并更新"
+```
+
+**常用命令：**
+- `npm outdated` - 查看过期依赖
+- `npm audit` - 检查安全漏洞
+- `npm update` - 更新依赖
+
+---
+
+## 🌟 高级 MCP 服务器
+
+以下是一些强大的第三方和专业 MCP 服务器，可以极大增强 Claude Code 的能力。
+
+### 7️⃣ Context7 文档查询（强烈推荐）⭐
+
+**用途：** 实时获取最新的库文档和 API 参考，无需离开编辑器
+
+**官方包**: `mcp-server-context7`
 
 ```json
 {
   "mcpServers": {
-    "dingtalk": {
+    "context7": {
       "command": "npx",
-      "args": ["@modelcontextprotocol/server-dingtalk"],
-      "env": {
-        "DINGTALK_WEBHOOK": "${DINGTALK_WEBHOOK_URL}",
-        "DINGTALK_ACCESS_TOKEN": "${DINGTALK_ACCESS_TOKEN}"
-      }
+      "args": ["-y", "mcp-server-context7"]
     }
   }
 }
 ```
 
 **Claude 能做的事：**
-- ✅ 发送开发进度通知
-- ✅ 发送代码审查提醒
-- ✅ 发送测试结果通知
-- ✅ 发送部署成功/失败告警
+- ✅ 查询任何 npm 包的最新文档
+- ✅ 获取特定版本的 API 参考
+- ✅ 搜索代码示例和用法
+- ✅ 理解最新的库特性
 
 **使用场景：**
 ```bash
-# 功能完成后发送通知
-claude code . "完成用户管理功能，自动在钉钉上通知团队"
+# 查询 React 最新文档
+claude code . "使用 Context7 查询 React 18 的 useTransition hook 用法"
 
-# 测试失败告警
-claude code . "测试失败，发送钉钉告警"
+# 查询特定库的 API
+claude code . "查询 axios 库的请求拦截器配置方法"
 
-# 部署完成通知
-claude code . "部署到测试环境完成，发送钉钉通知"
+# 获取代码示例
+claude code . "获取 Vue 3 Composition API 的响应式代码示例"
 ```
 
-### 6️⃣ NPM/PyPI MCP（依赖管理）
+**适用项目：** 所有项目，特别是需要频繁查阅文档的开发场景
 
-**NPM 配置：**
+---
+
+### 8️⃣ Open WebSearch 网页搜索（信息查询）
+
+**用途：** 让 Claude 能够搜索互联网获取最新信息
+
+**官方包**: `mcp-server-open-websearch`
 
 ```json
 {
   "mcpServers": {
-    "npm": {
+    "websearch": {
       "command": "npx",
-      "args": ["@modelcontextprotocol/server-npm"]
+      "args": ["-y", "mcp-server-open-websearch"]
     }
   }
 }
 ```
 
 **Claude 能做的事：**
-- ✅ 查看依赖版本
-- ✅ 检查安全漏洞
-- ✅ 建议更新
-- ✅ 生成 package.json
+- ✅ 搜索技术文档和教程
+- ✅ 查找最新的技术博客
+- ✅ 获取错误信息的解决方案
+- ✅ 搜索开源项目和示例
+
+**使用场景：**
+```bash
+# 搜索错误解决方案
+claude code . "搜索 'CORS error in React' 的最佳解决方案"
+
+# 查找最佳实践
+claude code . "搜索 Spring Boot 3.x 的性能优化最佳实践"
+
+# 获取技术对比
+claude code . "搜索并对比 Pinia vs Vuex 的优缺点"
+```
+
+**适用项目：** 需要实时信息查询的所有项目
+
+---
+
+### 9️⃣ Spec Workflow 规范化工作流（项目管理）⭐⭐
+
+**用途：** 结构化的需求、设计、任务管理工作流
+
+**官方包**: `mcp-server-spec-workflow`
+
+```json
+{
+  "mcpServers": {
+    "spec-workflow": {
+      "command": "npx",
+      "args": ["-y", "mcp-server-spec-workflow"]
+    }
+  }
+}
+```
+
+**Claude 能做的事：**
+- ✅ 创建和管理需求文档（Requirements）
+- ✅ 生成技术设计文档（Design）
+- ✅ 拆解和跟踪任务（Tasks）
+- ✅ 生成项目结构文档（Structure）
+- ✅ 审批流程管理（Approvals）
+
+**工作流程：**
+
+```
+1. 需求阶段 (requirements.md)
+   ↓
+2. 产品设计 (product.md)
+   ↓
+3. 技术设计 (design.md)
+   ↓
+4. 架构设计 (structure.md)
+   ↓
+5. 任务拆解 (tasks.md)
+   ↓
+6. 实施开发
+```
+
+**使用场景：**
+
+```bash
+# 初始化项目规范
+claude code . "使用 Spec Workflow 为'用户认证系统'创建需求文档"
+
+# 生成技术设计
+claude code . "基于需求文档生成技术设计，包括数据库设计和API设计"
+
+# 拆解任务
+claude code . "将技术设计拆解为可执行的开发任务列表"
+
+# 跟踪进度
+claude code . "查看当前项目的任务完成状态"
+```
+
+**文档结构：**
+
+```
+.spec-workflow/
+├── specs/
+│   └── user-auth/
+│       ├── requirements.md    # 需求文档
+│       ├── product.md         # 产品设计
+│       ├── design.md          # 技术设计
+│       ├── structure.md       # 架构设计
+│       └── tasks.md           # 任务列表
+└── approvals/                 # 审批记录
+```
+
+**适用项目：**
+- 需要规范化开发流程的团队项目
+- 大型功能开发
+- 需要文档化的企业项目
+
+---
+
+### 🔟 DeepWiki 深度文档（技术学习）
+
+**用途：** 获取 GitHub 项目的深度文档和使用指南
+
+**官方包**: `mcp-server-deepwiki`
+
+```json
+{
+  "mcpServers": {
+    "deepwiki": {
+      "command": "npx",
+      "args": ["-y", "mcp-server-deepwiki"]
+    }
+  }
+}
+```
+
+**Claude 能做的事：**
+- ✅ 获取 GitHub 项目的完整文档
+- ✅ 理解开源项目的架构
+- ✅ 学习项目的使用方法
+- ✅ 获取代码示例和最佳实践
+
+**使用场景：**
+
+```bash
+# 学习开源项目
+claude code . "使用 DeepWiki 获取 vercel/next.js 的完整文档"
+
+# 理解项目架构
+claude code . "通过 DeepWiki 分析 facebook/react 的架构设计"
+
+# 获取使用指南
+claude code . "获取 vuejs/core 的 Composition API 详细使用指南"
+```
+
+**支持的格式：**
+- GitHub 仓库（owner/repo）
+- DeepWiki URL
+- 项目关键词
+
+**适用项目：**
+- 学习和集成开源项目
+- 技术调研
+- 参考优秀项目的实现
+
+---
+
+### 1️⃣1️⃣ Playwright 浏览器控制（E2E 测试）⭐
+
+**用途：** 自动化浏览器操作，进行端到端测试
+
+**官方包**: `mcp-server-playwright`
+
+```json
+{
+  "mcpServers": {
+    "playwright": {
+      "command": "npx",
+      "args": ["-y", "mcp-server-playwright"]
+    }
+  }
+}
+```
+
+**Claude 能做的事：**
+- ✅ 自动化浏览器操作
+- ✅ 执行端到端测试
+- ✅ 截图和录屏
+- ✅ 表单自动填写
+- ✅ 页面性能分析
+- ✅ 网页内容抓取
+
+**使用场景：**
+
+```bash
+# E2E 测试
+claude code . "使用 Playwright 创建登录页面的端到端测试"
+
+# UI 测试
+claude code . "打开 http://localhost:3000 并测试用户注册流程"
+
+# 截图对比
+claude code . "访问产品页面，截图并与设计稿对比"
+
+# 性能测试
+claude code . "使用 Playwright 分析首页的加载性能"
+
+# 数据抓取
+claude code . "访问竞品网站，抓取产品列表数据"
+```
+
+**支持的操作：**
+
+```javascript
+// 导航
+browser.navigate("https://example.com")
+
+// 点击
+browser.click("#login-button")
+
+// 输入
+browser.type("#username", "testuser")
+
+// 截图
+browser.screenshot("homepage.png")
+
+// 等待元素
+browser.waitFor("#content")
+
+// 执行 JavaScript
+browser.evaluate("document.title")
+```
+
+**适用项目：**
+- Web 应用测试
+- UI 自动化
+- 数据爬取
+- 性能测试
+
+---
+
+## 🎯 推荐的 MCP 组合方案
+
+### 方案 1: 前端全栈开发者
+
+```json
+{
+  "mcpServers": {
+    "filesystem": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-filesystem", "."]
+    },
+    "git": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-git", "--repository", "."]
+    },
+    "context7": {
+      "command": "npx",
+      "args": ["-y", "mcp-server-context7"]
+    },
+    "websearch": {
+      "command": "npx",
+      "args": ["-y", "mcp-server-open-websearch"]
+    },
+    "playwright": {
+      "command": "npx",
+      "args": ["-y", "mcp-server-playwright"]
+    }
+  }
+}
+```
+
+### 方案 2: 企业项目开发
+
+```json
+{
+  "mcpServers": {
+    "filesystem": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-filesystem", "."]
+    },
+    "git": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-git", "--repository", "."]
+    },
+    "gitlab": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-gitlab"],
+      "env": {
+        "GITLAB_URL": "${GITLAB_URL}",
+        "GITLAB_TOKEN": "${GITLAB_TOKEN}"
+      }
+    },
+    "postgres": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-postgres"],
+      "env": {
+        "POSTGRES_HOST": "localhost",
+        "POSTGRES_DB": "myapp"
+      }
+    },
+    "spec-workflow": {
+      "command": "npx",
+      "args": ["-y", "mcp-server-spec-workflow"]
+    },
+    "context7": {
+      "command": "npx",
+      "args": ["-y", "mcp-server-context7"]
+    }
+  }
+}
+```
+
+### 方案 3: 学习和研究
+
+```json
+{
+  "mcpServers": {
+    "filesystem": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-filesystem", "."]
+    },
+    "context7": {
+      "command": "npx",
+      "args": ["-y", "mcp-server-context7"]
+    },
+    "deepwiki": {
+      "command": "npx",
+      "args": ["-y", "mcp-server-deepwiki"]
+    },
+    "websearch": {
+      "command": "npx",
+      "args": ["-y", "mcp-server-open-websearch"]
+    }
+  }
+}
+```
+
+---
 
 ## 前端开发 MCP 套装
 
