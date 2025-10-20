@@ -52,7 +52,69 @@ claude-code --list-agents
 
 ---
 
-## 4️⃣ 公司工具集成
+## 4️⃣ 常用 MCP 集成
+
+### 核心 MCP（必装）
+
+```json
+{
+  "filesystem": {
+    "command": "npx",
+    "args": ["-y", "@modelcontextprotocol/server-filesystem", "."]
+  },
+  "git": {
+    "command": "npx",
+    "args": ["-y", "@modelcontextprotocol/server-git", "--repository", "."]
+  }
+}
+```
+
+### 强大的第三方 MCP ⭐
+
+```json
+{
+  "context7": {
+    "command": "npx",
+    "args": ["-y", "mcp-server-context7"]
+  },
+  "websearch": {
+    "command": "npx",
+    "args": ["-y", "mcp-server-open-websearch"]
+  },
+  "spec-workflow": {
+    "command": "npx",
+    "args": ["-y", "mcp-server-spec-workflow"]
+  },
+  "playwright": {
+    "command": "npx",
+    "args": ["-y", "mcp-server-playwright"]
+  },
+  "deepwiki": {
+    "command": "npx",
+    "args": ["-y", "mcp-server-deepwiki"]
+  }
+}
+```
+
+**使用示例：**
+```bash
+# Context7 查询文档
+claude code . "使用 Context7 查询 React 18 的最新特性"
+
+# WebSearch 搜索信息
+claude code . "搜索 Spring Boot 3.x 的最佳实践"
+
+# Spec Workflow 项目管理
+claude code . "使用 Spec Workflow 创建用户认证系统的需求文档"
+
+# Playwright E2E 测试
+claude code . "使用 Playwright 测试登录流程"
+
+# DeepWiki 学习项目
+claude code . "通过 DeepWiki 学习 vercel/next.js 的架构"
+```
+
+## 5️⃣ 企业工具集成
 
 ### GitLab MCP
 
@@ -89,7 +151,7 @@ claude-code --list-agents
 
 ---
 
-## 5️⃣ 实战场景
+## 6️⃣ 实战场景
 
 ### 场景 1：快速开发 API
 
@@ -124,7 +186,7 @@ claude code . --subagent=vueFrontendDeveloper \
 
 ---
 
-## 6️⃣ 规则文件模板
+## 7️⃣ 规则文件模板
 
 ### 创建 CLAUDE.md
 
@@ -151,7 +213,7 @@ claude code . --subagent=vueFrontendDeveloper \
 
 ---
 
-## 7️⃣ 常见问题速答
+## 8️⃣ 常见问题速答
 
 | 问题 | 答案 |
 |-----|------|
@@ -163,7 +225,7 @@ claude code . --subagent=vueFrontendDeveloper \
 
 ---
 
-## 8️⃣ 文档导航
+## 9️⃣ 文档导航
 
 | 需求 | 查看章节 |
 |-----|--------|

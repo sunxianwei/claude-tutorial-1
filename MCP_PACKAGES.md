@@ -15,6 +15,18 @@
 | `@modelcontextprotocol/server-github` | ✅ 官方 | GitHub API |
 | `@modelcontextprotocol/server-gitlab` | ✅ 官方 | GitLab API |
 
+## 🌟 推荐的第三方 MCP 包
+
+以下是经过验证的强大第三方 MCP 服务器:
+
+| 包名 | 状态 | 说明 | 推荐度 |
+|------|------|------|--------|
+| `mcp-server-context7` | ✅ 可用 | 实时查询库文档和 API 参考 | ⭐⭐⭐ 强烈推荐 |
+| `mcp-server-open-websearch` | ✅ 可用 | 网页搜索，获取最新信息 | ⭐⭐⭐ 强烈推荐 |
+| `mcp-server-spec-workflow` | ✅ 可用 | 规范化项目管理工作流 | ⭐⭐⭐ 企业推荐 |
+| `mcp-server-deepwiki` | ✅ 可用 | 获取 GitHub 项目深度文档 | ⭐⭐ 推荐 |
+| `mcp-server-playwright` | ✅ 可用 | 浏览器自动化和 E2E 测试 | ⭐⭐⭐ 强烈推荐 |
+
 ## ⚠️ 需要验证或可能不存在的包
 
 以下包在教程中提及，但需要用户自行验证或实现:
@@ -119,18 +131,30 @@ await server.connect(transport);
 }
 ```
 
-### 前端开发集
+### 前端开发集（推荐）⭐
 
 ```json
 {
   "mcpServers": {
     "filesystem": {...},
-    "git": {...}
+    "git": {...},
+    "context7": {
+      "command": "npx",
+      "args": ["-y", "mcp-server-context7"]
+    },
+    "websearch": {
+      "command": "npx",
+      "args": ["-y", "mcp-server-open-websearch"]
+    },
+    "playwright": {
+      "command": "npx",
+      "args": ["-y", "mcp-server-playwright"]
+    }
   }
 }
 ```
 
-### 后端开发集
+### 后端开发集（推荐）⭐
 
 ```json
 {
@@ -144,6 +168,42 @@ await server.connect(transport);
         "POSTGRES_HOST": "localhost",
         "POSTGRES_DB": "mydb"
       }
+    },
+    "context7": {
+      "command": "npx",
+      "args": ["-y", "mcp-server-context7"]
+    },
+    "websearch": {
+      "command": "npx",
+      "args": ["-y", "mcp-server-open-websearch"]
+    }
+  }
+}
+```
+
+### 企业项目开发集（完整）⭐⭐
+
+```json
+{
+  "mcpServers": {
+    "filesystem": {...},
+    "git": {...},
+    "gitlab": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-gitlab"],
+      "env": {
+        "GITLAB_URL": "${GITLAB_URL}",
+        "GITLAB_TOKEN": "${GITLAB_TOKEN}"
+      }
+    },
+    "postgres": {...},
+    "spec-workflow": {
+      "command": "npx",
+      "args": ["-y", "mcp-server-spec-workflow"]
+    },
+    "context7": {
+      "command": "npx",
+      "args": ["-y", "mcp-server-context7"]
     }
   }
 }
