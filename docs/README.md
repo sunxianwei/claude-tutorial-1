@@ -71,13 +71,7 @@
 
 ### 📚 示例项目
 
-- **[前端项目示例](../examples/frontend-project/)** - Vue 3 + TypeScript 电商管理系统
-- **[后端项目示例](../examples/backend-project/)** - Java + Spring Boot 3.x 电商管理系统
-- **[新项目演示](../examples/new-project-demo/)** - 完整的图书管理系统（JDK1.8 + Vue + Playwright）
-
-### 🛠️ 配置模板
-
-- **[配置模板库](../templates/CONFIG_TEMPLATES.md)** - 开箱即用的配置
+- **[新项目演示](../examples/new-project-demo.md)** - 完整的图书管理系统开发案例（JDK1.8 + Vue + Playwright）
 
 ---
 

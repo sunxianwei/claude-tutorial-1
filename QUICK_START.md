@@ -14,7 +14,7 @@
 👉 **[老项目开发](#老项目开发)** - 渐进式接入策略
 
 ### 我从 1.x 升级到 2.1
-👉 **[迁移指南](MIGRATION_GUIDE_V2.md)** - 完整升级指南
+👉 **[进阶篇导航](docs/00-advanced-tutorial.md)** - 查看 2.1 新功能
 
 ---
 
@@ -77,7 +77,7 @@ claude .
 
 ### 完整案例：在线图书管理系统
 
-**项目地址：** [examples/new-project-demo/](examples/new-project-demo/)
+**项目案例：** [examples/new-project-demo.md](examples/new-project-demo.md)
 
 **技术栈：**
 - 后端：Spring Boot 2.7 + JDK 1.8 + MyBatis + MySQL
@@ -106,7 +106,7 @@ claude mcp list
 claude .
 
 # 6. 复制项目 Prompt
-# 从 examples/new-project-demo/README.md 复制完整的开发 Prompt
+# 从 examples/new-project-demo.md 复制完整的开发 Prompt
 
 # 7. 粘贴到 Claude Code 并开始开发
 ```
@@ -199,7 +199,7 @@ claude --model claude-opus-4-1-20250805 .
 > 设计图书管理系统的数据库架构
 ```
 
-**详细指南：** [examples/new-project-demo/README.md](examples/new-project-demo/README.md)
+**详细指南：** [examples/new-project-demo.md](examples/new-project-demo.md)
 
 ---
 
@@ -538,13 +538,13 @@ A: 提供更多上下文，参考现有的正确实现。
 ---
 
 #### 🔴 我从 1.x 升级
-👉 **[迁移指南](MIGRATION_GUIDE_V2.md)**
-- 完整的升级步骤
-- 破坏性变更说明
-- 新功能快速上手
-- 故障排查指南
+👉 **[进阶篇导航](docs/00-advanced-tutorial.md)**
+- 查看 2.1 新功能章节
+- Skills 完全指南
+- 模型切换使用
+- MCP 管理最佳实践
 
-**快速迁移（1 小时）：**
+**快速体验 2.1 新功能：**
 ```bash
 # 1. 更新版本
 npm update -g @anthropic-ai/claude-code
@@ -556,10 +556,9 @@ claude --version  # 应该是 2.1.x
 claude .
 > /skills     # 查看 Skills
 > /agents     # 查看 Agents
-> claude mcp list  # 查看 MCP
 
 # 4. 学习新功能
-# 阅读 Skills 和模型切换教程（35 分钟）
+# 阅读 docs/27-skills-guide.md 和 docs/28-model-providers.md
 ```
 
 ---
@@ -578,14 +577,12 @@ claude .
 - [命令参考](docs/15-command-reference.md) - 新增命令
 
 ### 🛠️ 实用工具
-- [命令速查卡片](COMMAND_CHEATSHEET.md) - 所有命令一页查
-- [迁移指南](MIGRATION_GUIDE_V2.md) - 1.x 升级到 2.1
-- [更新总结](UPDATE_SUMMARY_V2.md) - 详细更新说明
+- [命令参考](docs/15-command-reference.md) - 完整命令列表
+- [快捷键速查](docs/10-shortcuts.md) - 所有快捷键
+- [最佳实践](docs/13-best-practices.md) - 使用技巧
 
 ### 📝 示例项目
-- [新项目演示](examples/new-project-demo/) - 完整的图书管理系统
-- [前端项目示例](examples/frontend-project/) - Vue 3 + TypeScript
-- [后端项目示例](examples/backend-project/) - Spring Boot 3.x
+- [新项目演示](examples/new-project-demo.md) - 完整的图书管理系统开发案例
 
 ---
 
@@ -627,7 +624,7 @@ echo "✅ 工作流完成！"
 
 ### 常见问题
 - 📖 查看 [重要说明](docs/14-important-notice.md)
-- 🔍 搜索 [命令速查卡片](COMMAND_CHEATSHEET.md)
+- 🔍 搜索 [命令参考](docs/15-command-reference.md)
 - 💬 访问 GitHub Discussions
 
 ### 获取支持
@@ -646,7 +643,7 @@ echo "✅ 工作流完成！"
 | 完全新手 | [5 分钟快速体验](#5-分钟快速体验) → [基础篇](docs/00-basic-tutorial.md) | 5 min + 4-6 周 |
 | 开发新项目 | [新项目开发](#新项目开发) → [Skills 指南](docs/27-skills-guide.md) | 30 min + 2 周 |
 | 维护老项目 | [老项目开发](#老项目开发) → [老项目指南](docs/21-legacy-project-guide.md) | 1 h + 4 周 |
-| 从 1.x 升级 | [迁移指南](MIGRATION_GUIDE_V2.md) → [进阶篇](docs/00-advanced-tutorial.md) | 1 h + 2 周 |
+| 从 1.x 升级 | [进阶篇](docs/00-advanced-tutorial.md) → [Skills 指南](docs/27-skills-guide.md) | 1 h + 2 周 |
 
 ---
 

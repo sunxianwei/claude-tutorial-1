@@ -1,0 +1,241 @@
+# Claude Code 完整使用指南
+
+> 从入门到精通：Claude Code 2.1 在实际项目中的应用
+
+📚 **完整文档：** [docs/README.md](docs/README.md)  
+⚡ **快速开始：** [QUICK_START.md](QUICK_START.md)
+
+---
+
+## 🚀 快速导航
+
+### 🎯 我想快速上手
+
+👉 **[5 分钟快速开始](QUICK_START.md)** - 立即体验 Claude Code
+
+**适合：** 想立即开始使用的用户
+
+### 📖 我想系统学习
+
+👉 **[完整学习指南](docs/README.md)** - 29 个章节完整教程
+
+**适合：** 想深入掌握所有功能的用户
+
+### 🆕 我要开发新项目
+
+👉 **[新项目开发指南](QUICK_START.md#新项目开发)** - 图书管理系统完整案例
+
+**包含：** 2.1 新功能（Skills、Agents、MCP 管理）
+
+### 🔧 我要维护老项目
+
+👉 **[老项目开发指南](QUICK_START.md#老项目开发)** - 渐进式接入策略
+
+**包含：** 详细的分析和接入流程
+
+### ⬆️ 我从 1.x 升级
+
+👉 **[进阶篇导航](docs/00-advanced-tutorial.md)** - 查看 2.1 新功能
+
+**包含：** Skills、模型切换、MCP 管理等新功能
+
+---
+
+## ⭐ Claude Code 2.1 新增功能
+
+| 功能 | 说明 | 文档 |
+|------|------|------|
+| **Skills 系统** | 教会 Claude 新能力 | [27-skills-guide.md](docs/27-skills-guide.md) |
+| **模型切换** | 灵活选择 AI 模型 | [28-model-providers.md](docs/28-model-providers.md) |
+| **MCP 命令行** | 简化 MCP 管理 | [03-mcp-setup.md](docs/03-mcp-setup.md) |
+| **外部资源** | 22 个社区优质资源 | [29-external-resources.md](docs/29-external-resources.md) |
+
+---
+
+## 📚 学习路径
+
+### 🟢 新手路径（0-1 个月）
+
+**目标：** 快速上手，掌握核心功能
+
+**推荐步骤：**
+1. ⚡ [5 分钟快速体验](QUICK_START.md#5-分钟快速体验)（5 分钟）
+2. 📖 [基础篇导航](docs/00-basic-tutorial.md)（90 分钟）
+3. 🆕 [新项目工作流](docs/11-new-project-workflow.md)（20 分钟）
+4. 📋 [规则文件系统](docs/06-rules-file.md)（20 分钟）
+
+**总时长：** 约 2.5 小时
+
+---
+
+### 🟡 进阶路径（1-3 个月）
+
+**目标：** 深度使用，提升效率
+
+**推荐步骤：**
+1. 🎯 [进阶篇导航](docs/00-advanced-tutorial.md)（240 分钟）
+2. ⭐ [Skills 完全指南](docs/27-skills-guide.md)（20 分钟）
+3. 🔧 [MCP 配置指南](docs/03-mcp-setup.md)（20 分钟）
+4. 🤖 [SubAgents 使用](docs/05-subagents.md)（15 分钟）
+
+**总时长：** 约 5 小时
+
+---
+
+### 🔴 专家路径（3+ 个月）
+
+**目标：** 精通所有功能，为团队赋能
+
+**推荐步骤：**
+1. 🚀 [最佳实践](docs/13-best-practices.md)
+2. 🔌 [能力扩展](docs/09-extend-ability.md)
+3. 🏢 [老项目开发指南](docs/21-legacy-project-guide.md)
+4. 🌐 [外部参考资源](docs/29-external-resources.md)
+
+---
+
+## 📦 示例项目
+
+| 项目 | 技术栈 | 说明 |
+|------|--------|------|
+| **[新项目演示](examples/new-project-demo.md)** | Spring Boot + Vue + Playwright | 完整的图书管理系统开发案例 |
+
+---
+
+## 🛠️ 快速安装
+
+```bash
+# 1. 安装 Claude Code
+npm install -g @anthropic-ai/claude-code
+
+# 2. 验证版本（应该是 2.1.x 或更高）
+claude --version
+
+# 3. 配置 API Key
+export ANTHROPIC_API_KEY="sk-ant-xxxxxxxxxxxx"
+
+# 4. 初始化项目
+cd your-project
+claude init
+
+# 5. 启动使用
+claude .
+```
+
+**获取 API Key：** https://console.anthropic.com
+
+---
+
+## 💡 核心特性
+
+| 特性 | 说明 | 时间节省 |
+|------|------|---------|
+| **代码生成** | AI 辅助开发新功能 | 70% ⏱️ |
+| **Skills 系统** | 自定义 AI 能力 | 新功能 ⭐ |
+| **MCP 扩展** | 集成数据库、API | 80% ⏱️ |
+| **SubAgents** | 专业化智能代理 | 65% ⏱️ |
+| **规则系统** | 持久化工程规范 | 60% ⏱️ |
+
+---
+
+## 📖 文档结构
+
+```
+├── README.md                    # 项目入口（本文件）
+├── QUICK_START.md               # 快速开始指南
+├── docs/
+│   ├── README.md                # 完整教程目录
+│   ├── 00-basic-tutorial.md     # 基础篇导航（8 章节）
+│   ├── 00-advanced-tutorial.md  # 进阶篇导航（19 章节）
+│   ├── 01-quick-start.md        # 快速开始
+│   ├── ...                      # 其他章节（共 29 个）
+│   └── 29-external-resources.md # 外部参考资源
+└── examples/
+    └── new-project-demo.md      # 新项目完整案例
+```
+
+---
+
+## 📊 版本信息
+
+| 项目 | 版本 | 更新日期 |
+|------|------|---------|
+| **教程版本** | v2.0 | 2026-01-27 |
+| **适配版本** | Claude Code 2.1+ | - |
+| **文档数量** | 29 个章节 + 22 个外部资源 | - |
+| **总阅读时间** | 约 6.5 小时 | - |
+
+---
+
+## 🌟 特色亮点
+
+### 📝 详尽的文档
+- 29 个章节系统讲解
+- 3 个完整示例项目
+- 22 个外部优质资源
+
+### 🎯 清晰的学习路径
+- 按使用经验分级（新手/进阶/专家）
+- 按项目类型分类（新项目/老项目）
+- 每章标注时间和难度
+
+### 💻 实战案例
+- 完整的图书管理系统
+- 前后端分离架构
+- 包含测试和部署
+
+### 🆕 2.1 新功能详解
+- Skills 系统完整指南
+- 模型切换使用技巧
+- MCP 命令行工具
+
+---
+
+## 🆘 获取帮助
+
+### 常见问题
+- 📖 [重要说明](docs/14-important-notice.md)
+- 🔍 [命令参考](docs/15-command-reference.md)
+- 💬 [最佳实践](docs/13-best-practices.md)
+
+### 社区资源
+- 🌐 [外部参考资源](docs/29-external-resources.md) - 22 个优质资源
+- 📚 [Claude 官方文档](https://code.claude.com/docs)
+- 💬 GitHub Discussions
+
+---
+
+## 🤝 贡献与反馈
+
+发现错误或有改进建议？
+
+- 📝 提交 Issue
+- 🔧 发起 Pull Request
+- 💬 参与讨论
+
+---
+
+## 📄 许可证
+
+本指南采用 MIT 许可证。
+
+---
+
+## 🎉 开始你的旅程
+
+选择适合你的起点：
+
+| 你的情况 | 推荐路径 | 预计时间 |
+|---------|---------|---------|
+| 🆕 完全新手 | [5 分钟快速体验](QUICK_START.md#5-分钟快速体验) | 5 分钟 |
+| 📖 系统学习 | [基础篇导航](docs/00-basic-tutorial.md) | 90 分钟 |
+| 🏗️ 开发新项目 | [新项目开发](QUICK_START.md#新项目开发) | 30 分钟 |
+| 🔧 维护老项目 | [老项目开发](QUICK_START.md#老项目开发) | 1 小时 |
+| ⬆️ 从 1.x 升级 | [进阶篇导航](docs/00-advanced-tutorial.md) | 1 小时 |
+
+---
+
+**祝你使用愉快！** 🚀
+
+**版本：** Claude Code 2.1+  
+**最后更新：** 2026-01-27
