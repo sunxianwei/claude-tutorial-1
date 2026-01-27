@@ -45,10 +45,10 @@
 
 | 功能 | 说明 | 文档 |
 |------|------|------|
+| **参考资料** | 30+ 个优质中英文资源 | [00-references.md](docs/00-references.md) |
 | **Skills 系统** | 教会 Claude 新能力 | [27-skills-guide.md](docs/27-skills-guide.md) |
 | **模型切换** | 灵活选择 AI 模型 | [28-model-providers.md](docs/28-model-providers.md) |
 | **MCP 命令行** | 简化 MCP 管理 | [03-mcp-setup.md](docs/03-mcp-setup.md) |
-| **外部资源** | 22 个社区优质资源 | [29-external-resources.md](docs/29-external-resources.md) |
 
 ---
 
@@ -73,10 +73,11 @@
 **目标：** 深度使用，提升效率
 
 **推荐步骤：**
-1. 🎯 [进阶篇导航](docs/00-advanced-tutorial.md)（240 分钟）
-2. ⭐ [Skills 完全指南](docs/27-skills-guide.md)（20 分钟）
-3. 🔧 [MCP 配置指南](docs/03-mcp-setup.md)（20 分钟）
-4. 🤖 [SubAgents 使用](docs/05-subagents.md)（15 分钟）
+1. 📚 [参考资料](docs/00-references.md)（30 分钟）
+2. 🎯 [进阶篇导航](docs/00-advanced-tutorial.md)（240 分钟）
+3. ⭐ [Skills 完全指南](docs/27-skills-guide.md)（20 分钟）
+4. 🔧 [MCP 配置指南](docs/03-mcp-setup.md)（20 分钟）
+5. 🤖 [SubAgents 使用](docs/05-subagents.md)（15 分钟）
 
 **总时长：** 约 5 小时
 
@@ -90,7 +91,7 @@
 1. 🚀 [最佳实践](docs/13-best-practices.md)
 2. 🔌 [能力扩展](docs/09-extend-ability.md)
 3. 🏢 [老项目开发指南](docs/21-legacy-project-guide.md)
-4. 🌐 [外部参考资源](docs/29-external-resources.md)
+4. 🌐 [参考资料](docs/00-references.md)
 
 ---
 
@@ -145,11 +146,11 @@ claude .
 ├── QUICK_START.md               # 快速开始指南
 ├── docs/
 │   ├── README.md                # 完整教程目录
+│   ├── 00-references.md         # 参考资料（30+ 个资源）
 │   ├── 00-basic-tutorial.md     # 基础篇导航（8 章节）
 │   ├── 00-advanced-tutorial.md  # 进阶篇导航（19 章节）
 │   ├── 01-quick-start.md        # 快速开始
-│   ├── ...                      # 其他章节（共 29 个）
-│   └── 29-external-resources.md # 外部参考资源
+│   └── ...                      # 其他章节（共 29 个）
 └── examples/
     └── new-project-demo.md      # 新项目完整案例
 ```
@@ -199,7 +200,7 @@ claude .
 - 💬 [最佳实践](docs/13-best-practices.md)
 
 ### 社区资源
-- 🌐 [外部参考资源](docs/29-external-resources.md) - 22 个优质资源
+- 🌐 [参考资料](docs/00-references.md) - 30+ 个优质中英文资源
 - 📚 [Claude 官方文档](https://code.claude.com/docs)
 - 💬 GitHub Discussions
 

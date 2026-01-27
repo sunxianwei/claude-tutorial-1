@@ -63,9 +63,9 @@
 
 | 章节 | 时间 | 难度 | 优先级 |
 | ---- | ---- | ---- | ------ |
+| [00 参考资料](00-references.md) | 30 min | ⭐ | 🟢 参考 |
 | [27 Skills 完全指南](27-skills-guide.md) | 20 min | ⭐⭐ | 🔴 重要 |
 | [28 切换模型供应商](28-model-providers.md) | 15 min | ⭐⭐ | 🟡 推荐 |
-| [29 外部参考资源](29-external-resources.md) | 30 min | ⭐ | 🟢 参考 |
 
 **新增内容总时长：** 约 65 分钟
 
@@ -274,7 +274,7 @@ A: 按 token 数计费。优化后可省 50-70%。
 
 ## 📈 持续学习资源
 
-👉 **[查看完整外部资源列表](29-external-resources.md)** - 包含 15+ 个优质社区资源
+👉 **[查看完整外部资源列表](00-references.md)** - 包含 30+ 个优质中英文资源
 
 ### 官方资源
 - [Claude Code 官方文档](https://docs.claude.com/en/docs/claude-code/claude_code_docs_map.md)
