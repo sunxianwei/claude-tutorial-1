@@ -61,7 +61,7 @@ Claude: "这个项目是做什么的?"
 
 **手动指定：**
 ```bash
-claude code . "分析 src/index.ts 的性能问题"
+claude . "分析 src/index.ts 的性能问题"
 ```
 
 #### 2. Write（创建/覆盖文件）
@@ -180,7 +180,7 @@ feat(auth): 实现用户登录功能
 
 **使用场景：**
 ```bash
-claude code . "在 feature/user-profile 分支上实现用户资料功能"
+claude . "在 feature/user-profile 分支上实现用户资料功能"
 → Claude 自动创建分支并切换
 → 完成开发
 → 自动提交
@@ -195,7 +195,7 @@ claude code . "在 feature/user-profile 分支上实现用户资料功能"
 - ✅ 同步分支
 
 ```bash
-claude code . --push "完成功能后推送到远程"
+claude . --push "完成功能后推送到远程"
 ```
 
 ### ⚡ 执行工具
@@ -231,7 +231,7 @@ tree -L 2 src/
 
 **示例：**
 ```bash
-claude code . "修复所有 linting 错误"
+claude . "修复所有 linting 错误"
 → Claude 运行 eslint
 → 分析错误
 → 修复代码
@@ -247,7 +247,7 @@ claude code . "修复所有 linting 错误"
 - ✅ 修复失败的测试
 
 ```bash
-claude code . "为 UserService 添加单元测试，覆盖率要达到 80%"
+claude . "为 UserService 添加单元测试，覆盖率要达到 80%"
 → Claude 自动执行 npm test
 → 分析覆盖率
 → 添加缺失的测试
@@ -264,7 +264,7 @@ claude code . "为 UserService 添加单元测试，覆盖率要达到 80%"
 - ✅ 修复类型不匹配
 
 ```bash
-claude code . "修复所有 TypeScript 错误"
+claude . "修复所有 TypeScript 错误"
 → Claude 运行 tsc --noEmit
 → 分析类型错误
 → 添加缺失的类型定义
@@ -279,7 +279,7 @@ claude code . "修复所有 TypeScript 错误"
 - ✅ 修复风格问题
 
 ```bash
-claude code . "格式化所有代码并修复风格问题"
+claude . "格式化所有代码并修复风格问题"
 → Claude 运行 Prettier
 → Claude 运行 ESLint
 → 自动修复可修复的问题
@@ -333,7 +333,7 @@ claude code . "格式化所有代码并修复风格问题"
 ### 场景 1：完整功能开发
 
 ```bash
-claude code . --subagent=codegen \
+claude . --subagent=codegen \
   "创建用户注册 API，包括数据验证、数据库操作、错误处理"
 
 # Claude 自动使用工具流程:
@@ -348,7 +348,7 @@ claude code . --subagent=codegen \
 ### 场景 2：Bug 修复
 
 ```bash
-claude code . "修复登录页面输入框无法输入的 bug"
+claude . "修复登录页面输入框无法输入的 bug"
 
 # Claude 自动使用工具流程:
 # 1. Grep - 搜索所有包含 "input" 的组件
@@ -361,7 +361,7 @@ claude code . "修复登录页面输入框无法输入的 bug"
 ### 场景 3：性能优化
 
 ```bash
-claude code . "优化 ProductList 组件的性能"
+claude . "优化 ProductList 组件的性能"
 
 # Claude 自动使用工具流程:
 # 1. Read - 读取 ProductList.vue

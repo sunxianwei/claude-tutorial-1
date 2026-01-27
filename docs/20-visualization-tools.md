@@ -584,7 +584,7 @@ cat ~/.claude/config.json
 
 # 重启 Claude Code
 pkill claude
-claude code .
+claude .
 ```
 
 ### 问题 3：界面显示异常

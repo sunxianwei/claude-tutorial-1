@@ -382,17 +382,17 @@ touch CLAUDE.md
 当你运行 Claude Code 时，它会自动读取并应用规则：
 
 ```bash
-claude-code .
+claude .
 ```
 
 ### 步骤 4：验证规则生效
 
 ```bash
 # 查看已加载的规则
-claude-code --show-rules
+claude --show-rules
 
 # 调试模式
-claude-code --debug . "test"
+claude --debug . "test"
 ```
 
 ## 高级特性
@@ -425,10 +425,10 @@ claude-code --debug . "test"
 
 ```bash
 # 创建模板
-claude-code --create-template react-typescript
+claude --create-template react-typescript
 
 # 在新项目中使用
-claude-code init --template react-typescript
+claude init --template react-typescript
 ```
 
 ## 最佳实践

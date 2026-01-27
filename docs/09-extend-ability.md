@@ -81,13 +81,13 @@ Claude Code 虽然强大，但也有局限：
 
 ```bash
 # 搜索最新的框架版本
-claude code . "搜索 Vue 3 的最新版本和新特性"
+claude . "搜索 Vue 3 的最新版本和新特性"
 
 # 查找最佳实践
-claude code . "搜索 React 性能优化的最佳实践"
+claude . "搜索 React 性能优化的最佳实践"
 
 # 解决技术问题
-claude code . "搜索如何在 Spring Boot 中集成 WebSocket"
+claude . "搜索如何在 Spring Boot 中集成 WebSocket"
 ```
 
 ## 方案 2：文档生成和发布
@@ -126,13 +126,13 @@ npm install --save-dev @modelcontextprotocol/server-docs-generator
 
 ```bash
 # 生成 API 文档
-claude code . --docs-format=swagger "为所有 API 生成 Swagger 文档并发布到 API Gateway"
+claude . --docs-format=swagger "为所有 API 生成 Swagger 文档并发布到 API Gateway"
 
 # 生成用户手册
-claude code . --docs-format=html "生成用户手册并发布到内部 Wiki"
+claude . --docs-format=html "生成用户手册并发布到内部 Wiki"
 
 # 生成变更日志
-claude code . --docs-format=markdown "生成 CHANGELOG 并推送到 GitHub"
+claude . --docs-format=markdown "生成 CHANGELOG 并推送到 GitHub"
 ```
 
 ## 方案 3：集成内部系统
@@ -159,13 +159,13 @@ claude code . --docs-format=markdown "生成 CHANGELOG 并推送到 GitHub"
 
 ```bash
 # 根据 Jira issue 开发功能
-claude code . "根据 issue PROJ-123 实现用户管理功能"
+claude . "根据 issue PROJ-123 实现用户管理功能"
 
 # 自动生成 issue 和 commit 链接
-claude code . "完成 PROJ-456 任务并创建关联的 PR"
+claude . "完成 PROJ-456 任务并创建关联的 PR"
 
 # 生成工作报告
-claude code . "总结我这周完成的 issue：PROJ-789, PROJ-790, PROJ-791"
+claude . "总结我这周完成的 issue：PROJ-789, PROJ-790, PROJ-791"
 ```
 
 ### 场景：集成 Slack
@@ -189,13 +189,13 @@ claude code . "总结我这周完成的 issue：PROJ-789, PROJ-790, PROJ-791"
 
 ```bash
 # 代码审查完成后自动通知
-claude code . "代码审查完成，自动在 Slack 上通知审查人"
+claude . "代码审查完成，自动在 Slack 上通知审查人"
 
 # 测试失败时告警
-claude code . "测试失败，发送 Slack 告警"
+claude . "测试失败，发送 Slack 告警"
 
 # 部署成功通知
-claude code . "部署完成，发送成功消息到 Slack"
+claude . "部署完成，发送成功消息到 Slack"
 ```
 
 ## 方案 4：自定义工具开发
@@ -296,13 +296,13 @@ export const companyDBTool: CompanyDBTool = {
 
 ```bash
 # 分析系统性能
-claude code . "分析过去 1 小时的系统性能指标，找出瓶颈"
+claude . "分析过去 1 小时的系统性能指标，找出瓶颈"
 
 # 生成性能报告
-claude code . "生成周报，包括系统稳定性、性能、错误率等指标"
+claude . "生成周报，包括系统稳定性、性能、错误率等指标"
 
 # 优化告警阈值
-claude code . "根据最近的数据分析，建议调整告警阈值"
+claude . "根据最近的数据分析，建议调整告警阈值"
 ```
 
 ## 方案 6：CI/CD 流程集成
@@ -327,13 +327,13 @@ claude code . "根据最近的数据分析，建议调整告警阈值"
 
 ```bash
 # 自动触发 CI/CD
-claude code . "提交代码并自动触发 GitHub Actions 运行测试"
+claude . "提交代码并自动触发 GitHub Actions 运行测试"
 
 # 监控构建状态
-claude code . "查看最后 10 次构建的状态和日志"
+claude . "查看最后 10 次构建的状态和日志"
 
 # 自动部署
-claude code . "代码通过测试后自动部署到测试环境"
+claude . "代码通过测试后自动部署到测试环境"
 ```
 
 ## 扩展能力成熟度评估
@@ -373,7 +373,7 @@ claude code . "代码通过测试后自动部署到测试环境"
 
 ```bash
 # 立即使用 web 搜索
-claude code . "搜索 TypeScript 5.0 的新特性"
+claude . "搜索 TypeScript 5.0 的新特性"
 ```
 
 ---

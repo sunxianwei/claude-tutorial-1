@@ -62,7 +62,7 @@ mkdir -p .claude/commands
 **步骤 3：** 使用命令
 
 ```bash
-$ claude code .
+$ claude .
 
 > /review
 [Claude 自动执行代码审查...]

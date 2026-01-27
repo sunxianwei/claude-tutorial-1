@@ -47,7 +47,7 @@ claude mcp add context7 -- npx -y @upstash/context7-mcp
 
 ```bash
 # 1. 启动 Claude Code
-claude code .
+claude .
 
 # 2. 在对话中测试
 > 使用 Context7 查询 React 18 的 useTransition hook 用法
@@ -126,7 +126,7 @@ claude mcp add postgres -- npx -y @modelcontextprotocol/server-postgres
 export POSTGRES_CONNECTION_STRING="postgresql://localhost/testdb"
 
 # 4. 启动 Claude Code 测试
-claude code .
+claude .
 
 # 5. 测试查询
 > 查询数据库中的所有表
@@ -227,7 +227,7 @@ export GITHUB_TOKEN="your_token"
 claude mcp add github -- npx -y @modelcontextprotocol/server-github
 
 # 3. 启动 Claude Code
-claude code .
+claude .
 
 # 4. 测试功能
 > 列出我的 GitHub 仓库
@@ -358,7 +358,7 @@ claude mcp add gitlab -- npx -y @modelcontextprotocol/server-gitlab
 claude mcp add playwright -- npx -y @automatalabs/mcp-server-playwright
 
 # 2. 启动 Claude Code
-claude code .
+claude .
 
 # 3. 测试浏览器控制
 > 使用 Playwright 打开 https://www.google.com 并截图
@@ -620,27 +620,27 @@ echo "🧪 测试 MCP 配置..."
 
 # 1. 测试 Filesystem
 echo "1️⃣ 测试 Filesystem MCP..."
-claude code . "列出当前目录的所有文件"
+claude . "列出当前目录的所有文件"
 
 # 2. 测试 Git
 echo "2️⃣ 测试 Git MCP..."
-claude code . "显示最近 5 次 Git 提交"
+claude . "显示最近 5 次 Git 提交"
 
 # 3. 测试 GitHub（需要 Token）
 if [ -n "$GITHUB_TOKEN" ]; then
     echo "3️⃣ 测试 GitHub MCP..."
-    claude code . "列出我的 GitHub 仓库前 5 个"
+    claude . "列出我的 GitHub 仓库前 5 个"
 else
     echo "⚠️ 跳过 GitHub MCP（未设置 GITHUB_TOKEN）"
 fi
 
 # 4. 测试 Context7
 echo "4️⃣ 测试 Context7 MCP..."
-claude code . "使用 Context7 查询 React 文档"
+claude . "使用 Context7 查询 React 文档"
 
 # 5. 测试 Playwright
 echo "5️⃣ 测试 Playwright MCP..."
-claude code . "使用 Playwright 访问 https://example.com 并截图"
+claude . "使用 Playwright 访问 https://example.com 并截图"
 
 echo "✅ 测试完成！"
 ```
@@ -712,7 +712,7 @@ source ~/.bashrc  # 或 ~/.zshrc
 claude mcp list
 
 # 查看详细日志
-claude code --debug .
+claude --debug .
 
 # 重启 Claude Code
 # Ctrl+C 退出，然后重新启动

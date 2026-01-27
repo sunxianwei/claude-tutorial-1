@@ -32,17 +32,17 @@ source ~/.zshrc
 
 ```bash
 cd your-project
-claude-code init
+claude init
 ```
 
 ### 步骤 3：验证配置
 
 ```bash
 # 测试 Claude Code 是否可用
-claude-code --version
+claude --version
 
 # 查看已加载的配置
-claude-code --show-rules
+claude --show-rules
 ```
 
 ---
@@ -175,7 +175,7 @@ echo $ANTHROPIC_API_KEY
 # 应该输出类似：sk-ant-xxxxxxxxxxxxx
 ```
 
-### 问题 2：找不到 claude-code 命令
+### 问题 2：找不到 claude 命令
 
 **症状：**
 ```

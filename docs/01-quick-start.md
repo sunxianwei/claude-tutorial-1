@@ -23,7 +23,7 @@ Claude Code 是 Anthropic 官方提供的 CLI 工具，它让 Claude AI 能够�
 
 ```bash
 # 1. 在你的项目目录运行
-claude code .
+claude .
 
 # 2. 告诉 Claude 你想做什么
 # 比如：写一个用户登录的 API 端点
@@ -49,7 +49,7 @@ claude code .
 
 ```bash
 npm install -g @anthropic-ai/claude-code
-claude-code --version
+claude --version
 ```
 
 如果命令找不到，检查 npm 的全局 bin 目录：
@@ -63,7 +63,7 @@ npm config get prefix
 
 ```bash
 cd your-project
-claude code init
+claude init
 ```
 
 这会创建：
@@ -87,7 +87,7 @@ export ANTHROPIC_API_KEY="your-key-here"
 
 ```bash
 # 在你的项目目录打开 Claude Code
-claude code .
+claude .
 
 # 告诉 Claude 你的需求，比如：
 # "添加一个登录函数到 src/auth/login.ts"

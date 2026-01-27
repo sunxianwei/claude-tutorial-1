@@ -206,10 +206,10 @@ npm install --save-dev @modelcontextprotocol/server-filesystem \
 cd your-project
 
 # 自动生成配置
-claude-code init --mcp-preset=java+postgres
+claude init --mcp-preset=java+postgres
 
 # 或指定具体 MCP
-claude-code init --mcp=filesystem,git,postgres
+claude init --mcp=filesystem,git,postgres
 ```
 
 ### 方案 C：从模板克隆
@@ -232,10 +232,10 @@ cat .claude/mcp-servers.json | jq '.'
 npm list | grep @modelcontextprotocol
 
 # 3. 启动测试
-claude-code --mcp-check
+claude --mcp-check
 
 # 4. 查看已加载的服务
-claude-code --mcp-list
+claude --mcp-list
 ```
 
 ## 高级定制
@@ -255,7 +255,7 @@ API_KEY=your_api_key
 
 ```bash
 source .env
-claude-code .
+claude .
 ```
 
 ### 条件加载 MCP
@@ -268,9 +268,9 @@ claude-code .
 
 if [ "$ENVIRONMENT" == "development" ]; then
   export MCP_PRESET="development"
-  claude-code --config .claude/mcp-dev.json .
+  claude --config .claude/mcp-dev.json .
 else
-  claude-code --config .claude/mcp-prod.json .
+  claude --config .claude/mcp-prod.json .
 fi
 ```
 

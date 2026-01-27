@@ -6,7 +6,7 @@
 
 ```
 错误做法:
-claude-code . "帮我完整地实现这个系统"
+claude . "帮我完整地实现这个系统"
 → 结果：AI 生成的代码可能不符合你的真实需求
 ```
 
@@ -22,13 +22,13 @@ claude-code . "帮我完整地实现这个系统"
 ```
 错误做法:
 # 加载 50 GB 的代码库
-claude-code . "优化项目"
+claude . "优化项目"
 ```
 
 ```
 正确做法:
 # 选择性加载相关模块
-claude-code ./src/performance-critical . "优化"
+claude ./src/performance-critical . "优化"
 ```
 
 ### ❌ 误区 3：忽视规范文件
@@ -36,8 +36,8 @@ claude-code ./src/performance-critical . "优化"
 ```
 错误做法:
 # 没有 CLAUDE.md，每次都要重复说明规范
-claude-code . "代码里加日志，使用 console.log"
-claude-code . "代码里加日志，使用 log4j"
+claude . "代码里加日志，使用 console.log"
+claude . "代码里加日志，使用 log4j"
 ```
 
 ```
@@ -51,13 +51,13 @@ claude-code . "代码里加日志，使用 log4j"
 
 ```
 错误做法:
-claude-code . "优化数据库查询"
+claude . "优化数据库查询"
 # 直接上生产
 ```
 
 ```
 正确做法:
-claude-code . "优化数据库查询"
+claude . "优化数据库查询"
 npm test                    # 运行测试
 npm run perf-test          # 性能测试
 code review                # 人工审查
@@ -130,7 +130,7 @@ CLAUDE.md 应该包含：
 
 做法：
 # 让 Claude 自动生成规范的提交信息
-claude-code . "完成功能，自动提交"
+claude . "完成功能，自动提交"
 → Claude 自动生成符合规范的提交信息
 ```
 
@@ -334,7 +334,7 @@ Claude Haiku 4.5      ← 简单任务、成本优化
 
 ```bash
 # 目标：3 天内完成 MVP
-claude-code --subagent=codegen \
+claude --subagent=codegen \
   --context-window=small \
   --chain="codegen" \
   . "快速实现核心功能"
@@ -344,7 +344,7 @@ claude-code --subagent=codegen \
 
 ```bash
 # 目标：最小化对现有代码的理解
-claude-code . "基于现有代码，修复 bug XXX"
+claude . "基于现有代码，修复 bug XXX"
 
 # Claude 会自动：
 # 1. 查找相关代码
@@ -359,14 +359,14 @@ claude-code . "基于现有代码，修复 bug XXX"
 # 目标：分步进行，降低风险
 
 # 第一步：分析
-claude-code . "分析重构影响范围"
+claude . "分析重构影响范围"
 
 # 第二步：制定计划
-claude-code . "制定详细的重构计划"
+claude . "制定详细的重构计划"
 
 # 第三步：分阶段实施
 for step in 1..5; do
-  claude-code --subagent=refactor . "执行第 $step 步"
+  claude --subagent=refactor . "执行第 $step 步"
   npm test
 done
 ```

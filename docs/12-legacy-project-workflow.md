@@ -22,14 +22,14 @@
 
 ```bash
 cd your-legacy-project
-claude-code init
+claude init
 ```
 
 #### 步骤 2：让 Claude 理解项目
 
 ```bash
 # Claude 自动分析项目结构
-claude-code . "分析这个项目的结构、技术栈、核心功能"
+claude . "分析这个项目的结构、技术栈、核心功能"
 
 # 输出应该包括：
 # - 项目类型（Web/CLI/Library）
@@ -78,7 +78,7 @@ claude-code . "分析这个项目的结构、技术栈、核心功能"
 从现有项目推断规范：
 
 ```bash
-claude-code . "根据现有代码推断项目的编码规范，并生成 CLAUDE.md"
+claude . "根据现有代码推断项目的编码规范，并生成 CLAUDE.md"
 ```
 
 **输出示例：**
@@ -144,7 +144,7 @@ src/main/java/com/example/
 
 ```bash
 # 生成项目代码索引，便于快速查找
-claude-code . "生成项目的代码索引，列出所有主要类和函数"
+claude . "生成项目的代码索引，列出所有主要类和函数"
 ```
 
 **输出：** `.claude/code-index.md`
@@ -182,10 +182,10 @@ claude-code . "生成项目的代码索引，列出所有主要类和函数"
 
 ```bash
 # 分析缺失的测试
-claude-code . "分析项目中缺失测试的关键模块"
+claude . "分析项目中缺失测试的关键模块"
 
 # 生成单元测试
-claude-code --subagent=testing . "为 UserService 生成单元测试，覆盖率 >= 80%"
+claude --subagent=testing . "为 UserService 生成单元测试，覆盖率 >= 80%"
 
 # 运行测试
 mvn test
@@ -198,14 +198,14 @@ mvn clean test jacoco:report
 
 ```bash
 # 识别性能问题
-claude-code . "分析项目中的性能问题，特别是数据库查询"
+claude . "分析项目中的性能问题，特别是数据库查询"
 
 # 列出所有 N+1 查询问题
-claude-code search "for.*stream.*query" \
-  && claude-code search "for.*select"
+claude search "for.*stream.*query" \
+  && claude search "for.*select"
 
 # 优化查询
-claude-code --subagent=refactor . "优化 N+1 查询，使用 join 或 batch fetch"
+claude --subagent=refactor . "优化 N+1 查询，使用 join 或 batch fetch"
 
 # 运行性能测试
 mvn clean test -Dtest=PerformanceTest
@@ -215,16 +215,16 @@ mvn clean test -Dtest=PerformanceTest
 
 ```bash
 # 模块化分析
-claude-code . "分析代码中的重复和不规范，建议重构方向"
+claude . "分析代码中的重复和不规范，建议重构方向"
 
 # 逐个模块重构
-claude-code --subagent=refactor . "重构用户模块：提取公共方法、简化逻辑"
+claude --subagent=refactor . "重构用户模块：提取公共方法、简化逻辑"
 
 # 验证功能
 mvn test
 
 # 提交
-claude-code commit --auto
+claude commit --auto
 ```
 
 ### 第四阶段：持续维护（长期）
@@ -233,13 +233,13 @@ claude-code commit --auto
 
 ```bash
 # 每周检查代码质量
-claude-code --subagent=review . "周代码质量检查"
+claude --subagent=review . "周代码质量检查"
 
 # 定期更新文档
-claude-code --subagent=documentation . "更新 API 文档和 README"
+claude --subagent=documentation . "更新 API 文档和 README"
 
 # 监控技术债
-claude-code . "列出所有 TODO 注释，评估技术债务"
+claude . "列出所有 TODO 注释，评估技术债务"
 ```
 
 ## 实战案例：Spring Boot 2.x 升级到 3.x
@@ -247,7 +247,7 @@ claude-code . "列出所有 TODO 注释，评估技术债务"
 ### 第一步：分析兼容性
 
 ```bash
-claude-code . "分析升级 Spring Boot 3.x 需要的改动：
+claude . "分析升级 Spring Boot 3.x 需要的改动：
 - Java 版本要求
 - 依赖变化
 - API 变化
@@ -258,7 +258,7 @@ claude-code . "分析升级 Spring Boot 3.x 需要的改动：
 ### 第二步：生成升级计划
 
 ```bash
-claude-code . "生成详细的升级计划，包括：
+claude . "生成详细的升级计划，包括：
 - 需要修改的文件清单
 - 修改前后的代码对比
 - 需要运行的测试
@@ -270,10 +270,10 @@ claude-code . "生成详细的升级计划，包括：
 
 ```bash
 # 升级依赖
-claude-code . "更新 pom.xml，升级 Spring Boot 到 3.x"
+claude . "更新 pom.xml，升级 Spring Boot 到 3.x"
 
 # 修复 API 变化
-claude-code --subagent=refactor . "修复 Spring Boot 3.x 的 API 变化，特别是：
+claude --subagent=refactor . "修复 Spring Boot 3.x 的 API 变化，特别是：
 - javax -> jakarta
 - WebSecurityConfigurerAdapter 移除
 - 其他破坏性变化
@@ -290,10 +290,10 @@ npm run dev  # 或启动应用
 
 ```bash
 # 性能对比
-claude-code . "对比升级前后的性能数据"
+claude . "对比升级前后的性能数据"
 
 # 功能验收
-claude-code . "验收清单：
+claude . "验收清单：
 - [ ] 所有单元测试通过
 - [ ] 所有集成测试通过
 - [ ] 性能达到预期

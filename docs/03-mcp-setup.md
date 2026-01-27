@@ -126,7 +126,7 @@ npm install --save-dev @modelcontextprotocol/server-git
 #### 步骤 3：启动 Claude Code
 
 ```bash
-claude-code .
+claude .
 ```
 
 Claude Code 会自动加载所有配置的 MCP 服务器。
@@ -306,13 +306,13 @@ Claude: 列出所有表的关系
 **使用场景：**
 ```bash
 # 查看待处理的 MR
-claude code . "列出所有待审查的 MR"
+claude . "列出所有待审查的 MR"
 
 # 创建新的 MR
-claude code . "基于 feature 分支创建 MR，请求审查"
+claude . "基于 feature 分支创建 MR，请求审查"
 
 # 查看 Pipeline 状态
-claude code . "检查最近的构建状态，找出失败原因"
+claude . "检查最近的构建状态，找出失败原因"
 ```
 
 ### 5️⃣ᶜ 钉钉通知（需自行实现或使用第三方）
@@ -324,7 +324,7 @@ claude code . "检查最近的构建状态，找出失败原因"
 在提示词中要求使用 curl 发送钉钉 Webhook:
 
 ```bash
-claude code . "完成用户管理功能后，使用 curl 发送钉钉 Webhook 通知
+claude . "完成用户管理功能后，使用 curl 发送钉钉 Webhook 通知
 Webhook URL: ${DINGTALK_WEBHOOK}"
 ```
 
@@ -344,7 +344,7 @@ Webhook URL: ${DINGTALK_WEBHOOK}"
 
 ```bash
 # 直接在提示词中要求使用 bash 命令
-claude code . "使用 npm 命令检查项目中过期的依赖并更新"
+claude . "使用 npm 命令检查项目中过期的依赖并更新"
 ```
 
 **常用命令：**
@@ -384,13 +384,13 @@ claude code . "使用 npm 命令检查项目中过期的依赖并更新"
 **使用场景：**
 ```bash
 # 查询 React 最新文档
-claude code . "使用 Context7 查询 React 18 的 useTransition hook 用法"
+claude . "使用 Context7 查询 React 18 的 useTransition hook 用法"
 
 # 查询特定库的 API
-claude code . "查询 axios 库的请求拦截器配置方法"
+claude . "查询 axios 库的请求拦截器配置方法"
 
 # 获取代码示例
-claude code . "获取 Vue 3 Composition API 的响应式代码示例"
+claude . "获取 Vue 3 Composition API 的响应式代码示例"
 ```
 
 **适用项目：** 所有项目，特别是需要频繁查阅文档的开发场景
@@ -423,13 +423,13 @@ claude code . "获取 Vue 3 Composition API 的响应式代码示例"
 **使用场景：**
 ```bash
 # 搜索错误解决方案
-claude code . "搜索 'CORS error in React' 的最佳解决方案"
+claude . "搜索 'CORS error in React' 的最佳解决方案"
 
 # 查找最佳实践
-claude code . "搜索 Spring Boot 3.x 的性能优化最佳实践"
+claude . "搜索 Spring Boot 3.x 的性能优化最佳实践"
 
 # 获取技术对比
-claude code . "搜索并对比 Pinia vs Vuex 的优缺点"
+claude . "搜索并对比 Pinia vs Vuex 的优缺点"
 ```
 
 **适用项目：** 需要实时信息查询的所有项目
@@ -480,16 +480,16 @@ claude code . "搜索并对比 Pinia vs Vuex 的优缺点"
 
 ```bash
 # 初始化项目规范
-claude code . "使用 Spec Workflow 为'用户认证系统'创建需求文档"
+claude . "使用 Spec Workflow 为'用户认证系统'创建需求文档"
 
 # 生成技术设计
-claude code . "基于需求文档生成技术设计，包括数据库设计和API设计"
+claude . "基于需求文档生成技术设计，包括数据库设计和API设计"
 
 # 拆解任务
-claude code . "将技术设计拆解为可执行的开发任务列表"
+claude . "将技术设计拆解为可执行的开发任务列表"
 
 # 跟踪进度
-claude code . "查看当前项目的任务完成状态"
+claude . "查看当前项目的任务完成状态"
 ```
 
 **文档结构：**
@@ -540,13 +540,13 @@ claude code . "查看当前项目的任务完成状态"
 
 ```bash
 # 学习开源项目
-claude code . "使用 DeepWiki 获取 vercel/next.js 的完整文档"
+claude . "使用 DeepWiki 获取 vercel/next.js 的完整文档"
 
 # 理解项目架构
-claude code . "通过 DeepWiki 分析 facebook/react 的架构设计"
+claude . "通过 DeepWiki 分析 facebook/react 的架构设计"
 
 # 获取使用指南
-claude code . "获取 vuejs/core 的 Composition API 详细使用指南"
+claude . "获取 vuejs/core 的 Composition API 详细使用指南"
 ```
 
 **支持的格式：**
@@ -590,19 +590,19 @@ claude code . "获取 vuejs/core 的 Composition API 详细使用指南"
 
 ```bash
 # E2E 测试
-claude code . "使用 Playwright 创建登录页面的端到端测试"
+claude . "使用 Playwright 创建登录页面的端到端测试"
 
 # UI 测试
-claude code . "打开 http://localhost:3000 并测试用户注册流程"
+claude . "打开 http://localhost:3000 并测试用户注册流程"
 
 # 截图对比
-claude code . "访问产品页面，截图并与设计稿对比"
+claude . "访问产品页面，截图并与设计稿对比"
 
 # 性能测试
-claude code . "使用 Playwright 分析首页的加载性能"
+claude . "使用 Playwright 分析首页的加载性能"
 
 # 数据抓取
-claude code . "访问竞品网站，抓取产品列表数据"
+claude . "访问竞品网站，抓取产品列表数据"
 ```
 
 **支持的操作：**
@@ -761,16 +761,16 @@ browser.evaluate("document.title")
 
 ```bash
 # 创建新组件
-"claude code . 为购物车功能创建 Vue 组件"
+"claude . 为购物车功能创建 Vue 组件"
 
 # 优化性能
-"claude code . 分析页面性能并优化"
+"claude . 分析页面性能并优化"
 
 # 管理依赖
-"claude code . 更新所有过期的依赖"
+"claude . 更新所有过期的依赖"
 
 # 自动测试
-"claude code . 为 UserProfile 组件添加单元测试"
+"claude . 为 UserProfile 组件添加单元测试"
 ```
 
 ## 后端开发 MCP 套装
@@ -807,16 +807,16 @@ browser.evaluate("document.title")
 
 ```bash
 # 创建 API 端点
-"claude code . 为用户模块创建 REST API"
+"claude . 为用户模块创建 REST API"
 
 # 数据库迁移
-"claude code . 生成订单表迁移脚本"
+"claude . 生成订单表迁移脚本"
 
 # 性能优化
-"claude code . 分析慢查询并优化"
+"claude . 分析慢查询并优化"
 
 # 文档生成
-"claude code . 为所有 Controller 生成 Swagger 文档"
+"claude . 为所有 Controller 生成 Swagger 文档"
 ```
 
 ## 测试开发 MCP 套装
@@ -840,16 +840,16 @@ browser.evaluate("document.title")
 
 ```bash
 # 生成测试用例
-"claude code . 为 UserService 生成单元测试"
+"claude . 为 UserService 生成单元测试"
 
 # 集成测试
-"claude code . 创建登录流程的集成测试"
+"claude . 创建登录流程的集成测试"
 
 # 性能测试
-"claude code . 为 API 编写负载测试"
+"claude . 为 API 编写负载测试"
 
 # 测试覆盖率
-"claude code . 分析测试覆盖率并补充缺失的测试"
+"claude . 分析测试覆盖率并补充缺失的测试"
 ```
 
 ## MCP 环境变量管理
@@ -885,7 +885,7 @@ API_KEY=your_api_key
 
 ```bash
 source .env
-claude-code .
+claude .
 ```
 
 ⚠️ **安全提示：** 不要将 `.env` 提交到 Git，添加到 `.gitignore`
@@ -894,13 +894,13 @@ claude-code .
 
 ```bash
 # 验证 MCP 服务器是否正确加载
-claude-code --mcp-check
+claude --mcp-check
 
 # 查看已加载的 MCP 服务器
-claude-code --mcp-list
+claude --mcp-list
 
 # 显示详细的调试信息
-claude-code --debug . "test"
+claude --debug . "test"
 ```
 
 ## 常见 MCP 问题
@@ -1121,7 +1121,7 @@ PG_PASSWORD=your_secure_password
 ```bash
 # 使用环境变量选择配置
 export CLAUDE_MCP_CONFIG=.claude/mcp-servers.dev.json
-claude code .
+claude .
 ```
 
 #### 环境变量模板
@@ -1210,11 +1210,11 @@ echo $PG_PASSWORD
 
 # 手动加载 .env
 source .env
-claude code .
+claude .
 
 # 使用 dotenv
 npm install -g dotenv-cli
-dotenv -e .env -- claude code .
+dotenv -e .env -- claude .
 ```
 
 ### 7. MCP 性能优化

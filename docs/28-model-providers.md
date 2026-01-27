@@ -23,13 +23,13 @@ Claude Code 2.1 支持以下模型供应商：
 
 ```bash
 # Claude Opus 4.1 - 最强大，适合复杂任务
-claude code --model claude-opus-4-1-20250805 .
+claude --model claude-opus-4-1-20250805 .
 
 # Claude Sonnet 4 - 平衡性能和成本（推荐）⭐
-claude code --model claude-sonnet-4-20250514 .
+claude --model claude-sonnet-4-20250514 .
 
 # Claude Haiku 4.5 - 最快最便宜
-claude code --model claude-haiku-4-5-20251001 .
+claude --model claude-haiku-4-5-20251001 .
 ```
 
 ### 配置 API Key
@@ -60,7 +60,7 @@ source ~/.bashrc
 
 ```bash
 # 在命令行中指定
-claude code --model claude-opus-4-1-20250805 .
+claude --model claude-opus-4-1-20250805 .
 
 # 在交互模式中切换
 > /model claude-haiku-4-5-20251001
@@ -117,7 +117,7 @@ source ~/.bashrc
 
 ```bash
 # 指定模型运行
-claude code --model gpt-4-turbo --provider openai .
+claude --model gpt-4-turbo --provider openai .
 
 # 在交互模式中
 > /model gpt-4-turbo
@@ -163,7 +163,7 @@ export AZURE_OPENAI_DEPLOYMENT="your-deployment-name"
 
 ```bash
 # 使用 Azure OpenAI
-claude code --provider azure-openai .
+claude --provider azure-openai .
 ```
 
 **优势：**
@@ -219,7 +219,7 @@ source ~/.bashrc
 
 ```bash
 # 使用 Gemini Pro
-claude code --model gemini-1.5-pro --provider google .
+claude --model gemini-1.5-pro --provider google .
 ```
 
 ## 方法 5：使用 AWS Bedrock
@@ -269,7 +269,7 @@ export AWS_REGION="us-east-1"
 
 ```bash
 # 使用 Bedrock Claude
-claude code --provider aws-bedrock .
+claude --provider aws-bedrock .
 ```
 
 **优势：**
@@ -329,7 +329,7 @@ ollama pull phi
 
 ```bash
 # 使用本地模型
-claude code --provider ollama --model codellama .
+claude --provider ollama --model codellama .
 ```
 
 **优势：**
@@ -405,7 +405,7 @@ case $COMPLEXITY in
 esac
 
 echo "Using model: $MODEL"
-claude code --model $MODEL -p "$TASK"
+claude --model $MODEL -p "$TASK"
 ```
 
 **使用方式：**
@@ -441,7 +441,7 @@ else
   echo "✅ 使用标准模型"
 fi
 
-claude code --model $MODEL .
+claude --model $MODEL .
 ```
 
 ### 场景 3：多模型并行
@@ -456,11 +456,11 @@ echo "🤖 使用多个模型进行审查..."
 
 # Claude 审查
 echo "📝 Claude Sonnet 审查..."
-claude code --model claude-sonnet-4-20250514 -p "$TASK" > review-claude.md
+claude --model claude-sonnet-4-20250514 -p "$TASK" > review-claude.md
 
 # GPT-4 审查
 echo "📝 GPT-4 审查..."
-claude code --model gpt-4-turbo --provider openai -p "$TASK" > review-gpt4.md
+claude --model gpt-4-turbo --provider openai -p "$TASK" > review-gpt4.md
 
 # 合并结果
 echo "✅ 审查完成，结果已保存"
@@ -539,23 +539,23 @@ curl "https://generativelanguage.googleapis.com/v1beta/models?key=$GOOGLE_API_KE
 
 ```bash
 # 检查可用的模型
-claude code --list-models
+claude --list-models
 
 # 测试模型连接
-claude code --test-model claude-sonnet-4-20250514
+claude --test-model claude-sonnet-4-20250514
 ```
 
 ### 问题 3：性能问题
 
 ```bash
 # 使用更快的模型
-claude code --model claude-haiku-4-5-20251001 .
+claude --model claude-haiku-4-5-20251001 .
 
 # 减小上下文
-claude code --max-tokens 50000 .
+claude --max-tokens 50000 .
 
 # 启用缓存
-claude code --enable-cache .
+claude --enable-cache .
 ```
 
 ## 最佳实践

@@ -87,7 +87,7 @@ Claude Code 默认会在执行敏感操作前请求你的确认，这是为了�
 在交互模式中，使用 `/permissions` 命令查看和管理权限设置：
 
 ```bash
-$ claude code .
+$ claude .
 
 > /permissions
 ```
@@ -151,10 +151,10 @@ Git 操作权限：
 
 ```bash
 # 跳过所有权限确认
-claude code --dangerously-skip-permissions .
+claude --dangerously-skip-permissions .
 
 # 或使用简写
-claude code --skip-permissions .
+claude --skip-permissions .
 ```
 
 **⚠️ 警告：**
@@ -171,31 +171,31 @@ claude code --skip-permissions .
 # 1. CI/CD 自动化流程
 # .github/workflows/claude-ci.yml
 - name: Run Claude Code
-  run: claude code --dangerously-skip-permissions -p "运行测试并修复失败的用例"
+  run: claude --dangerously-skip-permissions -p "运行测试并修复失败的用例"
 
 # 2. Docker 容器中的一次性任务
-docker run --rm my-app claude code --dangerously-skip-permissions .
+docker run --rm my-app claude --dangerously-skip-permissions .
 
 # 3. 测试环境的批量操作
-claude code --dangerously-skip-permissions -p "重构所有组件并更新测试"
+claude --dangerously-skip-permissions -p "重构所有组件并更新测试"
 
 # 4. 可重现的沙盒环境
-sandbox-run "claude code --dangerously-skip-permissions ."
+sandbox-run "claude --dangerously-skip-permissions ."
 ```
 
 **不适合使用的场景：**
 
 ```bash
 # ❌ 生产环境
-claude code --dangerously-skip-permissions . # 危险！
+claude --dangerously-skip-permissions . # 危险！
 
 # ❌ 包含重要数据的项目
 cd ~/important-project
-claude code --dangerously-skip-permissions . # 危险！
+claude --dangerously-skip-permissions . # 危险！
 
 # ❌ 多人协作的项目
 cd ~/team-project
-claude code --dangerously-skip-permissions . # 可能影响他人！
+claude --dangerously-skip-permissions . # 可能影响他人！
 ```
 
 ## 配置文件权限管理
@@ -378,7 +378,7 @@ export CLAUDE_SKIP_PERMISSIONS=true
 export CLAUDE_AUDIT_ENABLED=true
 
 # 在 CI 脚本中使用
-claude code --dangerously-skip-permissions -p "执行测试并生成报告"
+claude --dangerously-skip-permissions -p "执行测试并生成报告"
 ```
 
 ### 场景 4：多人协作项目
@@ -433,7 +433,7 @@ claude code --dangerously-skip-permissions -p "执行测试并生成报告"
 
 ```bash
 # 方式 1：使用命令参数
-claude code --elevated-permissions .
+claude --elevated-permissions .
 
 # 方式 2：在交互模式中
 > /permissions elevate

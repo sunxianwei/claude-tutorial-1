@@ -59,10 +59,10 @@ UserService 类:
 
 ```bash
 # 只分析特定文件
-claude code . "分析 src/services/UserService.ts 的性能"
+claude . "分析 src/services/UserService.ts 的性能"
 
 # 而不是加载整个项目
-claude code . "分析项目性能"
+claude . "分析项目性能"
 ```
 
 ### 2. 依赖分析压缩
@@ -178,7 +178,7 @@ case "$TASK" in
     ;;
 esac
 
-claude code . "${@:2}"
+claude . "${@:2}"
 ```
 
 **使用方式：**
@@ -266,8 +266,8 @@ CLAUDE.testing.md      # 测试规则
 **加载机制：**
 
 ```bash
-claude code . --rules-variant=frontend "创建组件"
-claude code . --rules-variant=backend "创建 API"
+claude . --rules-variant=frontend "创建组件"
+claude . --rules-variant=backend "创建 API"
 ```
 
 ## 高级压缩技巧
@@ -307,7 +307,7 @@ claude code . --rules-variant=backend "创建 API"
 使用该文件：
 
 ```bash
-claude code . --context-file .claude/project-summary.md "基于项目摘要实现新功能"
+claude . --context-file .claude/project-summary.md "基于项目摘要实现新功能"
 ```
 
 ### 技巧 2：增量分析
@@ -319,19 +319,19 @@ claude code . --context-file .claude/project-summary.md "基于项目摘要实�
 git diff --name-only $(git log --since="3 days ago" --pretty=format:"%H" | tail -1)
 
 # 只分析这些文件
-claude code . "分析这些最近修改的文件的影响"
+claude . "分析这些最近修改的文件的影响"
 ```
 
 ### 技巧 3：模块化分析
 
 ```bash
 # 分别分析各个模块
-claude code ./src/modules/auth "优化认证模块"
-claude code ./src/modules/payment "优化支付模块"
-claude code ./src/modules/notification "优化通知模块"
+claude ./src/modules/auth "优化认证模块"
+claude ./src/modules/payment "优化支付模块"
+claude ./src/modules/notification "优化通知模块"
 
 # 总结分析结果
-claude code . "基于各模块分析结果，给出全局优化建议"
+claude . "基于各模块分析结果，给出全局优化建议"
 ```
 
 ## 测量压缩效果

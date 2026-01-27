@@ -77,7 +77,7 @@ claude --version
 cd your-legacy-project
 
 # 初始化 Claude Code
-claude code init
+claude init
 ```
 
 这会创建：
@@ -189,7 +189,7 @@ claude mcp add postgres -- npx -y @modelcontextprotocol/server-postgres
 **使用方式：**
 
 ```bash
-$ claude code .
+$ claude .
 
 > [粘贴上面的 Prompt]
 ```
@@ -1333,10 +1333,10 @@ git reset --hard HEAD~1
 git reset --hard HEAD~1
 
 # 2. 先补充测试
-claude code . "请为 UserService 补充完整的单元测试"
+claude . "请为 UserService 补充完整的单元测试"
 
 # 3. 再进行修改
-claude code . "现在请修改用户查询逻辑..."
+claude . "现在请修改用户查询逻辑..."
 ```
 
 ### Q4: 不知道如何描述需求

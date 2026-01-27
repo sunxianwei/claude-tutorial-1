@@ -6,7 +6,7 @@
 
 ```bash
 # 进入交互式对话模式
-claude code .
+claude .
 
 # 或使用简写
 claude .
@@ -23,7 +23,7 @@ claude .
 claude -p "你的问题或任务"
 
 # 或使用完整命令
-claude code -p "你的问题或任务"
+claude -p "你的问题或任务"
 ```
 
 **使用场景：**
@@ -94,12 +94,12 @@ crontab -e
 
 ```bash
 # 场景 1：意外退出后恢复
-$ claude code .
+$ claude .
 > 帮我实现用户登录功能
 [进行中...突然断网或退出]
 
 # 重新打开 Claude Code
-$ claude code .
+$ claude .
 > /resume
 [自动恢复之前的会话和上下文]
 ```
@@ -161,13 +161,13 @@ $ claude code .
 
 ```bash
 # 初始化 Claude Code 配置
-claude code init
+claude init
 
 # 初始化并指定模板
-claude code init --template=frontend
+claude init --template=frontend
 
 # 初始化并跳过交互式问答
-claude code init --yes
+claude init --yes
 ```
 
 **创建的文件：**
@@ -191,33 +191,33 @@ claude --version
 claude -v
 
 # 查看详细版本信息
-claude code --version --verbose
+claude --version --verbose
 ```
 
 ### 配置检查
 
 ```bash
 # 检查配置文件
-claude code --check-config
+claude --check-config
 
 # 验证 API 密钥
-claude code --check-api-key
+claude --check-api-key
 
 # 检查 MCP 服务器状态
-claude code --check-mcp
+claude --check-mcp
 ```
 
 ### 调试模式
 
 ```bash
 # 启用详细日志
-claude code --debug .
+claude --debug .
 
 # 启用 MCP 调试
-claude code --debug-mcp .
+claude --debug-mcp .
 
 # 查看完整的请求/响应
-claude code --verbose .
+claude --verbose .
 ```
 
 ## 高级命令选项
@@ -226,39 +226,39 @@ claude code --verbose .
 
 ```bash
 # 使用特定模型
-claude code --model=claude-opus-4 .
+claude --model=claude-opus-4 .
 
 # 使用最新的 Sonnet 模型
-claude code --model=claude-sonnet-4-5 .
+claude --model=claude-sonnet-4-5 .
 
 # 使用快速模型（成本优化）
-claude code --model=claude-haiku-4-5 .
+claude --model=claude-haiku-4-5 .
 ```
 
 ### 上下文控制
 
 ```bash
 # 限制上下文窗口大小
-claude code --max-tokens=50000 .
+claude --max-tokens=50000 .
 
 # 禁用自动上下文压缩
-claude code --no-context-compression .
+claude --no-context-compression .
 
 # 只包含特定文件
-claude code --files="src/**/*.ts" .
+claude --files="src/**/*.ts" .
 ```
 
 ### 输出控制
 
 ```bash
 # 静默模式（减少输出）
-claude code --quiet .
+claude --quiet .
 
 # 仅输出结果（用于脚本）
-claude code --output-only .
+claude --output-only .
 
 # JSON 格式输出
-claude code --output=json .
+claude --output=json .
 ```
 
 ## 别名和快捷方式
@@ -270,22 +270,22 @@ claude code --output=json .
 ```bash
 # 快捷命令
 alias cc='claude code'
-alias ccp='claude code -p'
-alias cci='claude code init'
+alias ccp='claude -p'
+alias cci='claude init'
 
 # 常用任务
-alias cc-review='claude code -p "代码审查"'
-alias cc-test='claude code -p "运行测试并修复失败的用例"'
-alias cc-doc='claude code -p "生成 API 文档"'
-alias cc-fix='claude code -p "修复所有 lint 错误"'
+alias cc-review='claude -p "代码审查"'
+alias cc-test='claude -p "运行测试并修复失败的用例"'
+alias cc-doc='claude -p "生成 API 文档"'
+alias cc-fix='claude -p "修复所有 lint 错误"'
 ```
 
 **使用示例：**
 
 ```bash
 # 使用别名
-cc .                           # 等同于 claude code .
-ccp "生成登录功能"              # 等同于 claude code -p "生成登录功能"
+cc .                           # 等同于 claude .
+ccp "生成登录功能"              # 等同于 claude -p "生成登录功能"
 cc-review                      # 快速代码审查
 ```
 
@@ -341,7 +341,7 @@ fi
 cd "$PROJECT_PATH" || exit
 
 echo "🔍 开始自动代码审查..."
-claude code -p "审查所有修改的文件，检查：
+claude -p "审查所有修改的文件，检查：
 1. 代码规范
 2. 潜在 bug
 3. 性能问题
@@ -374,7 +374,7 @@ def main():
     print("🤖 使用 Claude Code 生成提交信息...")
 
     # 使用 Claude Code 分析变更
-    cmd = 'claude code -p "分析 git diff，生成符合 Conventional Commits 规范的提交信息"'
+    cmd = 'claude -p "分析 git diff，生成符合 Conventional Commits 规范的提交信息"'
     output, error, code = run_command(cmd)
 
     if code != 0:
@@ -406,18 +406,18 @@ if __name__ == "__main__":
 # 代码审查
 claude-review:
 	@echo "🔍 开始代码审查..."
-	@claude code -p "代码审查" > review-report.md
+	@claude -p "代码审查" > review-report.md
 	@echo "✅ 完成！查看 review-report.md"
 
 # 运行测试
 claude-test:
 	@echo "🧪 运行测试..."
-	@claude code -p "运行所有测试并修复失败的用例"
+	@claude -p "运行所有测试并修复失败的用例"
 
 # 生成文档
 claude-doc:
 	@echo "📚 生成文档..."
-	@claude code -p "为所有公共 API 生成文档"
+	@claude -p "为所有公共 API 生成文档"
 
 # 一键完整流程
 claude-ci: claude-review claude-test claude-doc
@@ -451,20 +451,20 @@ coverage/
 
 ```bash
 # 只分析特定目录
-claude code --files="src/**/*.ts" .
+claude --files="src/**/*.ts" .
 
 # 排除测试文件
-claude code --exclude="**/*.test.ts" .
+claude --exclude="**/*.test.ts" .
 ```
 
 ### 3. 上下文压缩
 
 ```bash
 # 启用智能上下文压缩（默认）
-claude code .
+claude .
 
 # 手动控制压缩级别
-claude code --compression-level=high .
+claude --compression-level=high .
 ```
 
 ## 常见问题排查
@@ -487,7 +487,7 @@ npm config get prefix
 
 ```bash
 # 验证密钥
-claude code --check-api-key
+claude --check-api-key
 
 # 重新设置
 export ANTHROPIC_API_KEY="your-new-key"
@@ -506,7 +506,7 @@ rm -rf ~/.claude/sessions/*.old
 ls -la ~/.claude/sessions/
 
 # 手动恢复
-claude code --resume-session=<session-id>
+claude --resume-session=<session-id>
 ```
 
 ## Claude Code 2.1 新增命令
@@ -569,7 +569,7 @@ claude mcp remove postgres
 
 ```bash
 # 列出所有可用的 Skills
-claude code .
+claude .
 > /skills
 
 # 查看特定 Skill 详情
@@ -585,7 +585,7 @@ claude code .
 **示例：**
 
 ```bash
-$ claude code .
+$ claude .
 
 # 列出所有 Skills
 > /skills
@@ -632,9 +632,9 @@ Available Skills:
 
 | 命令 | 说明 | 示例 |
 |------|------|------|
-| `claude code .` | 进入交互模式 | `claude code .` |
+| `claude .` | 进入交互模式 | `claude .` |
 | `claude -p "task"` | 一次性任务 | `claude -p "生成 API 文档"` |
-| `claude code init` | 初始化项目 | `claude code init` |
+| `claude init` | 初始化项目 | `claude init` |
 | `claude --version` | 查看版本 | `claude --version` |
 
 ### MCP 命令
@@ -664,9 +664,9 @@ Available Skills:
 
 | 命令 | 说明 | 示例 |
 |------|------|------|
-| `--debug` | 调试模式 | `claude code --debug .` |
-| `--verbose` | 详细输出 | `claude code --verbose .` |
-| `--check-config` | 检查配置 | `claude code --check-config` |
+| `--debug` | 调试模式 | `claude --debug .` |
+| `--verbose` | 详细输出 | `claude --verbose .` |
+| `--check-config` | 检查配置 | `claude --check-config` |
 | `claude mcp logs` | 查看日志 | `claude mcp logs filesystem` |
 
 ## Git 集成命令
@@ -706,9 +706,9 @@ claude -p "运行测试 -> 更新版本号 -> 生成 CHANGELOG -> 创建 tag -> 
 
 ```bash
 # 使用特定模型
-claude code --model claude-opus-4-1-20250805 .
-claude code --model claude-sonnet-4-20250514 .
-claude code --model claude-haiku-4-5-20251001 .
+claude --model claude-opus-4-1-20250805 .
+claude --model claude-sonnet-4-20250514 .
+claude --model claude-haiku-4-5-20251001 .
 
 # 或在交互模式中切换模型
 > /model claude-opus-4
@@ -785,16 +785,16 @@ claude-all: claude-review claude-test claude-doc claude-commit
 
 ```bash
 # 使用压缩上下文
-claude code --compression-level high .
+claude --compression-level high .
 
 # 限制文件范围
-claude code --files "src/**/*.ts" .
+claude --files "src/**/*.ts" .
 
 # 排除文件
-claude code --exclude "**/test/**" .
+claude --exclude "**/test/**" .
 
 # 限制 token 数
-claude code --max-tokens 50000 .
+claude --max-tokens 50000 .
 ```
 
 ## 下一章

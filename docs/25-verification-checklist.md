@@ -73,7 +73,7 @@ cd claude-test
 git init
 
 # 启动 Claude Code
-claude code .
+claude .
 ```
 
 **在 Claude Code 中测试**:
@@ -116,7 +116,7 @@ claude mcp add filesystem -- npx -y @modelcontextprotocol/server-filesystem .
 cat .claude/mcp-servers.json
 
 # 启动 Claude Code
-claude code .
+claude .
 ```
 
 **测试用例**:
@@ -144,7 +144,7 @@ git status
 claude mcp add git -- npx -y @modelcontextprotocol/server-git --repository .
 
 # 启动 Claude Code
-claude code .
+claude .
 ```
 
 **测试用例**:
@@ -168,7 +168,7 @@ claude code .
 claude mcp add context7 -- npx -y @upstash/context7-mcp
 
 # 启动 Claude Code
-claude code .
+claude .
 ```
 
 **测试用例**:
@@ -200,7 +200,7 @@ export GITHUB_TOKEN="your_token_here"
 claude mcp add github -- npx -y @modelcontextprotocol/server-github
 
 # 启动 Claude Code
-claude code .
+claude .
 ```
 
 **测试用例**:
@@ -235,7 +235,7 @@ export POSTGRES_CONNECTION_STRING="postgresql://localhost/testdb"
 claude mcp add postgres -- npx -y @modelcontextprotocol/server-postgres
 
 # 启动 Claude Code
-claude code .
+claude .
 ```
 
 **测试用例**:
@@ -261,7 +261,7 @@ claude code .
 claude mcp add playwright -- npx -y @automatalabs/mcp-server-playwright
 
 # 启动 Claude Code
-claude code .
+claude .
 ```
 
 **测试用例**:
@@ -304,12 +304,12 @@ claude -p "创建一个 hello.txt 文件，内容是 'Hello, Claude!'"
 
 ```bash
 # 启动 Claude Code 并进行对话
-claude code .
+claude .
 # 进行一些对话...
 # Ctrl+D 退出
 
 # 列出历史会话
-claude code .
+claude .
 /resume
 
 # 选择一个会话恢复
@@ -330,7 +330,7 @@ claude code .
 #### ✅ 权限管理
 
 ```bash
-claude code .
+claude .
 ```
 
 **测试用例**:
@@ -368,7 +368,7 @@ Say hello to $ARGUMENTS
 EOF
 
 # 启动 Claude Code
-claude code .
+claude .
 ```
 
 **测试用例**:
@@ -395,7 +395,7 @@ cat > .claude/hooks.json << 'EOF'
 EOF
 
 # 启动 Claude Code
-claude code .
+claude .
 ```
 
 **测试用例**:
@@ -428,7 +428,7 @@ cat README.md
 # 复制完整的开发 Prompt
 
 # 启动 Claude Code
-claude code .
+claude .
 
 # 粘贴 Prompt 并执行
 ```
@@ -463,14 +463,14 @@ npm run test      # 测试应该通过
 cd your-old-project
 
 # 初始化 Claude Code
-claude code init
+claude init
 
 # 配置基础 MCP
 claude mcp add filesystem -- npx -y @modelcontextprotocol/server-filesystem .
 claude mcp add git -- npx -y @modelcontextprotocol/server-git --repository .
 
 # 启动 Claude Code
-claude code .
+claude .
 ```
 
 **使用分析 Prompt**:
@@ -513,8 +513,7 @@ claude code .
 - [ ] https://modelcontextprotocol.io
 - [ ] https://github.com/modelcontextprotocol/servers
 - [ ] https://docs.anthropic.com/en/docs/build-with-claude/mcp
-- [ ] https://www.npmjs.com/package/@anthropic-ai/claude-code
-- [ ] https://github.com/getAsterisk/claudia
+- [ ] https://www.npmjs.com/package/@anthropic-ai/claude - [ ] https://github.com/getAsterisk/claudia
 - [ ] https://github.com/xuzhenpeng263/claudia-global
 
 ---
@@ -605,7 +604,7 @@ cat > CLAUDE.md << 'EOF'
 EOF
 
 # 启动 Claude Code
-claude code .
+claude .
 ```
 
 **测试用例**:

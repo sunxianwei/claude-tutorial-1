@@ -337,8 +337,7 @@ cd examples/new-project-demo
 - Anthropic MCP 文档: https://docs.anthropic.com/en/docs/build-with-claude/mcp
 
 ### npm 包
-- Claude Code: https://www.npmjs.com/package/@anthropic-ai/claude-code
-- MCP 包搜索: https://www.npmjs.com/search?q=%40modelcontextprotocol
+- Claude Code: https://www.npmjs.com/package/@anthropic-ai/claude - MCP 包搜索: https://www.npmjs.com/search?q=%40modelcontextprotocol
 
 ### 社区资源
 - Awesome MCP Servers: https://github.com/punkpeye/awesome-mcp-servers

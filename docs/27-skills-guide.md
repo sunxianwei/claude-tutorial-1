@@ -91,14 +91,14 @@ Keep explanations conversational. For complex concepts, use multiple analogies.
 
 **方式 1:让 Claude 自动调用**
 ```bash
-claude code .
+claude .
 > How does this authentication code work?
 # Claude 会根据 description 自动加载 explain-code 技能
 ```
 
 **方式 2:直接使用技能名称调用**
 ```bash
-claude code .
+claude .
 > /explain-code src/auth/login.ts
 ```
 
@@ -758,7 +758,7 @@ This creates `codebase-map.html` and opens it in your browser.
 
 **检查**:
 1. 描述是否包含用户会自然说的关键字
-2. 使用 `claude code .` 进入交互模式,输入 `list skills` 查看是否列出
+2. 使用 `claude .` 进入交互模式,输入 `list skills` 查看是否列出
 3. 尝试直接调用: `/skill-name`
 4. 检查是否设置了 `disable-model-invocation: true`
 
@@ -823,7 +823,7 @@ allowed-tools: Read, Grep, Glob
 创建后立即测试:
 ```bash
 # 测试自动调用
-claude code . "trigger condition from description"
+claude . "trigger condition from description"
 
 # 测试手动调用
 /skill-name test-argument

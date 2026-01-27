@@ -65,7 +65,7 @@
 mkdir -p docs && touch docs/requirements.md
 
 # 使用 Claude Code 整理需求
-claude code . "根据以下需求写出详细的需求文档：
+claude . "根据以下需求写出详细的需求文档：
 - 功能描述
 - 业务流程
 - 非功能需求（性能、安全等）
@@ -117,7 +117,7 @@ claude code . "根据以下需求写出详细的需求文档：
 
 ```bash
 # 让 Claude 验证需求的完整性
-claude code . "检查这些需求是否完整，有没有遗漏的地方：
+claude . "检查这些需求是否完整，有没有遗漏的地方：
 - 用户认证和授权
 - 错误处理
 - 数据备份
@@ -131,7 +131,7 @@ claude code . "检查这些需求是否完整，有没有遗漏的地方：
 
 ```bash
 # 使用 Claude Code 进行技术选型
-claude code . --subagent=architect \
+claude . --subagent=architect \
   "为一个电商管理系统选型：
   - 前端框架（Vue/React）
   - 后端框架（Spring Boot/Node.js）
@@ -195,7 +195,7 @@ claude code . --subagent=architect \
 
 ```bash
 # 使用 Claude Code 设计数据库
-claude code . --subagent=database \
+claude . --subagent=database \
   "设计电商系统的数据库：
   - 用户表
   - 商品表
@@ -255,7 +255,7 @@ CREATE TABLE orders (
 
 ```bash
 # 使用 Claude Code 设计 API
-claude code . --subagent=api-designer \
+claude . --subagent=api-designer \
   "设计电商系统的 REST API：
   - 用户认证相关 API
   - 商品管理 API
@@ -332,7 +332,7 @@ claude code . --subagent=api-designer \
 
 ```bash
 # 创建详细设计文档
-claude code . --subagent=architect \
+claude . --subagent=architect \
   "创建详细设计文档：
   1. 核心模块划分
   2. 关键流程的时序图
@@ -359,7 +359,7 @@ mkdir ecommerce-service && cd ecommerce-service
 spring boot init --name=ecommerce
 
 # 初始化 Claude Code
-claude code init
+claude init
 ```
 
 ### 步骤 2：设置规则文件
@@ -392,23 +392,23 @@ claude code init
 
 ```bash
 # 创建数据库迁移
-claude code . --subagent=database \
+claude . --subagent=database \
   "创建数据库迁移文件，创建所有必要的表"
 
 # 创建实体类和 Repository
-claude code . --subagent=codegen \
+claude . --subagent=codegen \
   "创建用户、商品、订单的实体类和 Repository"
 
 # 创建业务逻辑
-claude code . --subagent=codegen \
+claude . --subagent=codegen \
   "创建 UserService、ProductService、OrderService，实现所有业务逻辑"
 
 # 创建 API 端点
-claude code . --subagent=codegen \
+claude . --subagent=codegen \
   "创建 UserController、ProductController、OrderController，实现所有 API 端点"
 
 # 生成文档
-claude code . --subagent=documentation \
+claude . --subagent=documentation \
   "为所有 Controller 生成 Swagger 文档"
 ```
 
@@ -416,23 +416,23 @@ claude code . --subagent=documentation \
 
 ```bash
 # 创建页面结构
-claude code . --subagent=codegen \
+claude . --subagent=codegen \
   "创建用户管理、商品管理、订单管理页面的基础结构"
 
 # 创建组件
-claude code . --subagent=codegen \
+claude . --subagent=codegen \
   "创建必要的可复用组件（表格、表单、对话框等）"
 
 # 创建状态管理
-claude code . --subagent=codegen \
+claude . --subagent=codegen \
   "创建 Pinia store，管理用户状态、商品列表、订单列表等"
 
 # 创建 API 服务
-claude code . --subagent=codegen \
+claude . --subagent=codegen \
   "创建 API 服务类，定义所有 HTTP 请求"
 
 # 实现页面功能
-claude code . --subagent=codegen \
+claude . --subagent=codegen \
   "实现用户管理、商品管理、订单管理页面的完整功能"
 ```
 
@@ -440,7 +440,7 @@ claude code . --subagent=codegen \
 
 ```bash
 # 运行前后端，测试整个流程
-claude code . "运行前后端应用，测试以下功能：
+claude . "运行前后端应用，测试以下功能：
 - 用户登录
 - 商品列表显示
 - 商品创建/编辑/删除
@@ -454,15 +454,15 @@ claude code . "运行前后端应用，测试以下功能：
 
 ```bash
 # 后端单元测试
-claude code . --subagent=testing \
+claude . --subagent=testing \
   "为 UserService、ProductService、OrderService 生成完整的单元测试，覆盖率 >= 80%"
 
 # 前端单元测试
-claude code . --subagent=testing \
+claude . --subagent=testing \
   "为关键组件生成单元测试，覆盖率 >= 80%"
 
 # 集成测试
-claude code . --subagent=testing \
+claude . --subagent=testing \
   "创建集成测试，测试以下场景：
   - 用户注册流程
   - 商品购买流程
@@ -470,7 +470,7 @@ claude code . --subagent=testing \
   "
 
 # 性能测试
-claude code . "运行性能测试，检查：
+claude . "运行性能测试，检查：
 - 列表查询性能（1000+ 条记录）
 - 并发请求处理（100+ 并发）
 - 内存使用情况
@@ -482,7 +482,7 @@ claude code . "运行性能测试，检查：
 
 ```bash
 # 生成部署脚本
-claude code . --subagent=devops \
+claude . --subagent=devops \
   "生成部署脚本：
   - Docker 镜像
   - Kubernetes 配置
@@ -491,7 +491,7 @@ claude code . --subagent=devops \
   "
 
 # 灰度发布
-claude code . "创建灰度发布计划：
+claude . "创建灰度发布计划：
 - 第一阶段: 1% 流量
 - 第二阶段: 10% 流量
 - 第三阶段: 100% 流量
@@ -503,28 +503,28 @@ claude code . "创建灰度发布计划：
 
 ```bash
 # 初始化新项目
-claude code init
+claude init
 
 # 需求分析
-claude code . "分析这些需求..."
+claude . "分析这些需求..."
 
 # 架构设计
-claude code . --subagent=architect "设计系统架构..."
+claude . --subagent=architect "设计系统架构..."
 
 # 代码生成
-claude code . --subagent=codegen "创建用户模块..."
+claude . --subagent=codegen "创建用户模块..."
 
 # 测试生成
-claude code . --subagent=testing "生成单元测试..."
+claude . --subagent=testing "生成单元测试..."
 
 # 代码审查
-claude code . --subagent=review "审查代码质量..."
+claude . --subagent=review "审查代码质量..."
 
 # 文档生成
-claude code . --subagent=documentation "生成 API 文档..."
+claude . --subagent=documentation "生成 API 文档..."
 
 # 提交代码
-claude code . "完成用户管理功能，自动提交"
+claude . "完成用户管理功能，自动提交"
 ```
 
 ## 下一章

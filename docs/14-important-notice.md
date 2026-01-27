@@ -9,8 +9,8 @@
 1. **基本使用**
    ```bash
    # 正确的基本命令
-   claude code <directory> "<prompt>"
-   claude code . "创建用户管理功能"
+   claude <directory> "<prompt>"
+   claude . "创建用户管理功能"
    ```
 
 2. **MCP 集成**
@@ -40,10 +40,10 @@
 **实际使用方式:**
 ```bash
 # 不是这样 ❌
-claude code . --subagent=javaApiDeveloper "创建API"
+claude . --subagent=javaApiDeveloper "创建API"
 
 # 而是通过清晰的提示词 ✅
-claude code . "作为 Java Spring Boot 专家，创建用户管理 REST API，
+claude . "作为 Java Spring Boot 专家，创建用户管理 REST API，
 包括 Controller、Service、Repository 和测试"
 ```
 
@@ -58,11 +58,11 @@ claude code . "作为 Java Spring Boot 专家，创建用户管理 REST API，
 
 ```bash
 # 这些可能不存在 ⚠️
-claude-code init --template react-typescript
-claude-code --subagent=architect
-claude-code --dry-run . "command"
-claude-code --temperature=0.5 . "command"
-claude-code --agent-info=xxx
+claude init --template react-typescript
+claude --subagent=architect
+claude --dry-run . "command"
+claude --temperature=0.5 . "command"
+claude --agent-info=xxx
 ```
 
 **正确的替代方案:**
@@ -120,7 +120,7 @@ claude-code --agent-info=xxx
 ### 方案 2: 使用结构化提示词
 
 ```bash
-claude code . "
+claude . "
 角色: Java Spring Boot 后端专家
 任务: 创建用户管理功能
 要求:

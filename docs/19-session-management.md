@@ -43,7 +43,7 @@
 ### 基本用法
 
 ```bash
-$ claude code .
+$ claude .
 
 # 恢复最近的会话
 > /resume
@@ -412,7 +412,7 @@ ccundo --interactive
 # 情况：开发到一半电脑崩溃了
 
 # 重启后
-$ claude code .
+$ claude .
 > /resume
 
 [自动显示最近的会话]
@@ -463,7 +463,7 @@ $ ccundo -n 3
 [撤销最近的 3 次修改]
 
 # 重新指导 Claude
-$ claude code .
+$ claude .
 > 请重新实现，但是这次...
 ```
 
@@ -534,7 +534,7 @@ mv session-export.md docs/work-logs/week-42.md
 
 ```bash
 # 开始新会话时给个描述性的标题
-$ claude code . "实现用户权限管理系统"
+$ claude . "实现用户权限管理系统"
 ```
 
 ### 3. 定期清理旧会话
@@ -564,10 +564,10 @@ $ claude code . "实现用户权限管理系统"
 ls ~/.claude/sessions/
 
 # 验证会话文件完整性
-claude code --check-sessions
+claude --check-sessions
 
 # 尝试修复
-claude code --repair-sessions
+claude --repair-sessions
 ```
 
 ### 问题 2：会话文件过大

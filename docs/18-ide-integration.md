@@ -28,7 +28,7 @@ Claude Code 可以与主流 IDE/编辑器无缝集成：
 **步骤 2：运行 Claude Code**
 
 ```bash
-claude code .
+claude .
 ```
 
 **优势：**
@@ -48,7 +48,7 @@ claude code .
     {
       "label": "Claude Code: 启动",
       "type": "shell",
-      "command": "claude code .",
+      "command": "claude .",
       "problemMatcher": [],
       "presentation": {
         "echo": true,
@@ -60,19 +60,19 @@ claude code .
     {
       "label": "Claude Code: 代码审查",
       "type": "shell",
-      "command": "claude code -p '代码审查'",
+      "command": "claude -p '代码审查'",
       "problemMatcher": []
     },
     {
       "label": "Claude Code: 运行测试",
       "type": "shell",
-      "command": "claude code -p '运行所有测试'",
+      "command": "claude -p '运行所有测试'",
       "problemMatcher": []
     },
     {
       "label": "Claude Code: 生成文档",
       "type": "shell",
-      "command": "claude code -p '生成 API 文档'",
+      "command": "claude -p '生成 API 文档'",
       "problemMatcher": []
     }
   ]
@@ -152,7 +152,7 @@ npm install -g @anthropic-ai/claude-code
 
 在终端运行：
 \`\`\`bash
-claude code . "你的任务描述"
+claude . "你的任务描述"
 \`\`\`
 
 ## 推荐场景
@@ -197,7 +197,7 @@ claude code . "你的任务描述"
 **步骤 2：运行 Claude Code**
 
 ```bash
-claude code .
+claude .
 ```
 
 ### 方式 2：External Tools
@@ -229,7 +229,7 @@ Working directory: $ProjectFileDir$
 
 ```
 Name: Claude Code
-Script text: claude code .
+Script text: claude .
 Working directory: $PROJECT_DIR$
 ```
 
@@ -239,10 +239,10 @@ Working directory: $PROJECT_DIR$
 
 ```vim
 " 在 Vim 中执行 Claude Code
-:term claude code .
+:term claude .
 
 " 或使用简写
-:!claude code .
+:!claude .
 ```
 
 ### 方式 2：创建命令
@@ -251,10 +251,10 @@ Working directory: $PROJECT_DIR$
 
 ```vim
 " Claude Code 命令
-command! ClaudeCode :term claude code .
-command! ClaudeReview :!claude code -p "代码审查"
-command! ClaudeTest :!claude code -p "运行测试"
-command! ClaudeDocs :!claude code -p "生成文档"
+command! ClaudeCode :term claude .
+command! ClaudeReview :!claude -p "代码审查"
+command! ClaudeTest :!claude -p "运行测试"
+command! ClaudeDocs :!claude -p "生成文档"
 
 " 键盘映射
 nnoremap <leader>cc :ClaudeCode<CR>
@@ -274,7 +274,7 @@ nnoremap <leader>ct :ClaudeTest<CR>
 
 ```vim
 " 将选中的代码发送给 Claude Code 处理
-vnoremap <leader>cp :!claude code -p "优化选中的代码"<CR>
+vnoremap <leader>cp :!claude -p "优化选中的代码"<CR>
 ```
 
 ## 编辑器配置最佳实践
@@ -324,7 +324,7 @@ vnoremap <leader>cp :!claude code -p "优化选中的代码"<CR>
 ```
 1. 在 VS Code 中打开项目
 2. 按 Ctrl+` 打开终端
-3. 运行 claude code .
+3. 运行 claude .
 4. 在 Claude Code 中描述需求
 5. VS Code 自动刷新显示修改
 6. 审查修改并继续迭代
@@ -414,7 +414,7 @@ vnoremap <leader>cp :!claude code -p "优化选中的代码"<CR>
 1. VS Code 打开项目
 2. 创建新的分支：git checkout -b feature/user-profile
 3. 打开终端：Ctrl+`
-4. 运行：claude code .
+4. 运行：claude .
 5. 输入：创建用户个人资料组件，包括头像、昵称、简介
 6. Claude 生成组件
 7. 在 VS Code 中审查代码
@@ -428,7 +428,7 @@ vnoremap <leader>cp :!claude code -p "优化选中的代码"<CR>
 ```
 1. IDEA 打开项目
 2. Alt+F12 打开终端
-3. 运行：claude code .
+3. 运行：claude .
 4. 输入：为 User 模块创建 REST API
 5. Claude 生成 Controller、Service、Repository
 6. IDEA 自动索引新文件

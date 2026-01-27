@@ -39,7 +39,7 @@
 在交互模式中，使用 `/agents` 命令查看所有可用的 SubAgents：
 
 ```bash
-$ claude code .
+$ claude .
 
 > /agents
 ```
@@ -64,7 +64,7 @@ $ claude code .
   ⚡ performanceOptimizer - 性能优化专家
 
 使用方式：
-  claude code . --subagent=<agent-name> "你的任务描述"
+  claude . --subagent=<agent-name> "你的任务描述"
   或在交互模式中: @<agent-name> 你的任务描述
 ```
 
@@ -91,7 +91,7 @@ Agent: codegen (代码生成专家)
 除了使用 `--subagent` 参数，你还可以在交互模式中使用 `@` 提及 Agent：
 
 ```bash
-$ claude code .
+$ claude .
 
 > @codegen 创建用户登录 API
 [使用 CodeGen Agent 执行任务...]
@@ -120,10 +120,10 @@ Claude Code 内置了多个专业的代理：
 **使用方式：**
 
 ```bash
-claude code . "使用 CodeGen Agent：为用户管理创建 REST API"
+claude . "使用 CodeGen Agent：为用户管理创建 REST API"
 
 # 或显式指定
-claude code . --subagent=codegen "创建登录功能"
+claude . --subagent=codegen "创建登录功能"
 ```
 
 **示例任务：**
@@ -152,7 +152,7 @@ claude code . --subagent=codegen "创建登录功能"
 **使用方式：**
 
 ```bash
-claude code . --subagent=security "审查登录代码的安全性"
+claude . --subagent=security "审查登录代码的安全性"
 ```
 
 **示例任务：**
@@ -181,7 +181,7 @@ claude code . --subagent=security "审查登录代码的安全性"
 **使用方式：**
 
 ```bash
-claude code . --subagent=testing "为 UserService 生成单元测试"
+claude . --subagent=testing "为 UserService 生成单元测试"
 ```
 
 **示例任务：**
@@ -210,7 +210,7 @@ claude code . --subagent=testing "为 UserService 生成单元测试"
 **使用方式：**
 
 ```bash
-claude code . --subagent=documentation "生成 API 文档"
+claude . --subagent=documentation "生成 API 文档"
 ```
 
 **示例任务：**
@@ -239,7 +239,7 @@ claude code . --subagent=documentation "生成 API 文档"
 **使用方式：**
 
 ```bash
-claude code . --subagent=refactor "优化查询性能"
+claude . --subagent=refactor "优化查询性能"
 ```
 
 **示例任务：**
@@ -268,7 +268,7 @@ claude code . --subagent=refactor "优化查询性能"
 **使用方式：**
 
 ```bash
-claude code . --subagent=review "完整代码审查"
+claude . --subagent=review "完整代码审查"
 ```
 
 ## 自定义 SubAgent（完整指南）
@@ -372,23 +372,23 @@ claude code . --subagent=review "完整代码审查"
 
 ```bash
 # 使用 Java API 开发专家
-claude code . --subagent=javaApiDeveloper "为用户管理模块创建完整的 REST API"
+claude . --subagent=javaApiDeveloper "为用户管理模块创建完整的 REST API"
 
 # 使用 Vue 前端开发专家
-claude code . --subagent=vueFrontendDeveloper "创建用户管理页面，包括列表、搜索、编辑功能"
+claude . --subagent=vueFrontendDeveloper "创建用户管理页面，包括列表、搜索、编辑功能"
 
 # 使用测试专家
-claude code . --subagent=testingExpert "为 UserService 生成完整的单元测试"
+claude . --subagent=testingExpert "为 UserService 生成完整的单元测试"
 
 # 使用性能优化专家
-claude code . --subagent=performanceOptimizer "分析并优化数据库查询性能"
+claude . --subagent=performanceOptimizer "分析并优化数据库查询性能"
 ```
 
 #### 方式 B：链式执行多个 Agent
 
 ```bash
 # 代码生成 → 测试 → 安全审查 → 优化 → 文档
-claude code . \
+claude . \
   --subagent=javaApiDeveloper \
   --chain="testingExpert,security,performanceOptimizer,documentation" \
   "创建订单管理 API，包括查询、创建、更新功能"
@@ -403,7 +403,7 @@ claude code . \
 **代码生成阶段：**
 
 ```bash
-claude code . --subagent=javaApiDeveloper \
+claude . --subagent=javaApiDeveloper \
   "创建用户认证 API，需求如下：
 
 ## 功能需求
@@ -434,14 +434,14 @@ claude code . --subagent=javaApiDeveloper \
 **测试阶段：**
 
 ```bash
-claude code . --subagent=testingExpert \
+claude . --subagent=testingExpert \
   "为上面生成的 AuthController 和 AuthService 生成完整的测试用例"
 ```
 
 **优化阶段：**
 
 ```bash
-claude code . --subagent=performanceOptimizer \
+claude . --subagent=performanceOptimizer \
   "分析认证代码的性能，特别是关注：
   - 数据库查询优化
   - 密码验证的性能
@@ -456,7 +456,7 @@ claude code . --subagent=performanceOptimizer \
 **代码生成阶段：**
 
 ```bash
-claude code . --subagent=vueFrontendDeveloper \
+claude . --subagent=vueFrontendDeveloper \
   "创建用户管理页面组件，需求如下：
 
 ## 功能需求
@@ -491,7 +491,7 @@ claude code . --subagent=vueFrontendDeveloper \
 **测试阶段：**
 
 ```bash
-claude code . --subagent=testingExpert \
+claude . --subagent=testingExpert \
   "为用户管理页面生成完整的单元测试"
 ```
 
@@ -513,13 +513,13 @@ your-project/
 
 ```bash
 # 查看所有可用的 agent
-claude-code --list-agents
+claude --list-agents
 
 # 显示特定 agent 的详情
-claude-code --agent-info=javaApiDeveloper
+claude --agent-info=javaApiDeveloper
 
 # 测试 agent 功能
-claude-code --test-agent=javaApiDeveloper
+claude --test-agent=javaApiDeveloper
 ```
 
 ### 步骤 5：最佳实践
@@ -585,19 +585,19 @@ FEATURE_DESC=$2
 echo "🚀 开始完整的功能开发流程..."
 
 echo "1️⃣ 代码生成..."
-claude code $PROJECT_PATH --subagent=codegen "$FEATURE_DESC"
+claude $PROJECT_PATH --subagent=codegen "$FEATURE_DESC"
 
 echo "2️⃣ 生成测试..."
-claude code $PROJECT_PATH --subagent=testing "为上面的代码生成完整的单元测试"
+claude $PROJECT_PATH --subagent=testing "为上面的代码生成完整的单元测试"
 
 echo "3️⃣ 安全审查..."
-claude code $PROJECT_PATH --subagent=security "审查安全性"
+claude $PROJECT_PATH --subagent=security "审查安全性"
 
 echo "4️⃣ 生成文档..."
-claude code $PROJECT_PATH --subagent=documentation "生成 API 文档"
+claude $PROJECT_PATH --subagent=documentation "生成 API 文档"
 
 echo "5️⃣ 最终审查..."
-claude code $PROJECT_PATH --subagent=review "完整代码审查"
+claude $PROJECT_PATH --subagent=review "完整代码审查"
 
 echo "✅ 流程完成！"
 ```
@@ -615,7 +615,7 @@ chmod +x dev-workflow.sh
 
 ```bash
 # 使用专家 Agent 创建 API
-claude code . --subagent=apiDeveloper --chain="test,security,doc" \
+claude . --subagent=apiDeveloper --chain="test,security,doc" \
   "创建订单 API，包括查询、创建、更新、删除功能"
 
 # --chain 参数指定自动链式执行的 agent
@@ -630,7 +630,7 @@ claude code . --subagent=apiDeveloper --chain="test,security,doc" \
 ### 案例 2：Vue 组件完整开发
 
 ```bash
-claude code . --subagent=frontendDeveloper --chain="test,doc" \
+claude . --subagent=frontendDeveloper --chain="test,doc" \
   "创建用户管理页面，包括列表、搜索、编辑、删除功能"
 ```
 
@@ -643,7 +643,7 @@ claude code . --subagent=frontendDeveloper --chain="test,doc" \
 ### 案例 3：数据库迁移
 
 ```bash
-claude code . --subagent=database \
+claude . --subagent=database \
   "创建用户表迁移，包括字段和索引"
 ```
 

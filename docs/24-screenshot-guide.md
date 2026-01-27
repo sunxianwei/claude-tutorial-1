@@ -20,7 +20,7 @@
 ### 第 1 章：快速开始 (docs/01-quick-start.md)
 
 #### 截图 1.1: Claude Code 启动界面
-**位置**: 第一次运行 `claude code .` 的效果
+**位置**: 第一次运行 `claude .` 的效果
 **内容要求**:
 - 显示 Claude Code 的欢迎信息
 - 显示加载的 MCP 服务器
@@ -28,7 +28,7 @@
 
 **建议文件名**: `screenshots/01-startup-screen.png`
 
-**截图时机**: 运行 `claude code .` 后
+**截图时机**: 运行 `claude .` 后
 
 ---
 
@@ -503,7 +503,7 @@ screenshots/
 运行以下命令启动：
 
 ```bash
-claude code .
+claude .
 ```
 
 启动后会看到如下界面：
