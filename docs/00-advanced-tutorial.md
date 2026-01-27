@@ -458,9 +458,6 @@ claude mcp restart
 #### 18. [可视化工具](20-visualization-tools.md)
 **时间：** 15 分钟 | **难度：** ⭐⭐
 
-#### 19. [验证与测试清单](25-verification-checklist.md)
-**时间：** 15 分钟 | **难度：** ⭐⭐
-
 ---
 
 ## 🚀 学习建议
