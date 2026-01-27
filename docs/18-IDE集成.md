@@ -118,7 +118,7 @@ Ctrl+Shift+P (或 Cmd+Shift+P)
 
 ### 方式 4：VS Code 扩展（概念性）
 
-> ⚠️ **注意**: 以下为理想的集成方式，实际可用性请参考 [重要说明](14-important-notice.md)
+> 💡 **提示**: 以下为常见的集成方式，具体功能可参考 [参考资料](00-参考资料.md) 中的官方文档
 
 **功能特性：**
 - 📝 在编辑器中直接与 Claude 对话
@@ -482,7 +482,7 @@ File → Settings → Appearance & Behavior → System Settings
 
 ## 下一章
 
-👉 **[第 19 章：历史会话管理](19-session-management.md)** - 找回和管理你的对话历史
+👉 **[第 19 章：历史会话管理](19-会话管理.md)** - 找回和管理你的对话历史
 
 ---
 

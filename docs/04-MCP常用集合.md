@@ -206,10 +206,8 @@ npm install --save-dev @modelcontextprotocol/server-filesystem \
 cd your-project
 
 # 自动生成配置
-claude init --mcp-preset=java+postgres
 
 # 或指定具体 MCP
-claude init --mcp=filesystem,git,postgres
 ```
 
 ### 方案 C：从模板克隆
@@ -276,7 +274,7 @@ fi
 
 ## 下一章
 
-👉 **[第 5 章：SubAgents 使用](05-subagents.md)** - 智能代理系统
+👉 **[第 5 章：SubAgents 使用](05-子代理使用.md)** - 智能代理系统
 
 ---
 

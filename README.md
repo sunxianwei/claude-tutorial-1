@@ -3,7 +3,8 @@
 > 从入门到精通：Claude Code 2.1 在实际项目中的应用
 
 📚 **完整文档：** [docs/README.md](docs/README.md)  
-⚡ **快速开始：** [QUICK_START.md](QUICK_START.md)
+⚡ **快速开始：** [QUICK_START.md](QUICK_START.md)  
+🔗 **参考资料：** [docs/00-参考资料.md](docs/00-参考资料.md) - 30+ 优质资源
 
 ---
 
@@ -35,7 +36,7 @@
 
 ### ⬆️ 我从 1.x 升级
 
-👉 **[进阶篇导航](docs/00-advanced-tutorial.md)** - 查看 2.1 新功能
+👉 **[进阶篇导航](docs/00-进阶篇导航.md)** - 查看 2.1 新功能
 
 **包含：** Skills、模型切换、MCP 管理等新功能
 
@@ -45,10 +46,10 @@
 
 | 功能 | 说明 | 文档 |
 |------|------|------|
-| **参考资料** | 30+ 个优质中英文资源 | [00-references.md](docs/00-references.md) |
-| **Skills 系统** | 教会 Claude 新能力 | [27-skills-guide.md](docs/27-skills-guide.md) |
-| **模型切换** | 灵活选择 AI 模型 | [28-model-providers.md](docs/28-model-providers.md) |
-| **MCP 命令行** | 简化 MCP 管理 | [03-mcp-setup.md](docs/03-mcp-setup.md) |
+| **参考资料** | 30+ 个优质中英文资源 | [00-参考资料.md](docs/00-参考资料.md) |
+| **Skills 系统** | 教会 Claude 新能力 | [27-Skills指南.md](docs/27-Skills指南.md) |
+| **模型切换** | 灵活选择 AI 模型 | [28-模型切换.md](docs/28-模型切换.md) |
+| **MCP 命令行** | 简化 MCP 管理 | [03-MCP配置指南.md](docs/03-MCP配置指南.md) |
 
 ---
 
@@ -60,9 +61,9 @@
 
 **推荐步骤：**
 1. ⚡ [5 分钟快速体验](QUICK_START.md#5-分钟快速体验)（5 分钟）
-2. 📖 [基础篇导航](docs/00-basic-tutorial.md)（90 分钟）
-3. 🆕 [新项目工作流](docs/11-new-project-workflow.md)（20 分钟）
-4. 📋 [规则文件系统](docs/06-rules-file.md)（20 分钟）
+2. 📖 [基础篇导航](docs/00-基础篇导航.md)（90 分钟）
+3. 🆕 [新项目工作流](docs/11-新项目工作流.md)（20 分钟）
+4. 📋 [规则文件系统](docs/06-规则文件系统.md)（20 分钟）
 
 **总时长：** 约 2.5 小时
 
@@ -73,11 +74,11 @@
 **目标：** 深度使用，提升效率
 
 **推荐步骤：**
-1. 📚 [参考资料](docs/00-references.md)（30 分钟）
-2. 🎯 [进阶篇导航](docs/00-advanced-tutorial.md)（240 分钟）
-3. ⭐ [Skills 完全指南](docs/27-skills-guide.md)（20 分钟）
-4. 🔧 [MCP 配置指南](docs/03-mcp-setup.md)（20 分钟）
-5. 🤖 [SubAgents 使用](docs/05-subagents.md)（15 分钟）
+1. 📚 [参考资料](docs/00-参考资料.md)（30 分钟）
+2. 🎯 [进阶篇导航](docs/00-进阶篇导航.md)（240 分钟）
+3. ⭐ [Skills 完全指南](docs/27-Skills指南.md)（20 分钟）
+4. 🔧 [MCP 配置指南](docs/03-MCP配置指南.md)（20 分钟）
+5. 🤖 [SubAgents 使用](docs/05-子代理使用.md)（15 分钟）
 
 **总时长：** 约 5 小时
 
@@ -88,10 +89,10 @@
 **目标：** 精通所有功能，为团队赋能
 
 **推荐步骤：**
-1. 🚀 [最佳实践](docs/13-best-practices.md)
-2. 🔌 [能力扩展](docs/09-extend-ability.md)
-3. 🏢 [老项目开发指南](docs/21-legacy-project-guide.md)
-4. 🌐 [参考资料](docs/00-references.md)
+1. 🚀 [最佳实践](docs/13-最佳实践.md)
+2. 🔌 [能力扩展](docs/09-能力扩展.md)
+3. 🏢 [老项目开发指南](docs/21-老项目开发指南.md)
+4. 🌐 [参考资料](docs/00-参考资料.md)
 
 ---
 
@@ -117,7 +118,6 @@ export ANTHROPIC_API_KEY="sk-ant-xxxxxxxxxxxx"
 
 # 4. 初始化项目
 cd your-project
-claude init
 
 # 5. 启动使用
 claude .
@@ -146,11 +146,11 @@ claude .
 ├── QUICK_START.md               # 快速开始指南
 ├── docs/
 │   ├── README.md                # 完整教程目录
-│   ├── 00-references.md         # 参考资料（30+ 个资源）
-│   ├── 00-basic-tutorial.md     # 基础篇导航（7 章节）
-│   ├── 00-advanced-tutorial.md  # 进阶篇导航（18 章节）
-│   ├── 01-quick-start.md        # 快速开始
-│   └── ...                      # 其他章节（共 26 个）
+│   ├── 00-参考资料.md         # 参考资料（30+ 个资源+官方文档）
+│   ├── 00-基础篇导航.md     # 基础篇导航（7 章节）
+│   ├── 00-进阶篇导航.md  # 进阶篇导航（18 章节）
+│   ├── 01-快速开始.md        # 快速开始
+│   └── ...                      # 其他章节（共 24 个）
 └── examples/
     └── new-project-demo.md      # 新项目完整案例
 ```
@@ -161,19 +161,21 @@ claude .
 
 | 项目 | 版本 | 更新日期 |
 |------|------|---------|
-| **教程版本** | v2.0 | 2026-01-27 |
+| **教程版本** | v2.1 | 2026-01-27 |
 | **适配版本** | Claude Code 2.1+ | - |
-| **文档数量** | 26 个章节 + 30+ 个外部资源 | - |
-| **总阅读时间** | 约 6 小时 | - |
+| **文档数量** | 27 个文档（24个章节+3个导航） | - |
+| **外部资源** | 30+ 个优质中英文资源（含官方文档） | - |
+| **总阅读时间** | 约 5.5 小时 | - |
 
 ---
 
 ## 🌟 特色亮点
 
 ### 📝 详尽的文档
-- 26 个章节系统讲解
+- 24 个章节系统讲解
+- 3 个导航文档（参考资料、基础篇、进阶篇）
+- 30+ 个外部优质资源（含官方文档）
 - 3 个完整示例项目
-- 30+ 个外部优质资源
 
 ### 🎯 清晰的学习路径
 - 按使用经验分级（新手/进阶/专家）
@@ -195,12 +197,12 @@ claude .
 ## 🆘 获取帮助
 
 ### 常见问题
-- 📖 [重要说明](docs/14-important-notice.md)
-- 🔍 [命令参考](docs/15-command-reference.md)
-- 💬 [最佳实践](docs/13-best-practices.md)
+- 📖 [重要说明](docs/00-重要说明-必读.md)
+- 🔍 [命令参考](docs/15-命令参考.md)
+- 💬 [最佳实践](docs/13-最佳实践.md)
 
 ### 社区资源
-- 🌐 [参考资料](docs/00-references.md) - 30+ 个优质中英文资源
+- 🌐 [参考资料](docs/00-参考资料.md) - 30+ 个优质中英文资源
 - 📚 [Claude 官方文档](https://code.claude.com/docs)
 - 💬 GitHub Discussions
 
@@ -229,10 +231,10 @@ claude .
 | 你的情况 | 推荐路径 | 预计时间 |
 |---------|---------|---------|
 | 🆕 完全新手 | [5 分钟快速体验](QUICK_START.md#5-分钟快速体验) | 5 分钟 |
-| 📖 系统学习 | [基础篇导航](docs/00-basic-tutorial.md) | 90 分钟 |
+| 📖 系统学习 | [基础篇导航](docs/00-基础篇导航.md) | 90 分钟 |
 | 🏗️ 开发新项目 | [新项目开发](QUICK_START.md#新项目开发) | 30 分钟 |
 | 🔧 维护老项目 | [老项目开发](QUICK_START.md#老项目开发) | 1 小时 |
-| ⬆️ 从 1.x 升级 | [进阶篇导航](docs/00-advanced-tutorial.md) | 1 小时 |
+| ⬆️ 从 1.x 升级 | [进阶篇导航](docs/00-进阶篇导航.md) | 1 小时 |
 
 ---
 
