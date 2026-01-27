@@ -65,8 +65,9 @@
 | ---- | ---- | ---- | ------ |
 | [27 Skills 完全指南](27-skills-guide.md) | 20 min | ⭐⭐ | 🔴 重要 |
 | [28 切换模型供应商](28-model-providers.md) | 15 min | ⭐⭐ | 🟡 推荐 |
+| [29 外部参考资源](29-external-resources.md) | 30 min | ⭐ | 🟢 参考 |
 
-**新增内容总时长：** 约 35 分钟
+**新增内容总时长：** 约 65 分钟
 
 ### 📚 示例项目
 
@@ -279,11 +280,17 @@ A: 按 token 数计费。优化后可省 50-70%。
 
 ## 📈 持续学习资源
 
+👉 **[查看完整外部资源列表](29-external-resources.md)** - 包含 15+ 个优质社区资源
+
 ### 官方资源
 - [Claude Code 官方文档](https://docs.claude.com/en/docs/claude-code/claude_code_docs_map.md)
 - [Anthropic 官网](https://www.anthropic.com/)
+- [Claude Code Best Practices (官方)](https://www.anthropic.com/engineering/claude-code-best-practices)
 
-### 社区资源
+### 社区精选
+- [Claude Code Best Practices 综合分析](https://rosmur.github.io/claudecode-best-practices/)
+- [6 Weeks of Claude Code (Puzzmo)](https://blog.puzzmo.com/posts/2025/07/30/six-weeks-of-claude-code/)
+- [How I Use Every Claude Code Feature](https://blog.sshh.io/p/how-i-use-every-claude-code-feature)
 - GitHub Discussions
 - Stack Overflow 相关标签
 

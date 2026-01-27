@@ -171,6 +171,7 @@
   },
   "active": "10281438fa4a94ab",
   "lastOpenFiles": [
+    "docs/29-external-resources.md",
     "claudecode-best-practices/sources.csv",
     "claudecode-best-practices/index.md",
     "claudecode-best-practices/article_fetcher.py",
@@ -205,7 +206,6 @@
     "QUICK_START.md.tmp.10477.1760970192862",
     "README.md.tmp.10477.1760970192760",
     "DEMO_CARD.md.tmp.33684.1760944274404",
-    "examples/backend-project/src/main/resources/application.yml",
-    "examples/backend-project/src/main/resources"
+    "examples/backend-project/src/main/resources/application.yml"
   ]
 }
