@@ -1,0 +1,626 @@
+# 28 - 切换模型供应商：使用不同的 AI 模型
+
+## 概述
+
+Claude Code 默认使用 Anthropic 的 Claude 模型，但你也可以配置使用其他 AI 模型供应商，如 OpenAI、Azure OpenAI、Google Gemini 等。
+
+## 支持的模型供应商
+
+Claude Code 2.1 支持以下模型供应商：
+
+| 供应商 | 模型 | API Key | 配置难度 |
+|--------|------|---------|---------|
+| **Anthropic** | Claude Opus, Sonnet, Haiku | `ANTHROPIC_API_KEY` | ⭐ 简单 |
+| **OpenAI** | GPT-4, GPT-3.5 | `OPENAI_API_KEY` | ⭐⭐ 中等 |
+| **Azure OpenAI** | GPT-4, GPT-3.5 | Azure 凭证 | ⭐⭐⭐ 复杂 |
+| **Google** | Gemini Pro, Ultra | `GOOGLE_API_KEY` | ⭐⭐ 中等 |
+| **AWS Bedrock** | Claude via Bedrock | AWS 凭证 | ⭐⭐⭐ 复杂 |
+| **本地模型** | Ollama, LM Studio | 无需 API Key | ⭐⭐ 中等 |
+
+## 方法 1：使用 Anthropic Claude（默认）
+
+### 支持的模型
+
+```bash
+# Claude Opus 4.1 - 最强大，适合复杂任务
+claude code --model claude-opus-4-1-20250805 .
+
+# Claude Sonnet 4 - 平衡性能和成本（推荐）⭐
+claude code --model claude-sonnet-4-20250514 .
+
+# Claude Haiku 4.5 - 最快最便宜
+claude code --model claude-haiku-4-5-20251001 .
+```
+
+### 配置 API Key
+
+```bash
+# 环境变量（推荐）
+export ANTHROPIC_API_KEY="sk-ant-xxxxxxxxxxxx"
+
+# 或添加到 ~/.bashrc 或 ~/.zshrc
+echo 'export ANTHROPIC_API_KEY="sk-ant-xxxxxxxxxxxx"' >> ~/.bashrc
+source ~/.bashrc
+```
+
+### 在配置文件中指定默认模型
+
+编辑 `.claude/config.json`：
+
+```json
+{
+  "model": "claude-sonnet-4-20250514",
+  "provider": "anthropic",
+  "temperature": 0.7,
+  "maxTokens": 4096
+}
+```
+
+### 临时切换模型
+
+```bash
+# 在命令行中指定
+claude code --model claude-opus-4-1-20250805 .
+
+# 在交互模式中切换
+> /model claude-haiku-4-5-20251001
+```
+
+## 方法 2：使用 OpenAI GPT 模型
+
+### 配置 OpenAI
+
+#### 步骤 1：获取 OpenAI API Key
+
+访问 [OpenAI Platform](https://platform.openai.com/api-keys) 创建 API Key。
+
+#### 步骤 2：设置环境变量
+
+```bash
+# 设置 OpenAI API Key
+export OPENAI_API_KEY="sk-xxxxxxxxxxxx"
+
+# 永久保存
+echo 'export OPENAI_API_KEY="sk-xxxxxxxxxxxx"' >> ~/.bashrc
+source ~/.bashrc
+```
+
+#### 步骤 3：配置 Claude Code
+
+编辑 `.claude/config.json`：
+
+```json
+{
+  "provider": "openai",
+  "model": "gpt-4-turbo",
+  "openai": {
+    "apiKey": "${OPENAI_API_KEY}",
+    "organization": "your-org-id",  // 可选
+    "baseURL": "https://api.openai.com/v1"  // 默认值
+  }
+}
+```
+
+### 支持的 OpenAI 模型
+
+```json
+{
+  "model": "gpt-4-turbo",           // GPT-4 Turbo（推荐）
+  "model": "gpt-4",                 // GPT-4
+  "model": "gpt-4-32k",             // GPT-4 32K 上下文
+  "model": "gpt-3.5-turbo",         // GPT-3.5 Turbo（经济）
+  "model": "gpt-3.5-turbo-16k"      // GPT-3.5 16K 上下文
+}
+```
+
+### 使用 OpenAI 模型
+
+```bash
+# 指定模型运行
+claude code --model gpt-4-turbo --provider openai .
+
+# 在交互模式中
+> /model gpt-4-turbo
+```
+
+## 方法 3：使用 Azure OpenAI
+
+### 配置 Azure OpenAI
+
+#### 步骤 1：准备 Azure OpenAI 凭证
+
+从 Azure Portal 获取：
+- Endpoint URL
+- API Key
+- Deployment Name
+
+#### 步骤 2：设置环境变量
+
+```bash
+export AZURE_OPENAI_API_KEY="your-azure-key"
+export AZURE_OPENAI_ENDPOINT="https://your-resource.openai.azure.com"
+export AZURE_OPENAI_DEPLOYMENT="your-deployment-name"
+```
+
+#### 步骤 3：配置 Claude Code
+
+编辑 `.claude/config.json`：
+
+```json
+{
+  "provider": "azure-openai",
+  "model": "gpt-4",
+  "azureOpenAI": {
+    "apiKey": "${AZURE_OPENAI_API_KEY}",
+    "endpoint": "${AZURE_OPENAI_ENDPOINT}",
+    "deploymentName": "${AZURE_OPENAI_DEPLOYMENT}",
+    "apiVersion": "2024-02-15-preview"
+  }
+}
+```
+
+### 使用 Azure OpenAI
+
+```bash
+# 使用 Azure OpenAI
+claude code --provider azure-openai .
+```
+
+**优势：**
+- ✅ 企业级安全和合规
+- ✅ 数据隐私保护
+- ✅ 可用性 SLA
+- ✅ 与 Azure 服务集成
+
+## 方法 4：使用 Google Gemini
+
+### 配置 Gemini
+
+#### 步骤 1：获取 Google AI API Key
+
+访问 [Google AI Studio](https://makersuite.google.com/app/apikey) 创建 API Key。
+
+#### 步骤 2：设置环境变量
+
+```bash
+export GOOGLE_API_KEY="your-google-api-key"
+
+# 永久保存
+echo 'export GOOGLE_API_KEY="your-google-api-key"' >> ~/.bashrc
+source ~/.bashrc
+```
+
+#### 步骤 3：配置 Claude Code
+
+编辑 `.claude/config.json`：
+
+```json
+{
+  "provider": "google",
+  "model": "gemini-pro",
+  "google": {
+    "apiKey": "${GOOGLE_API_KEY}"
+  }
+}
+```
+
+### 支持的 Gemini 模型
+
+```json
+{
+  "model": "gemini-1.5-pro",      // Gemini 1.5 Pro（推荐）
+  "model": "gemini-1.5-flash",    // Gemini 1.5 Flash（快速）
+  "model": "gemini-pro",          // Gemini Pro
+  "model": "gemini-ultra"         // Gemini Ultra
+}
+```
+
+### 使用 Gemini
+
+```bash
+# 使用 Gemini Pro
+claude code --model gemini-1.5-pro --provider google .
+```
+
+## 方法 5：使用 AWS Bedrock
+
+### 配置 AWS Bedrock
+
+#### 步骤 1：配置 AWS 凭证
+
+```bash
+# 配置 AWS CLI
+aws configure
+
+# 或设置环境变量
+export AWS_ACCESS_KEY_ID="your-access-key"
+export AWS_SECRET_ACCESS_KEY="your-secret-key"
+export AWS_REGION="us-east-1"
+```
+
+#### 步骤 2：配置 Claude Code
+
+编辑 `.claude/config.json`：
+
+```json
+{
+  "provider": "aws-bedrock",
+  "model": "anthropic.claude-v2",
+  "awsBedrock": {
+    "region": "${AWS_REGION}",
+    "accessKeyId": "${AWS_ACCESS_KEY_ID}",
+    "secretAccessKey": "${AWS_SECRET_ACCESS_KEY}"
+  }
+}
+```
+
+### 支持的 Bedrock 模型
+
+```json
+{
+  "model": "anthropic.claude-3-sonnet-20240229-v1:0",  // Claude 3 Sonnet
+  "model": "anthropic.claude-3-opus-20240229-v1:0",    // Claude 3 Opus
+  "model": "anthropic.claude-v2",                      // Claude 2
+  "model": "anthropic.claude-instant-v1"               // Claude Instant
+}
+```
+
+### 使用 AWS Bedrock
+
+```bash
+# 使用 Bedrock Claude
+claude code --provider aws-bedrock .
+```
+
+**优势：**
+- ✅ 与 AWS 服务深度集成
+- ✅ 企业级安全
+- ✅ 数据不离开 AWS
+- ✅ 按需付费
+
+## 方法 6：使用本地模型（Ollama）
+
+### 配置 Ollama
+
+#### 步骤 1：安装 Ollama
+
+```bash
+# macOS
+brew install ollama
+
+# Linux
+curl -fsSL https://ollama.com/install.sh | sh
+
+# 启动 Ollama 服务
+ollama serve
+```
+
+#### 步骤 2：下载模型
+
+```bash
+# 下载 Code Llama（代码专用）
+ollama pull codellama
+
+# 下载 Llama 2（通用）
+ollama pull llama2
+
+# 下载 Mistral
+ollama pull mistral
+
+# 下载 Phi-2（轻量级）
+ollama pull phi
+```
+
+#### 步骤 3：配置 Claude Code
+
+编辑 `.claude/config.json`：
+
+```json
+{
+  "provider": "ollama",
+  "model": "codellama",
+  "ollama": {
+    "baseURL": "http://localhost:11434"
+  }
+}
+```
+
+### 使用 Ollama
+
+```bash
+# 使用本地模型
+claude code --provider ollama --model codellama .
+```
+
+**优势：**
+- ✅ 完全离线运行
+- ✅ 无 API 费用
+- ✅ 数据隐私
+- ✅ 自定义模型
+
+**劣势：**
+- ❌ 需要强大的本地硬件
+- ❌ 模型能力相对较弱
+- ❌ 上下文窗口较小
+
+## 模型对比和选择建议
+
+### 按任务类型选择
+
+| 任务类型 | 推荐模型 | 理由 |
+|---------|---------|------|
+| **复杂系统设计** | Claude Opus 4.1 | 最强推理能力 |
+| **日常开发** | Claude Sonnet 4 | 性价比最优 ⭐ |
+| **快速问答** | Claude Haiku 4.5 | 最快响应 |
+| **代码补全** | GPT-4 Turbo | 代码理解强 |
+| **离线开发** | Ollama + CodeLlama | 隐私和成本 |
+| **企业合规** | Azure OpenAI / AWS Bedrock | 安全合规 |
+
+### 按成本选择
+
+| 模型 | 成本等级 | 适用场景 |
+|------|---------|---------|
+| Claude Haiku 4.5 | 💰 低 | 高频简单任务 |
+| GPT-3.5 Turbo | 💰 低 | 经济型方案 |
+| Claude Sonnet 4 | 💰💰 中 | 日常开发（推荐） |
+| GPT-4 Turbo | 💰💰 中 | 代码生成 |
+| Claude Opus 4.1 | 💰💰💰 高 | 复杂任务 |
+| Ollama（本地） | 💰 免费 | 硬件投资 |
+
+### 按响应速度选择
+
+| 模型 | 速度 | 上下文窗口 |
+|------|------|-----------|
+| Claude Haiku 4.5 | ⚡⚡⚡ 最快 | 200K tokens |
+| GPT-3.5 Turbo | ⚡⚡⚡ 快 | 16K tokens |
+| Claude Sonnet 4 | ⚡⚡ 中等 | 200K tokens |
+| GPT-4 Turbo | ⚡⚡ 中等 | 128K tokens |
+| Claude Opus 4.1 | ⚡ 较慢 | 200K tokens |
+
+## 动态切换模型策略
+
+### 场景 1：根据任务复杂度自动切换
+
+创建脚本 `smart-claude.sh`：
+
+```bash
+#!/bin/bash
+
+TASK=$1
+COMPLEXITY=$2
+
+case $COMPLEXITY in
+  simple)
+    MODEL="claude-haiku-4-5-20251001"
+    ;;
+  medium)
+    MODEL="claude-sonnet-4-20250514"
+    ;;
+  complex)
+    MODEL="claude-opus-4-1-20250805"
+    ;;
+  *)
+    MODEL="claude-sonnet-4-20250514"
+    ;;
+esac
+
+echo "Using model: $MODEL"
+claude code --model $MODEL -p "$TASK"
+```
+
+**使用方式：**
+
+```bash
+# 简单任务
+./smart-claude.sh "生成 README" simple
+
+# 中等任务
+./smart-claude.sh "实现用户登录" medium
+
+# 复杂任务
+./smart-claude.sh "设计微服务架构" complex
+```
+
+### 场景 2：成本优化策略
+
+```bash
+#!/bin/bash
+# cost-aware-claude.sh
+
+# 统计今日 token 使用量
+TODAY_TOKENS=$(claude usage --today)
+BUDGET=1000000  # 每日 token 预算
+
+if [ $TODAY_TOKENS -gt $((BUDGET * 80 / 100)) ]; then
+  # 接近预算，使用便宜模型
+  MODEL="claude-haiku-4-5-20251001"
+  echo "⚠️  接近预算限制，使用经济模型"
+else
+  # 预算充足，使用标准模型
+  MODEL="claude-sonnet-4-20250514"
+  echo "✅ 使用标准模型"
+fi
+
+claude code --model $MODEL .
+```
+
+### 场景 3：多模型并行
+
+```bash
+#!/bin/bash
+# multi-model-review.sh
+
+TASK="审查 src/auth/login.ts 的安全性"
+
+echo "🤖 使用多个模型进行审查..."
+
+# Claude 审查
+echo "📝 Claude Sonnet 审查..."
+claude code --model claude-sonnet-4-20250514 -p "$TASK" > review-claude.md
+
+# GPT-4 审查
+echo "📝 GPT-4 审查..."
+claude code --model gpt-4-turbo --provider openai -p "$TASK" > review-gpt4.md
+
+# 合并结果
+echo "✅ 审查完成，结果已保存"
+```
+
+## 高级配置
+
+### 为不同项目配置不同模型
+
+```json
+// 前端项目 - 使用 GPT-4（代码生成强）
+// frontend/.claude/config.json
+{
+  "provider": "openai",
+  "model": "gpt-4-turbo"
+}
+
+// 后端项目 - 使用 Claude Sonnet（推理强）
+// backend/.claude/config.json
+{
+  "provider": "anthropic",
+  "model": "claude-sonnet-4-20250514"
+}
+
+// 数据分析项目 - 使用 Claude Opus（分析强）
+// analytics/.claude/config.json
+{
+  "provider": "anthropic",
+  "model": "claude-opus-4-1-20250805"
+}
+```
+
+### 配置后备模型
+
+```json
+{
+  "provider": "anthropic",
+  "model": "claude-sonnet-4-20250514",
+  "fallbackModels": [
+    {
+      "provider": "openai",
+      "model": "gpt-4-turbo"
+    },
+    {
+      "provider": "google",
+      "model": "gemini-pro"
+    }
+  ]
+}
+```
+
+**工作原理：**
+1. 首先尝试使用 Claude Sonnet
+2. 如果失败（API 限制、网络问题等），自动切换到 GPT-4
+3. 如果 GPT-4 也失败，切换到 Gemini Pro
+
+## 故障排查
+
+### 问题 1：API Key 无效
+
+```bash
+# 验证 Anthropic Key
+curl https://api.anthropic.com/v1/messages \
+  -H "x-api-key: $ANTHROPIC_API_KEY" \
+  -H "content-type: application/json"
+
+# 验证 OpenAI Key
+curl https://api.openai.com/v1/models \
+  -H "Authorization: Bearer $OPENAI_API_KEY"
+
+# 验证 Google Key
+curl "https://generativelanguage.googleapis.com/v1beta/models?key=$GOOGLE_API_KEY"
+```
+
+### 问题 2：模型不可用
+
+```bash
+# 检查可用的模型
+claude code --list-models
+
+# 测试模型连接
+claude code --test-model claude-sonnet-4-20250514
+```
+
+### 问题 3：性能问题
+
+```bash
+# 使用更快的模型
+claude code --model claude-haiku-4-5-20251001 .
+
+# 减小上下文
+claude code --max-tokens 50000 .
+
+# 启用缓存
+claude code --enable-cache .
+```
+
+## 最佳实践
+
+### 1. 使用环境变量管理 API Keys
+
+```bash
+# .env（不提交到版本控制）
+ANTHROPIC_API_KEY=sk-ant-xxxxxxxxxxxx
+OPENAI_API_KEY=sk-xxxxxxxxxxxx
+GOOGLE_API_KEY=xxxxxxxxxxxx
+```
+
+### 2. 为团队创建统一配置
+
+```json
+// .claude/config.json（提交到版本控制）
+{
+  "provider": "anthropic",
+  "model": "claude-sonnet-4-20250514",
+  "fallbackModels": [
+    {
+      "provider": "openai",
+      "model": "gpt-4-turbo"
+    }
+  ]
+}
+```
+
+### 3. 成本监控
+
+```bash
+# 每日使用报告
+claude usage --today
+
+# 每月使用报告
+claude usage --month
+
+# 设置预算告警
+claude usage --set-budget 100
+```
+
+### 4. 安全配置
+
+```bash
+# 不要在配置文件中硬编码 API Key
+# ❌ 不要这样做
+{
+  "apiKey": "sk-ant-1234567890"
+}
+
+# ✅ 应该这样做
+{
+  "apiKey": "${ANTHROPIC_API_KEY}"
+}
+```
+
+## 下一步
+
+**相关资源：**
+- [02 - 安装配置](02-installation.md) - 基础配置
+- [03 - MCP 配置指南](03-mcp-setup.md) - 扩展工具集成
+- [13 - 最佳实践](13-best-practices.md) - 优化使用体验
+
+---
+
+**时间提示：** 本章阅读 15 分钟，配置 10-30 分钟（取决于选择的供应商） ⏱️
+**难度：** ⭐⭐

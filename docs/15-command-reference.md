@@ -509,11 +509,299 @@ ls -la ~/.claude/sessions/
 claude code --resume-session=<session-id>
 ```
 
+## Claude Code 2.1 新增命令
+
+### MCP 管理命令
+
+```bash
+# 列出所有 MCP 服务器
+claude mcp list
+
+# 添加 MCP 服务器
+claude mcp add <name> -- <command> [args...]
+
+# 删除 MCP 服务器
+claude mcp remove <name>
+
+# 查看 MCP 服务器详情
+claude mcp info <name>
+
+# 测试 MCP 连接
+claude mcp test <name>
+
+# 更新 MCP 服务器
+claude mcp update <name>
+
+# 重启 MCP 服务器
+claude mcp restart [name]
+
+# 查看 MCP 日志
+claude mcp logs <name>
+
+# 禁用/启用 MCP 服务器
+claude mcp disable <name>
+claude mcp enable <name>
+```
+
+**实战示例：**
+
+```bash
+# 添加文件系统 MCP
+claude mcp add filesystem -- npx @modelcontextprotocol/server-filesystem .
+
+# 添加 Git MCP
+claude mcp add git -- npx @modelcontextprotocol/server-git --repository .
+
+# 查看所有 MCP
+claude mcp list
+
+# 测试连接
+claude mcp test filesystem
+
+# 查看日志
+claude mcp logs git
+
+# 删除 MCP
+claude mcp remove postgres
+```
+
+### Skills 管理命令
+
+```bash
+# 列出所有可用的 Skills
+claude code .
+> /skills
+
+# 查看特定 Skill 详情
+> /skills info <skill-name>
+
+# 使用 Skill
+> /<skill-name> [arguments]
+
+# 刷新 Skills 列表
+> /skills refresh
+```
+
+**示例：**
+
+```bash
+$ claude code .
+
+# 列出所有 Skills
+> /skills
+Available Skills:
+  - explain-code: Explains code with diagrams
+  - code-review: Comprehensive code review
+  - gen-tests: Generate test suite
+
+# 查看详情
+> /skills info explain-code
+
+# 使用 Skill
+> /explain-code src/auth/login.ts
+```
+
+### 交互模式新增命令
+
+```bash
+# 查看上下文信息
+/context
+
+# 查看可用的 Agents
+/agents
+
+# 查看 Agents 详情
+/agents info <agent-name>
+
+# 使用 @ 提及 Agent
+@agent-name your task here
+
+# 紧凑模式（减少输出）
+/compact
+
+# 查看帮助
+/help
+
+# 清空屏幕
+/clear
+```
+
+## 完整命令速查表
+
+### 核心命令
+
+| 命令 | 说明 | 示例 |
+|------|------|------|
+| `claude code .` | 进入交互模式 | `claude code .` |
+| `claude -p "task"` | 一次性任务 | `claude -p "生成 API 文档"` |
+| `claude code init` | 初始化项目 | `claude code init` |
+| `claude --version` | 查看版本 | `claude --version` |
+
+### MCP 命令
+
+| 命令 | 说明 | 示例 |
+|------|------|------|
+| `claude mcp list` | 列出 MCP | `claude mcp list` |
+| `claude mcp add` | 添加 MCP | `claude mcp add fs -- npx @modelcontextprotocol/server-filesystem .` |
+| `claude mcp remove` | 删除 MCP | `claude mcp remove fs` |
+| `claude mcp test` | 测试 MCP | `claude mcp test fs` |
+| `claude mcp restart` | 重启 MCP | `claude mcp restart` |
+
+### 交互模式命令
+
+| 命令 | 说明 | 使用方式 |
+|------|------|---------|
+| `/resume` | 恢复会话 | `/resume` 或 `/resume <id>` |
+| `/export` | 导出会话 | `/export output.md` |
+| `/skills` | 列出 Skills | `/skills` |
+| `/agents` | 列出 Agents | `/agents` |
+| `/context` | 查看上下文 | `/context` |
+| `/help` | 帮助信息 | `/help` |
+| `/compact` | 紧凑模式 | `/compact` |
+| `/clear` | 清空屏幕 | `/clear` |
+
+### 调试命令
+
+| 命令 | 说明 | 示例 |
+|------|------|------|
+| `--debug` | 调试模式 | `claude code --debug .` |
+| `--verbose` | 详细输出 | `claude code --verbose .` |
+| `--check-config` | 检查配置 | `claude code --check-config` |
+| `claude mcp logs` | 查看日志 | `claude mcp logs filesystem` |
+
+## Git 集成命令
+
+### 在交互模式中使用 Git
+
+```bash
+# Claude Code 可以直接执行 Git 命令
+
+# 查看状态
+> 查看 git 状态
+
+# 提交变更
+> 提交这些变更，消息为 "feat: add user login"
+
+# 创建分支
+> 创建新分支 feature/user-auth
+
+# 推送到远程
+> 推送到 origin
+```
+
+### Git 工作流自动化
+
+```bash
+# 智能提交
+claude -p "分析变更并生成符合 Conventional Commits 的提交信息"
+
+# 代码审查后提交
+claude -p "审查代码，如果没有问题则提交"
+
+# 完整发布流程
+claude -p "运行测试 -> 更新版本号 -> 生成 CHANGELOG -> 创建 tag -> 推送"
+```
+
+## 模型选择命令
+
+```bash
+# 使用特定模型
+claude code --model claude-opus-4-1-20250805 .
+claude code --model claude-sonnet-4-20250514 .
+claude code --model claude-haiku-4-5-20251001 .
+
+# 或在交互模式中切换模型
+> /model claude-opus-4
+```
+
+## 批处理和脚本
+
+### Bash 脚本示例
+
+```bash
+#!/bin/bash
+# auto-workflow.sh
+
+# 代码审查
+echo "🔍 代码审查..."
+claude -p "审查所有修改的文件" > review.md
+
+# 运行测试
+echo "🧪 运行测试..."
+claude -p "运行所有测试并修复失败的用例"
+
+# 生成文档
+echo "📚 生成文档..."
+claude -p "更新 API 文档"
+
+# 提交变更
+echo "💾 提交..."
+claude -p "提交所有变更，生成合适的提交信息"
+
+echo "✅ 工作流完成！"
+```
+
+### Make 集成
+
+```makefile
+# Makefile
+
+.PHONY: claude-all
+
+claude-review:
+	@claude -p "代码审查" > review-report.md
+
+claude-test:
+	@claude -p "运行测试并修复失败的用例"
+
+claude-doc:
+	@claude -p "生成 API 文档"
+
+claude-commit:
+	@claude -p "分析变更并生成提交"
+
+claude-all: claude-review claude-test claude-doc claude-commit
+	@echo "✅ 所有任务完成"
+```
+
+## 权限和安全命令
+
+```bash
+# 查看权限配置
+> /permissions
+
+# 设置权限规则
+> /permissions set Shell(npm:*) allow
+> /permissions set Write(src/**) deny
+
+# 查看被拒绝的操作
+> /permissions denied
+
+# 重置权限
+> /permissions reset
+```
+
+## 性能优化命令
+
+```bash
+# 使用压缩上下文
+claude code --compression-level high .
+
+# 限制文件范围
+claude code --files "src/**/*.ts" .
+
+# 排除文件
+claude code --exclude "**/test/**" .
+
+# 限制 token 数
+claude code --max-tokens 50000 .
+```
+
 ## 下一章
 
 👉 **[第 16 章：自定义命令和 Hook](16-custom-commands.md)** - 扩展 Claude Code 的能力
 
 ---
 
-**时间提示：** 本章阅读 10 分钟，实践 15 分钟 ⏱️
+**时间提示：** 本章阅读 15 分钟，实践 20 分钟 ⏱️
 **难度：** ⭐⭐

@@ -952,10 +952,361 @@ chmod 644 .claude/mcp-servers.json
 psql -l  # 列出数据库
 ```
 
+## MCP 管理最佳实践
+
+### 1. MCP 命令行工具
+
+Claude Code 2.1 提供了专门的 MCP 命令行工具，用于管理 MCP 服务器：
+
+```bash
+# 列出所有已安装的 MCP 服务器
+claude mcp list
+
+# 添加新的 MCP 服务器
+claude mcp add <服务器名称> -- <npm 包命令>
+
+# 删除 MCP 服务器
+claude mcp remove <服务器名称>
+
+# 查看 MCP 服务器详情
+claude mcp info <服务器名称>
+
+# 测试 MCP 服务器连接
+claude mcp test <服务器名称>
+
+# 更新 MCP 服务器
+claude mcp update <服务器名称>
+
+# 重启所有 MCP 服务器
+claude mcp restart
+```
+
+#### 实战示例
+
+```bash
+# 添加文件系统 MCP
+claude mcp add filesystem -- npx @modelcontextprotocol/server-filesystem .
+
+# 添加 Git MCP
+claude mcp add git -- npx @modelcontextprotocol/server-git --repository .
+
+# 添加数据库 MCP
+claude mcp add postgres -- npx @modelcontextprotocol/server-postgres
+
+# 查看所有 MCP
+claude mcp list
+# 输出：
+# ✅ filesystem - @modelcontextprotocol/server-filesystem
+# ✅ git - @modelcontextprotocol/server-git
+# ✅ postgres - @modelcontextprotocol/server-postgres
+
+# 删除不需要的 MCP
+claude mcp remove postgres
+
+# 测试 MCP 连接
+claude mcp test filesystem
+# 输出： ✅ filesystem server is running correctly
+```
+
+### 2. MCP 配置文件管理
+
+#### 项目级 vs 全局级
+
+```
+# 项目级配置（推荐用于特定项目需求）
+.claude/mcp-servers.json
+
+# 用户级配置（推荐用于个人常用工具）
+~/.claude/mcp-servers.json
+
+# 企业级配置（推荐用于团队统一配置）
+通过 IAM 系统托管
+```
+
+#### 配置分离策略
+
+将敏感信息和通用配置分离：
+
+```json
+// .claude/mcp-servers.json （提交到版本控制）
+{
+  "mcpServers": {
+    "postgres": {
+      "command": "npx",
+      "args": ["@modelcontextprotocol/server-postgres"],
+      "env": {
+        "PG_HOST": "${PG_HOST}",
+        "PG_PORT": "5432",
+        "PG_DATABASE": "${PG_DATABASE}",
+        "PG_USER": "${PG_USER}",
+        "PG_PASSWORD": "${PG_PASSWORD}"
+      }
+    }
+  }
+}
+```
+
+```bash
+# .env （不提交到版本控制，添加到 .gitignore）
+PG_HOST=localhost
+PG_DATABASE=myapp
+PG_USER=postgres
+PG_PASSWORD=your_secure_password
+```
+
+### 3. MCP 版本管理
+
+#### 锁定 MCP 版本（推荐）
+
+```json
+{
+  "mcpServers": {
+    "filesystem": {
+      "command": "npx",
+      "args": [
+        "@modelcontextprotocol/server-filesystem@1.2.3",
+        "."
+      ]
+    }
+  }
+}
+```
+
+#### 使用 package.json 管理（更推荐）
+
+```json
+// package.json
+{
+  "devDependencies": {
+    "@modelcontextprotocol/server-filesystem": "^1.2.3",
+    "@modelcontextprotocol/server-git": "^2.0.0",
+    "@modelcontextprotocol/server-postgres": "^1.5.0"
+  }
+}
+```
+
+```json
+// .claude/mcp-servers.json
+{
+  "mcpServers": {
+    "filesystem": {
+      "command": "node",
+      "args": ["./node_modules/@modelcontextprotocol/server-filesystem/dist/index.js", "."]
+    }
+  }
+}
+```
+
+**优势：**
+- ✅ 版本锁定，团队统一
+- ✅ 离线可用
+- ✅ 更快的启动速度
+- ✅ 更好的依赖管理
+
+### 4. MCP 环境管理
+
+#### 多环境配置
+
+```bash
+# 开发环境
+.claude/mcp-servers.dev.json
+
+# 测试环境
+.claude/mcp-servers.test.json
+
+# 生产环境
+.claude/mcp-servers.prod.json
+```
+
+```bash
+# 使用环境变量选择配置
+export CLAUDE_MCP_CONFIG=.claude/mcp-servers.dev.json
+claude code .
+```
+
+#### 环境变量模板
+
+创建 `.env.example` 作为模板：
+
+```bash
+# .env.example （提交到版本控制）
+# Database
+PG_HOST=localhost
+PG_PORT=5432
+PG_DATABASE=your_database
+PG_USER=your_user
+PG_PASSWORD=your_password
+
+# GitHub
+GITHUB_TOKEN=your_github_token
+
+# GitLab
+GITLAB_URL=https://gitlab.yourcompany.com
+GITLAB_TOKEN=your_gitlab_token
+GITLAB_PROJECT_ID=your_project_id
+```
+
+### 5. MCP 健康检查
+
+#### 定期检查脚本
+
+```bash
+#!/bin/bash
+# check-mcp-health.sh
+
+echo "🔍 检查 MCP 服务器健康状态..."
+
+# 检查每个 MCP 服务器
+for server in filesystem git postgres; do
+  echo "Testing $server..."
+  if claude mcp test "$server"; then
+    echo "✅ $server is healthy"
+  else
+    echo "❌ $server failed"
+    # 尝试重启
+    echo "Attempting to restart $server..."
+    claude mcp restart "$server"
+  fi
+done
+
+echo "✅ Health check completed"
+```
+
+### 6. MCP 故障排查
+
+#### 常见问题和解决方案
+
+**问题 1： MCP 服务器启动失败**
+
+```bash
+# 检查 MCP 日志
+claude mcp logs <server-name>
+
+# 查看详细错误信息
+claude mcp test <server-name> --verbose
+
+# 重新安装 MCP
+claude mcp remove <server-name>
+claude mcp add <server-name> -- <command>
+```
+
+**问题 2： MCP 连接超时**
+
+```bash
+# 增加超时时间
+export MCP_TIMEOUT=60000  # 60 秒
+
+# 检查网络连接
+ping api.modelcontextprotocol.io
+
+# 检查防火墙设置
+```
+
+**问题 3： 环境变量未加载**
+
+```bash
+# 验证环境变量
+echo $PG_PASSWORD
+
+# 手动加载 .env
+source .env
+claude code .
+
+# 使用 dotenv
+npm install -g dotenv-cli
+dotenv -e .env -- claude code .
+```
+
+### 7. MCP 性能优化
+
+#### 延迟加载 MCP
+
+```json
+{
+  "mcpServers": {
+    "heavy-tool": {
+      "command": "npx",
+      "args": ["heavy-mcp-server"],
+      "lazyLoad": true,
+      "loadTimeout": 10000
+    }
+  }
+}
+```
+
+#### 禁用不需要的 MCP
+
+```bash
+# 临时禁用 MCP
+claude mcp disable postgres
+
+# 重新启用
+claude mcp enable postgres
+
+# 查看状态
+claude mcp list
+```
+
+### 8. MCP 安全最佳实践
+
+#### 1. 使用环境变量存储敏感信息
+
+```bash
+# ❌ 不要这样做
+{
+  "env": {
+    "API_KEY": "sk-1234567890abcdef"  # 硬编码
+  }
+}
+
+# ✅ 应该这样做
+{
+  "env": {
+    "API_KEY": "${API_KEY}"  # 使用环境变量
+  }
+}
+```
+
+#### 2. 限制 MCP 权限
+
+```json
+{
+  "mcpServers": {
+    "filesystem": {
+      "command": "npx",
+      "args": ["@modelcontextprotocol/server-filesystem", "./src"],
+      "permissions": {
+        "read": true,
+        "write": false
+      }
+    }
+  }
+}
+```
+
+### 9. MCP 团队协作
+
+#### 团队配置模板
+
+创建团队共享的 MCP 配置：
+
+```bash
+# 项目根目录
+.claude/
+├── mcp-servers.json          # 基础配置（提交）
+├── mcp-servers.dev.json      # 开发环境（提交）
+├── mcp-servers.example.json  # 示例配置（提交）
+└── README-MCP.md             # MCP 使用文档（提交）
+
+# 不提交
+.env                           # 个人环境变量（不提交）
+.claude/mcp-servers.local.json # 个人配置覆盖（不提交）
+```
+
 ## 下一章
 
 👉 **[第 4 章：MCP 常用集合](04-mcp-common.md)** - 开箱即用的配置示例
 
 ---
 
-**时间提示：** 本章阅读 15 分钟，配置 10 分钟 ⏱️
+**时间提示：** 本章阅读 20 分钟，配置 15 分钟 ⏱️
