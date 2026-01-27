@@ -1463,12 +1463,162 @@ GITLAB_TOKEN=your_gitlab_token
 GITLAB_PROJECT_ID=your_project_id
 ```
 
-## 下一章
+---
 
-👉 **[第 5 章：SubAgents 使用](12-子代理使用.md)** - 智能代理系统
+## 快速验证 MCP 配置
+
+### 验证已安装的 MCP
+
+```bash
+# 列出所有 MCP
+claude mcp list
+
+# 查看详细信息
+claude mcp info <server-name>
+```
+
+### 测试常用 MCP
+
+```bash
+# 测试 Filesystem
+claude . "列出当前目录的所有 .md 文件"
+
+# 测试 Git
+claude . "显示最近 3 次提交"
+
+# 测试 GitHub（需要 Token）
+claude . "列出我的前 5 个仓库"
+
+# 测试 Context7
+claude . "使用 Context7 查询 React hooks 文档"
+
+# 测试 Playwright
+claude . "用 Playwright 访问 https://example.com 并截图"
+```
+
+### 验证清单
+
+- [ ] `claude mcp list` 显示所有配置的 MCP
+- [ ] Filesystem MCP 可以列出文件
+- [ ] Git MCP 可以查看提交（如在 Git 仓库中）
+- [ ] 环境变量正确设置（如需要）
+- [ ] 无权限错误
+- [ ] 无连接错误
 
 ---
 
-**时间提示：** 本章阅读 25 分钟，配置 15 分钟 ⏱️
+## 故障排查
 
-> 💡 **更新说明：** 本章已整合原《MCP 常用集合》内容，提供从基础到高级的完整 MCP 配置方案
+### 问题 1: npx 找不到包
+
+```bash
+# 错误: Cannot find package '@modelcontextprotocol/server-xxx'
+
+# 解决方案
+# 1. 检查包名
+npm search @modelcontextprotocol/server-xxx
+
+# 2. 清理缓存
+npm cache clean --force
+
+# 3. 使用 -y 强制下载
+claude mcp add xxx -- npx -y @modelcontextprotocol/server-xxx
+```
+
+### 问题 2: 权限错误
+
+```bash
+# 错误: Permission denied
+
+# 解决方案
+# 检查文件权限
+ls -la .claude/mcp-servers.json
+
+# 修复权限
+chmod 644 .claude/mcp-servers.json
+chmod 755 .claude
+```
+
+### 问题 3: 环境变量未加载
+
+```bash
+# 错误: Missing required environment variable
+
+# 解决方案
+# 1. 验证环境变量
+echo $GITHUB_TOKEN
+
+# 2. 重新加载配置
+source ~/.bashrc  # 或 ~/.zshrc
+
+# 3. 重启终端
+```
+
+### 问题 4: MCP 服务器无响应
+
+```bash
+# 检查状态
+claude mcp list
+
+# 查看详细日志
+claude --debug .
+
+# 移除并重新添加
+claude mcp remove <name>
+claude mcp add <name> -- npx -y <package>
+```
+
+### 调试技巧
+
+```bash
+# 1. 使用 debug 模式
+claude --debug .
+
+# 2. 测试单个 MCP
+claude mcp info <server-name>
+
+# 3. 检查 JSON 配置
+cat .claude/mcp-servers.json | jq .
+
+# 4. 验证 npm 包存在
+npm view @modelcontextprotocol/server-xxx
+```
+
+---
+
+## 推荐的 MCP 组合
+
+### 最小配置（所有项目）
+
+```bash
+claude mcp add filesystem -- npx -y @modelcontextprotocol/server-filesystem .
+claude mcp add git -- npx -y @modelcontextprotocol/server-git --repository .
+```
+
+### Web 开发
+
+```bash
+# 基础
+claude mcp add filesystem -- npx -y @modelcontextprotocol/server-filesystem .
+claude mcp add git -- npx -y @modelcontextprotocol/server-git --repository .
+
+# 文档查询
+claude mcp add context7 -- npx -y @upstash/context7-mcp
+
+# E2E 测试
+claude mcp add playwright -- npx -y @automatalabs/mcp-server-playwright
+```
+
+### 全栈开发
+
+```bash
+# Web 开发 + 数据库 + GitHub
+claude mcp add filesystem -- npx -y @modelcontextprotocol/server-filesystem .
+claude mcp add git -- npx -y @modelcontextprotocol/server-git --repository .
+claude mcp add context7 -- npx -y @upstash/context7-mcp
+claude mcp add github -- npx -y @modelcontextprotocol/server-github
+claude mcp add postgres -- npx -y @modelcontextprotocol/server-postgres
+```
+
+---
+
