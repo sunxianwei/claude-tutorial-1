@@ -171,6 +171,8 @@
   },
   "active": "011c8154dbdc3d00",
   "lastOpenFiles": [
+    "FINAL_CHECK_REPORT.md",
+    "MERGE_SUMMARY.md",
     "QUICK_VIEW.md",
     "FINAL_SUMMARY.md",
     "VERIFICATION_CHECKLIST.md",
@@ -195,8 +197,6 @@
     "docs-backup-20260127-160516/01-安装配置.md",
     "docs-backup-20260127-160516/00-零基础快速上手.md",
     "docs-backup-20260127-160516/00-进阶篇导航.md",
-    "docs-backup-20260127-160516/00-故障排查指南.md",
-    "docs-backup-20260127-160516/00-改进总结报告.md",
     "docs-backup-20260127-160516",
     "fix-commands.sh",
     "merge_mcp.py",
