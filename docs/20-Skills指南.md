@@ -1,19 +1,58 @@
-# 27 - Skills 完全指南:扩展 Claude Code 的能力
+# 20 - Skills 完全指南：扩展 Claude Code 的能力
 
-## 什么是 Skills?
+> **官方完整教程**：https://code.claude.com/docs/zh-CN/skills  
+> **官方 Skills 仓库**：https://github.com/anthropics/skills
 
-**Skills(技能)** 是 Claude Code 2.1 版本引入的强大功能,它让你可以教会 Claude 新的能力。通过创建包含指令的 `SKILL.md` 文件,Claude 会将其添加到工具包中,在相关时自动使用,或者你可以通过 `/skill-name` 直接调用。
+## 什么是 Skills？
+
+**Skills（技能）** 是 Claude Code 2.1 版本引入的强大功能，它让你可以教会 Claude 新的能力。通过创建包含指令的 `SKILL.md` 文件，Claude 会将其添加到工具包中，在相关时自动使用，或者你可以通过 `/skill-name` 直接调用。
+
+### Skills 能解决什么问题？
+
+- ✅ **标准化工作流程**：将团队的工作流程固化，确保每次执行都遵循统一标准
+- ✅ **专业知识复用**：将领域知识、业务逻辑、公司规范打包，团队成员都能使用
+- ✅ **提高效率**：避免重复编写相同代码、重复解释相同流程
+- ✅ **保证质量**：通过预制的脚本和模板，减少错误，提高输出一致性
 
 ### Skills vs 自定义命令
 
-在 Claude Code 2.1 中,**自定义斜杠命令已合并到 Skills 中**:
+在 Claude Code 2.1 中，**自定义斜杠命令已合并到 Skills 中**：
 - `.claude/commands/review.md` 文件和 `.claude/skills/review/SKILL.md` 技能都会创建 `/review` 命令
 - 现有的 `.claude/commands/` 文件继续有效
-- Skills 提供了更多可选功能:支持文件的目录、控制调用方式的前置元数据、自动加载能力
+- Skills 提供了更多可选功能：支持文件的目录、控制调用方式的前置元数据、自动加载能力
 
 ### Skills 遵循开放标准
 
-Claude Code Skills 遵循 [Agent Skills](https://agentskills.io) 开放标准,该标准适用于多个 AI 工具。同时 Claude Code 扩展了该标准,增加了调用控制、子代理执行和动态上下文注入等功能。
+Claude Code Skills 遵循 [Agent Skills](https://agentskills.io) 开放标准，该标准适用于多个 AI 工具。同时 Claude Code 扩展了该标准，增加了调用控制、子代理执行和动态上下文注入等功能。
+
+---
+
+## 📚 学习资源
+
+### 官方资源
+
+- **官方文档**：https://code.claude.com/docs/zh-CN/skills
+- **官方 Skills 仓库**：https://github.com/anthropics/skills
+  - `skills/` 目录包含所有官方提供的 skill
+  - `skill-creator/` 可以帮助用户快速创建 skill
+  - 包含文档处理（docx、pdf、pptx、xlsx）、创意设计、开发工具等
+
+### 视频教程
+
+- [Agent Skills 到底是什么，一个动画彻底搞懂！](https://www.bilibili.com/video/BV1EXksBGEa8/)
+- [开源项目 claude-skills-guide，快速制作属于你的 claude skill 技能](https://www.bilibili.com/video/BV1wsCuBgEZ2/)
+
+### 如何查找好用的 Skill
+
+**方式 1：浏览官方仓库**
+1. 访问 https://github.com/anthropics/skills
+2. 查看 `skills/` 目录
+3. 找到感兴趣的 skill，查看其 `SKILL.md` 文件
+4. 复制整个 skill 文件夹到你的 skill 目录即可使用
+
+**方式 2：使用 skill-creator**
+- 直接在 Claude 对话中说明需求
+- Claude 会自动使用 skill-creator 帮你生成
 
 ## 核心概念
 
@@ -720,37 +759,198 @@ my-plugin/
 
 ## 生成视觉输出
 
-Skills 可以捆绑并运行脚本,生成交互式可视化输出。
+Skills 可以捆绑并运行任何语言的脚本，生成超越单个提示可能的功能。一个强大的模式是生成视觉输出：在浏览器中打开的交互式 HTML 文件，用于探索数据、调试或创建报告。
 
-**示例:代码库可视化工具**
+### 完整示例：代码库可视化工具
 
-```markdown
+此示例创建一个代码库浏览器：交互式树视图，展开/折叠目录、查看文件大小、按颜色识别文件类型。
+
+#### 步骤 1：创建技能目录
+
+```bash
+mkdir -p ~/.claude/skills/codebase-visualizer/scripts
+```
+
+#### 步骤 2：创建 SKILL.md
+
+创建 `~/.claude/skills/codebase-visualizer/SKILL.md`：
+
+````markdown
 ---
 name: codebase-visualizer
-description: Generate an interactive collapsible tree visualization of your codebase
+description: Generate an interactive collapsible tree visualization of your codebase. Use when exploring a new repo, understanding project structure, or identifying large files.
 allowed-tools: Shell(python:*)
 ---
 
 # Codebase Visualizer
 
-Generate an interactive HTML tree view that shows your project's file structure.
+Generate an interactive HTML tree view that shows your project's file structure with collapsible directories.
 
 ## Usage
+
 Run the visualization script from your project root:
+
 ```bash
 python ~/.claude/skills/codebase-visualizer/scripts/visualize.py .
 ```
 
-This creates `codebase-map.html` and opens it in your browser.
+This creates `codebase-map.html` in the current directory and opens it in your default browser.
 
-## Features
+## What the visualization shows
+
 - **Collapsible directories**: Click folders to expand/collapse
 - **File sizes**: Displayed next to each file
-- **Colors**: Different colors for file types
+- **Colors**: Different colors for different file types
 - **Directory totals**: Shows aggregate size of each folder
+````
+
+#### 步骤 3：创建 visualize.py 脚本
+
+创建 `~/.claude/skills/codebase-visualizer/scripts/visualize.py`。此脚本扫描目录树并生成自包含的 HTML 文件，包含：
+
+- **摘要侧边栏**：文件计数、目录计数、总大小、文件类型数量
+- **条形图**：按文件类型（按大小排名前 8）分解代码库
+- **可折叠树**：展开和折叠目录，带颜色编码的文件类型指示器
+
+```python
+#!/usr/bin/env python3
+"""Generate an interactive collapsible tree visualization of a codebase."""
+
+import json
+import sys
+import webbrowser
+from pathlib import Path
+from collections import Counter
+
+IGNORE = {'.git', 'node_modules', '__pycache__', '.venv', 'venv', 'dist', 'build'}
+
+def scan(path: Path, stats: dict) -> dict:
+    result = {"name": path.name, "children": [], "size": 0}
+    try:
+        for item in sorted(path.iterdir()):
+            if item.name in IGNORE or item.name.startswith('.'):
+                continue
+            if item.is_file():
+                size = item.stat().st_size
+                ext = item.suffix.lower() or '(no ext)'
+                result["children"].append({"name": item.name, "size": size, "ext": ext})
+                result["size"] += size
+                stats["files"] += 1
+                stats["extensions"][ext] += 1
+                stats["ext_sizes"][ext] += size
+            elif item.is_dir():
+                stats["dirs"] += 1
+                child = scan(item, stats)
+                if child["children"]:
+                    result["children"].append(child)
+                    result["size"] += child["size"]
+    except PermissionError:
+        pass
+    return result
+
+def generate_html(data: dict, stats: dict, output: Path) -> None:
+    ext_sizes = stats["ext_sizes"]
+    total_size = sum(ext_sizes.values()) or 1
+    sorted_exts = sorted(ext_sizes.items(), key=lambda x: -x[1])[:8]
+    colors = {
+        '.js': '#f7df1e', '.ts': '#3178c6', '.py': '#3776ab', '.go': '#00add8',
+        '.rs': '#dea584', '.rb': '#cc342d', '.css': '#264de4', '.html': '#e34c26',
+        '.json': '#6b7280', '.md': '#083fa1', '.yaml': '#cb171e', '.yml': '#cb171e',
+        '.mdx': '#083fa1', '.tsx': '#3178c6', '.jsx': '#61dafb', '.sh': '#4eaa25',
+    }
+    lang_bars = "".join(
+        f'<div class="bar-row"><span class="bar-label">{ext}</span>'
+        f'<div class="bar" style="width:{(size/total_size)*100}%;background:{colors.get(ext,"#6b7280")}"></div>'
+        f'<span class="bar-pct">{(size/total_size)*100:.1f}%</span></div>'
+        for ext, size in sorted_exts
+    )
+    def fmt(b):
+        if b < 1024: return f"{b} B"
+        if b < 1048576: return f"{b/1024:.1f} KB"
+        return f"{b/1048576:.1f} MB"
+
+    html = f'''<!DOCTYPE html>
+<html><head>
+  <meta charset="utf-8"><title>Codebase Explorer</title>
+  <style>
+    body {{ font: 14px/1.5 system-ui, sans-serif; margin: 0; background: #1a1a2e; color: #eee; }}
+    .container {{ display: flex; height: 100vh; }}
+    .sidebar {{ width: 280px; background: #252542; padding: 20px; border-right: 1px solid #3d3d5c; overflow-y: auto; flex-shrink: 0; }}
+    .main {{ flex: 1; padding: 20px; overflow-y: auto; }}
+    h1 {{ margin: 0 0 10px 0; font-size: 18px; }}
+    h2 {{ margin: 20px 0 10px 0; font-size: 14px; color: #888; text-transform: uppercase; }}
+    .stat {{ display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #3d3d5c; }}
+    .stat-value {{ font-weight: bold; }}
+    .bar-row {{ display: flex; align-items: center; margin: 6px 0; }}
+    .bar-label {{ width: 55px; font-size: 12px; color: #aaa; }}
+    .bar {{ height: 18px; border-radius: 3px; }}
+    .bar-pct {{ margin-left: 8px; font-size: 12px; color: #666; }}
+    .tree {{ list-style: none; padding-left: 20px; }}
+    details {{ cursor: pointer; }}
+    summary {{ padding: 4px 8px; border-radius: 4px; }}
+    summary:hover {{ background: #2d2d44; }}
+    .folder {{ color: #ffd700; }}
+    .file {{ display: flex; align-items: center; padding: 4px 8px; border-radius: 4px; }}
+    .file:hover {{ background: #2d2d44; }}
+    .size {{ color: #888; margin-left: auto; font-size: 12px; }}
+    .dot {{ width: 8px; height: 8px; border-radius: 50%; margin-right: 8px; }}
+  </style>
+</head><body>
+  <div class="container">
+    <div class="sidebar">
+      <h1>📊 Summary</h1>
+      <div class="stat"><span>Files</span><span class="stat-value">{stats["files"]:,}</span></div>
+      <div class="stat"><span>Directories</span><span class="stat-value">{stats["dirs"]:,}</span></div>
+      <div class="stat"><span>Total size</span><span class="stat-value">{fmt(data["size"])}</span></div>
+      <div class="stat"><span>File types</span><span class="stat-value">{len(stats["extensions"])}</span></div>
+      <h2>By file type</h2>
+      {lang_bars}
+    </div>
+    <div class="main">
+      <h1>📁 {data["name"]}</h1>
+      <ul class="tree" id="root"></ul>
+    </div>
+  </div>
+  <script>
+    const data = {json.dumps(data)};
+    const colors = {json.dumps(colors)};
+    function fmt(b) {{ if (b < 1024) return b + ' B'; if (b < 1048576) return (b/1024).toFixed(1) + ' KB'; return (b/1048576).toFixed(1) + ' MB'; }}
+    function render(node, parent) {{
+      if (node.children) {{
+        const det = document.createElement('details');
+        det.open = parent === document.getElementById('root');
+        det.innerHTML = `<summary><span class="folder">📁 ${{node.name}}</span><span class="size">${{fmt(node.size)}}</span></summary>`;
+        const ul = document.createElement('ul'); ul.className = 'tree';
+        node.children.sort((a,b) => (b.children?1:0)-(a.children?1:0) || a.name.localeCompare(b.name));
+        node.children.forEach(c => render(c, ul));
+        det.appendChild(ul);
+        const li = document.createElement('li'); li.appendChild(det); parent.appendChild(li);
+      }} else {{
+        const li = document.createElement('li'); li.className = 'file';
+        li.innerHTML = `<span class="dot" style="background:${{colors[node.ext]||'#6b7280'}}"></span>${{node.name}}<span class="size">${{fmt(node.size)}}</span>`;
+        parent.appendChild(li);
+      }}
+    }}
+    data.children.forEach(c => render(c, document.getElementById('root')));
+  </script>
+</body></html>'''
+    output.write_text(html)
+
+if __name__ == '__main__':
+    target = Path(sys.argv[1] if len(sys.argv) > 1 else '.').resolve()
+    stats = {"files": 0, "dirs": 0, "extensions": Counter(), "ext_sizes": Counter()}
+    data = scan(target, stats)
+    out = Path('codebase-map.html')
+    generate_html(data, stats, out)
+    print(f'Generated {out.absolute()}')
+    webbrowser.open(f'file://{out.absolute()}')
 ```
 
-配套的 `scripts/visualize.py` 可以生成自包含的 HTML 可视化。
+#### 测试
+
+在任何项目中打开 Claude Code 并询问"可视化此代码库"。Claude 运行脚本，生成 `codebase-map.html`，并在浏览器中打开它。
+
+**此模式适用于任何视觉输出**：依赖关系图、测试覆盖率报告、API 文档或数据库架构可视化。
 
 ## 故障排除
 
@@ -779,16 +979,74 @@ This creates `codebase-map.html` and opens it in your browser.
    export SLASH_COMMAND_TOOL_CHAR_BUDGET=30000
    ```
 
+## 使用 skill-creator 快速生成（推荐）
+
+如果你的 AI 工具支持 skill-creator，这是最快速的创建方式。
+
+### 使用步骤
+
+**1. 开启对话**
+直接在 Claude 中说明你的需求：
+```
+"我想创建一个用于生成季度业务报告的 skill"
+```
+
+**2. 提供材料（可选）**
+- 上传模板文件
+- 提供示例文档
+- 分享品牌规范或数据文件
+
+**3. 回答 Claude 的问题**
+Claude 会询问：
+- 使用场景
+- 工作流程
+- 输出格式要求
+- 特殊规范
+
+**4. Claude 自动生成**
+Claude 会：
+- 创建 `SKILL.md` 文件
+- 组织你的材料到合适目录
+- 生成必要的脚本和模板
+
+**5. 保存并激活**
+- 保存生成的 skill 文件到 `~/.claude/skills/` 或 `.claude/skills/`
+- 在设置中启用（Settings > Capabilities > Skills）
+- 测试使用，看到 "Using [skill name]" 即表示成功
+
+### 使用技巧
+
+- ✅ **描述要具体**：说明 skill 的用途、触发场景、输出格式
+- ✅ **提供示例**：上传实际使用的模板或示例文件
+- ✅ **说明约束**：告知必须遵循的规范或限制
+
+---
+
+## 📋 快速检查清单
+
+创建 skill 后，确认：
+
+- [ ] `SKILL.md` 包含 YAML frontmatter（name 和 description）
+- [ ] description 包含**做什么**和**什么时候用**（触发关键词）
+- [ ] SKILL.md 主体内容不超过 500 行
+- [ ] 文件路径使用 `/` 而不是 `\`
+- [ ] 所有脚本已测试可用
+- [ ] 描述使用第三人称（"处理 Excel 文件"而非"我可以处理"）
+- [ ] 如果有支持文件，已在 SKILL.md 中引用
+- [ ] 测试了自动调用和手动调用两种方式
+
+---
+
 ## 最佳实践
 
 ### 1. 清晰的描述
-描述应该明确说明何时使用该 Skill:
+描述应该明确说明何时使用该 Skill：
 ```markdown
 description: Use when user asks to deploy to production, requests deployment, or says "ship it"
 ```
 
 ### 2. 分步指令
-将复杂任务分解为明确的步骤:
+将复杂任务分解为明确的步骤：
 ```markdown
 1. First, do X
 2. Then, do Y
@@ -796,7 +1054,7 @@ description: Use when user asks to deploy to production, requests deployment, or
 ```
 
 ### 3. 包含示例
-在 Skills 中包含示例输出或代码:
+在 Skills 中包含示例输出或代码：
 ````markdown
 ## Example Output
 ```json
@@ -808,19 +1066,19 @@ description: Use when user asks to deploy to production, requests deployment, or
 ````
 
 ### 4. 使用支持文件
-大型参考文档不需要在每次调用时加载:
+大型参考文档不需要在每次调用时加载：
 ```markdown
 For complete API details, see [reference.md](reference.md)
 ```
 
 ### 5. 限制工具访问
-只授予必要的工具权限:
+只授予必要的工具权限：
 ```markdown
 allowed-tools: Read, Grep, Glob
 ```
 
 ### 6. 测试你的 Skills
-创建后立即测试:
+创建后立即测试：
 ```bash
 # 测试自动调用
 claude . "trigger condition from description"
@@ -835,21 +1093,130 @@ claude . "trigger condition from description"
 - 将详细内容移到支持文件
 
 ### 8. 版本控制
-将项目 Skills 纳入版本控制:
+将项目 Skills 纳入版本控制：
 ```bash
 git add .claude/skills/
 git commit -m "feat: add code-review skill"
 ```
 
+## ❓ 常见问题
+
+### Q: Skill 不生效？
+
+**可能原因和解决方案**：
+1. 检查 description 是否包含触发关键词
+2. 确认 skill 文件在正确目录（`~/.claude/skills/` 或 `.claude/skills/`）
+3. 验证 YAML frontmatter 格式正确（`---` 标记）
+4. 使用 `list skills` 命令查看 skill 是否被识别
+5. 尝试直接调用：`/skill-name`
+6. 检查是否设置了 `disable-model-invocation: true`
+7. 重启 Claude 或重新加载
+
+### Q: 如何更新 skill？
+
+- 直接编辑 `SKILL.md` 或相关文件
+- 保存后即可生效，无需重启
+- 如果修改了 frontmatter，建议重启 Claude Code
+
+### Q: 可以删除 skill 吗？
+
+- 直接删除 skill 目录即可
+- 如果是项目 skill，建议同时更新版本控制
+
+### Q: 如何分享 skill？
+
+**项目级别**：
+```bash
+git add .claude/skills/
+git commit -m "feat: add new skill"
+```
+
+**个人分享**：
+- 将整个 skill 目录打包
+- 或上传到 GitHub 供他人下载
+
+### Q: Skill 和自定义命令有什么区别？
+
+- Skills 是自定义命令的增强版
+- Skills 支持多文件、子代理、动态上下文等高级功能
+- 旧的 `.claude/commands/` 文件仍然有效
+- 建议新项目使用 Skills
+
+### Q: 多个项目可以共享同一个 skill 吗？
+
+可以！将 skill 放在个人目录：
+```bash
+~/.claude/skills/my-shared-skill/
+```
+
+所有项目都可以使用。项目级 skill 会覆盖同名的个人 skill。
+
+---
+
+## 其他生成 Skill 的方法
+
+### 方法一：参考官方示例修改
+
+1. 从 https://github.com/anthropics/skills 下载相似的 skill
+2. 复制到你的 skill 目录
+3. 修改 `SKILL.md` 中的描述和内容
+4. 替换示例和模板文件
+
+### 方法二：使用基础模板
+
+```markdown
+---
+name: skill-name
+description: 做什么 + 什么时候使用（必须包含触发关键词）
+---
+
+# Skill 名称
+
+## 快速开始
+[核心使用步骤]
+
+## 工作流程
+1. 步骤一
+2. 步骤二
+3. 步骤三
+
+## 示例
+[具体示例]
+
+## 注意事项
+[重要提示]
+```
+
+### 方法三：让 Claude 帮你写
+
+直接描述需求，让 Claude 生成完整的 skill 内容：
+```
+"帮我写一个 code-review 的 skill，要求：
+1. 检查代码质量和安全性
+2. 遵循团队编码规范
+3. 输出格式化的审查报告"
+```
+
+然后手动保存 Claude 生成的内容到 `SKILL.md`。
+
+---
+
 ## 下一步
 
-**相关资源**:
+**相关资源**：
 - [子代理指南](03-子代理使用.md) - 将任务委派给专门的代理
 - [自定义命令和 Hook](13-自定义命令.md) - 围绕工具事件自动化工作流
 - [规则文件系统](04-规则文件系统.md) - 管理 CLAUDE.md 文件以获得持久上下文
 - [权限管理](12-权限管理.md) - 控制工具和技能访问
 
+**官方资源**：
+- 📖 [完整官方文档](https://code.claude.com/docs/zh-CN/skills)
+- 🔗 [官方 Skills 仓库](https://github.com/anthropics/skills)
+- 🌐 [Agent Skills 开放标准](https://agentskills.io)
+
 ---
 
-**时间提示**: 本章阅读 20 分钟,实践 30 分钟 ⏱️
-**难度**: ⭐⭐
+**时间提示**：本章阅读 25 分钟，实践 30-60 分钟 ⏱️  
+**难度**：⭐⭐
+
+> 💡 **提示**：第一次创建建议先用 skill-creator，熟悉后再手动创建。参考官方示例能快速上手。

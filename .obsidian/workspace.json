@@ -171,6 +171,12 @@
   },
   "active": "011c8154dbdc3d00",
   "lastOpenFiles": [
+    "aiagent_tutorial/Pasted image 20260122175539.png",
+    "aiagent_tutorial/Pasted image 20260122175516.png",
+    "aiagent_tutorial/Pasted image 20260122175506.png",
+    "aiagent_tutorial/Pasted image 20260122175408.png",
+    "aiagent_tutorial/Claude_Skill编写教程.md",
+    "aiagent_tutorial",
     "docs/19-按岗位场景.md",
     "docs/17-老项目开发指南.md",
     "docs_backup_20260127_085021/11-new-project-workflow.md",
@@ -196,8 +202,6 @@
     "docs/20-Skills指南.md",
     "docs/21-模型切换.md",
     "SHORTCUTS_COMPLETE.md",
-    "SHORTCUTS_CORRECTION.md",
-    "MERGE_CHANGES.md",
     "fix_all.py",
     "update_refs.py",
     "update-references.sh",
@@ -206,7 +210,6 @@
     "未命名.base",
     "examples",
     "claudecode-best-practices/sources.csv",
-    "claudecode-best-practices/article_fetcher.py",
-    "claudecode-best-practices/_config.yml"
+    "claudecode-best-practices/article_fetcher.py"
   ]
 }
