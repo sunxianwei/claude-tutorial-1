@@ -136,7 +136,7 @@ Cursor 是基于 VS Code 的 AI 编辑器，与 Claude Code 有天然的兼容�
 **步骤 1：安装 Claude Code**
 
 ```bash
-# 注意：安装通过 Claude Desktop 应用完成
+npm install -g @anthropic-ai/claude-code
 ```
 
 **步骤 2：在 Cursor 中配置**

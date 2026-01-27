@@ -1,10 +1,5 @@
 # 03 - MCP 配置指南：扩展 Claude Code 的能力
 
-> ⚠️ **命令验证提示**
->
-> 本文档命令已更新至 Claude Code 2.1.5。如遇到问题，请查看 [故障排查指南](00-故障排查指南.md) 或 [命令验证报告](00-命令验证报告.md)。
-
-
 ## 什么是 MCP？
 
 **MCP (Model Context Protocol)** 是一个标准协议,允许 Claude AI 通过定义明确的接口来访问外部工具和数据源。
@@ -63,7 +58,7 @@ claude mcp remove <服务器名称>
 claude mcp list
 
 # 查看 MCP 服务器详情
-claude mcp get <服务器名称>
+claude mcp info <服务器名称>
 ```
 
 **实战示例：**
@@ -1291,7 +1286,7 @@ claude mcp add <服务器名称> -- <npm 包命令>
 claude mcp remove <服务器名称>
 
 # 查看 MCP 服务器详情
-claude mcp get <服务器名称>
+claude mcp info <服务器名称>
 
 # 测试 MCP 服务器连接
 claude mcp test <服务器名称>
@@ -1479,7 +1474,7 @@ GITLAB_PROJECT_ID=your_project_id
 claude mcp list
 
 # 查看详细信息
-claude mcp get <server-name>
+claude mcp info <server-name>
 ```
 
 ### 测试常用 MCP
@@ -1580,7 +1575,7 @@ claude mcp add <name> -- npx -y <package>
 claude --debug .
 
 # 2. 测试单个 MCP
-claude mcp get <server-name>
+claude mcp info <server-name>
 
 # 3. 检查 JSON 配置
 cat .claude/mcp-servers.json | jq .
