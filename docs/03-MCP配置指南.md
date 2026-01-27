@@ -2,7 +2,7 @@
 
 ## 什么是 MCP？
 
-**MCP (Model Context Protocol)** 是一个标准协议，允许 Claude AI 通过定义明确的接口来访问外部工具和数据源。
+**MCP (Model Context Protocol)** 是一个标准协议,允许 Claude AI 通过定义明确的接口来访问外部工具和数据源。
 
 ### MCP 解决的问题
 
@@ -91,7 +91,7 @@ claude mcp list
 
 ### 方式 2：手动配置文件
 
-如果你需要更精细的控制，可以手动编辑配置文件。
+如果你需要更精细的控制,可以手动编辑配置文件。
 
 #### 步骤 1：创建 MCP 配置文件
 
@@ -131,9 +131,9 @@ claude .
 
 Claude Code 会自动加载所有配置的 MCP 服务器。
 
-## 常用 MCP 服务器配置
+---
 
-### 📚 官方 MCP 资源
+## 📚 官方 MCP 资源
 
 **官方仓库和文档：**
 - **MCP 官方规范**: https://spec.modelcontextprotocol.io
@@ -147,9 +147,13 @@ Claude Code 会自动加载所有配置的 MCP 服务器。
 - **MCP 服务器集合**: https://mcp.so
 - **社区讨论**: https://github.com/modelcontextprotocol/servers/discussions
 
+---
+
+## 常用 MCP 服务器配置
+
 ### 1️⃣ 文件系统 MCP（必装）
 
-**用途：** 给 Claude 完整的项目文件访问权限
+**用途：** 给 Claude 完整的项目文件访问权限  
 **官方包**: [@modelcontextprotocol/server-filesystem](https://github.com/modelcontextprotocol/servers/tree/main/src/filesystem)
 
 ```json
@@ -734,9 +738,30 @@ browser.evaluate("document.title")
 
 ---
 
-## 前端开发 MCP 套装
+## 📦 开箱即用的配置示例
 
-适合 Vue/React 开发的推荐组合：
+### 最小化配置（推荐新手）
+
+```json
+{
+  "mcpServers": {
+    "filesystem": {
+      "command": "npx",
+      "args": ["@modelcontextprotocol/server-filesystem", "."]
+    },
+    "git": {
+      "command": "npx",
+      "args": ["@modelcontextprotocol/server-git", "."]
+    }
+  }
+}
+```
+
+**功能：** 文件管理 + 版本控制
+
+---
+
+### Vue + Node.js 完整配置
 
 ```json
 {
@@ -752,30 +777,31 @@ browser.evaluate("document.title")
     "npm": {
       "command": "npx",
       "args": ["@modelcontextprotocol/server-npm"]
+    },
+    "github": {
+      "command": "npx",
+      "args": ["@modelcontextprotocol/server-github"],
+      "env": {
+        "GITHUB_TOKEN": "${GITHUB_TOKEN}"
+      }
     }
   }
 }
 ```
 
-**推荐指令集合：**
+**功能：** 文件管理 + 版本控制 + 依赖管理 + GitHub 集成
 
+**安装命令：**
 ```bash
-# 创建新组件
-"claude . 为购物车功能创建 Vue 组件"
-
-# 优化性能
-"claude . 分析页面性能并优化"
-
-# 管理依赖
-"claude . 更新所有过期的依赖"
-
-# 自动测试
-"claude . 为 UserProfile 组件添加单元测试"
+npm install --save-dev @modelcontextprotocol/server-filesystem \
+                       @modelcontextprotocol/server-git \
+                       @modelcontextprotocol/server-npm \
+                       @modelcontextprotocol/server-github
 ```
 
-## 后端开发 MCP 套装
+---
 
-适合 Java/Spring Boot 开发的推荐组合：
+### Java + PostgreSQL 完整配置
 
 ```json
 {
@@ -794,32 +820,27 @@ browser.evaluate("document.title")
       "env": {
         "PG_HOST": "localhost",
         "PG_PORT": "5432",
-        "PG_DATABASE": "myapp",
+        "PG_DATABASE": "myapp_dev",
         "PG_USER": "postgres",
-        "PG_PASSWORD": "password"
+        "PG_PASSWORD": "${DB_PASSWORD}"
+      }
+    },
+    "github": {
+      "command": "npx",
+      "args": ["@modelcontextprotocol/server-github"],
+      "env": {
+        "GITHUB_TOKEN": "${GITHUB_TOKEN}"
       }
     }
   }
 }
 ```
 
-**推荐指令集合：**
+**功能：** 文件管理 + 版本控制 + 数据库管理 + GitHub 集成
 
-```bash
-# 创建 API 端点
-"claude . 为用户模块创建 REST API"
+---
 
-# 数据库迁移
-"claude . 生成订单表迁移脚本"
-
-# 性能优化
-"claude . 分析慢查询并优化"
-
-# 文档生成
-"claude . 为所有 Controller 生成 Swagger 文档"
-```
-
-## 测试开发 MCP 套装
+### 微服务架构配置
 
 ```json
 {
@@ -831,26 +852,27 @@ browser.evaluate("document.title")
     "git": {
       "command": "npx",
       "args": ["@modelcontextprotocol/server-git", "."]
+    },
+    "postgres": {
+      "command": "npx",
+      "args": ["@modelcontextprotocol/server-postgres"],
+      "env": {
+        "PG_HOST": "localhost",
+        "PG_PORT": "5432",
+        "PG_DATABASE": "services",
+        "PG_USER": "postgres",
+        "PG_PASSWORD": "${DB_PASSWORD}"
+      }
+    },
+    "docker": {
+      "command": "npx",
+      "args": ["@modelcontextprotocol/server-docker"]
     }
   }
 }
 ```
 
-**推荐工作流：**
-
-```bash
-# 生成测试用例
-"claude . 为 UserService 生成单元测试"
-
-# 集成测试
-"claude . 创建登录流程的集成测试"
-
-# 性能测试
-"claude . 为 API 编写负载测试"
-
-# 测试覆盖率
-"claude . 分析测试覆盖率并补充缺失的测试"
-```
+---
 
 ## MCP 环境变量管理
 
@@ -1146,167 +1168,12 @@ GITLAB_TOKEN=your_gitlab_token
 GITLAB_PROJECT_ID=your_project_id
 ```
 
-### 5. MCP 健康检查
-
-#### 定期检查脚本
-
-```bash
-#!/bin/bash
-# check-mcp-health.sh
-
-echo "🔍 检查 MCP 服务器健康状态..."
-
-# 检查每个 MCP 服务器
-for server in filesystem git postgres; do
-  echo "Testing $server..."
-  if claude mcp test "$server"; then
-    echo "✅ $server is healthy"
-  else
-    echo "❌ $server failed"
-    # 尝试重启
-    echo "Attempting to restart $server..."
-    claude mcp restart "$server"
-  fi
-done
-
-echo "✅ Health check completed"
-```
-
-### 6. MCP 故障排查
-
-#### 常见问题和解决方案
-
-**问题 1： MCP 服务器启动失败**
-
-```bash
-# 检查 MCP 日志
-claude mcp logs <server-name>
-
-# 查看详细错误信息
-claude mcp test <server-name> --verbose
-
-# 重新安装 MCP
-claude mcp remove <server-name>
-claude mcp add <server-name> -- <command>
-```
-
-**问题 2： MCP 连接超时**
-
-```bash
-# 增加超时时间
-export MCP_TIMEOUT=60000  # 60 秒
-
-# 检查网络连接
-ping api.modelcontextprotocol.io
-
-# 检查防火墙设置
-```
-
-**问题 3： 环境变量未加载**
-
-```bash
-# 验证环境变量
-echo $PG_PASSWORD
-
-# 手动加载 .env
-source .env
-claude .
-
-# 使用 dotenv
-npm install -g dotenv-cli
-dotenv -e .env -- claude .
-```
-
-### 7. MCP 性能优化
-
-#### 延迟加载 MCP
-
-```json
-{
-  "mcpServers": {
-    "heavy-tool": {
-      "command": "npx",
-      "args": ["heavy-mcp-server"],
-      "lazyLoad": true,
-      "loadTimeout": 10000
-    }
-  }
-}
-```
-
-#### 禁用不需要的 MCP
-
-```bash
-# 临时禁用 MCP
-claude mcp disable postgres
-
-# 重新启用
-claude mcp enable postgres
-
-# 查看状态
-claude mcp list
-```
-
-### 8. MCP 安全最佳实践
-
-#### 1. 使用环境变量存储敏感信息
-
-```bash
-# ❌ 不要这样做
-{
-  "env": {
-    "API_KEY": "sk-1234567890abcdef"  # 硬编码
-  }
-}
-
-# ✅ 应该这样做
-{
-  "env": {
-    "API_KEY": "${API_KEY}"  # 使用环境变量
-  }
-}
-```
-
-#### 2. 限制 MCP 权限
-
-```json
-{
-  "mcpServers": {
-    "filesystem": {
-      "command": "npx",
-      "args": ["@modelcontextprotocol/server-filesystem", "./src"],
-      "permissions": {
-        "read": true,
-        "write": false
-      }
-    }
-  }
-}
-```
-
-### 9. MCP 团队协作
-
-#### 团队配置模板
-
-创建团队共享的 MCP 配置：
-
-```bash
-# 项目根目录
-.claude/
-├── mcp-servers.json          # 基础配置（提交）
-├── mcp-servers.dev.json      # 开发环境（提交）
-├── mcp-servers.example.json  # 示例配置（提交）
-└── README-MCP.md             # MCP 使用文档（提交）
-
-# 不提交
-.env                           # 个人环境变量（不提交）
-.claude/mcp-servers.local.json # 个人配置覆盖（不提交）
-```
-
 ## 下一章
 
-👉 **[第 4 章：MCP 常用集合](04-MCP常用集合.md)** - 开箱即用的配置示例
+👉 **[第 5 章：SubAgents 使用](05-子代理使用.md)** - 智能代理系统
 
 ---
 
-**时间提示：** 本章阅读 20 分钟，配置 15 分钟 ⏱️
+**时间提示：** 本章阅读 25 分钟，配置 15 分钟 ⏱️
+
+> 💡 **更新说明：** 本章已整合原《MCP 常用集合》内容，提供从基础到高级的完整 MCP 配置方案
