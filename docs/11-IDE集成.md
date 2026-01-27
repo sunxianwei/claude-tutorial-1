@@ -482,7 +482,7 @@ File → Settings → Appearance & Behavior → System Settings
 
 ## 下一章
 
-👉 **[第 15 章：历史会话管理](15-会话管理.md)** - 找回和管理你的对话历史
+👉 **[第 12 章：历史会话管理](12-会话管理.md)** - 找回和管理你的对话历史
 
 ---
 

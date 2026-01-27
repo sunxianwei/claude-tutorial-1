@@ -11,14 +11,10 @@
             "id": "011c8154dbdc3d00",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "docs/02-MCP配置指南.md",
-                "mode": "source",
-                "source": false
-              },
+              "type": "empty",
+              "state": {},
               "icon": "lucide-file",
-              "title": "02-MCP配置指南"
+              "title": "新标签页"
             }
           }
         ]
@@ -171,6 +167,28 @@
   },
   "active": "011c8154dbdc3d00",
   "lastOpenFiles": [
+    "docs/02-MCP配置指南.md",
+    "docs/07-MCP配置指南.md",
+    "docs/15-自定义命令.md",
+    "docs/11-IDE集成.md",
+    "docs/12-会话管理.md",
+    "docs/03-内置工具列表.md",
+    "docs/17-模型切换.md",
+    "docs/02-规则文件系统.md",
+    "docs/05-新项目工作流.md",
+    "docs/06-命令参考.md",
+    "docs/13-子代理使用.md",
+    "docs/16-上下文压缩.md",
+    "docs/10-权限管理.md",
+    "docs/14-Skills指南.md",
+    "docs/04-快捷键速查.md",
+    "docs/21-可视化工具.md",
+    "docs/19-MCP配置实例.md",
+    "docs/18-老项目开发指南.md",
+    "docs/20-按岗位场景.md",
+    "docs/09-最佳实践.md",
+    "docs/08-老项目迁移.md",
+    "reorder_chapters.py",
     "aiagent_tutorial/Pasted image 20260122175539.png",
     "aiagent_tutorial/Pasted image 20260122175516.png",
     "aiagent_tutorial/Pasted image 20260122175506.png",
@@ -182,26 +200,6 @@
     "docs_backup_20260127_085021/11-new-project-workflow.md",
     "docs_backup_20260127_085021/00-basic-tutorial.md",
     "update_chapter_refs.py",
-    "docs/01-安装配置.md",
-    "docs/02-MCP配置指南.md",
-    "docs/03-子代理使用.md",
-    "docs/04-规则文件系统.md",
-    "docs/05-上下文压缩.md",
-    "docs/06-内置工具列表.md",
-    "docs/07-快捷键速查.md",
-    "docs/08-新项目工作流.md",
-    "docs/09-老项目迁移.md",
-    "docs/10-最佳实践.md",
-    "docs/11-命令参考.md",
-    "docs/12-权限管理.md",
-    "docs/13-自定义命令.md",
-    "docs/14-IDE集成.md",
-    "docs/15-会话管理.md",
-    "docs/16-可视化工具.md",
-    "docs/18-MCP配置实例.md",
-    "docs/20-Skills指南.md",
-    "docs/21-模型切换.md",
-    "SHORTCUTS_COMPLETE.md",
     "fix_all.py",
     "update_refs.py",
     "update-references.sh",
@@ -209,7 +207,6 @@
     "未命名.canvas",
     "未命名.base",
     "examples",
-    "claudecode-best-practices/sources.csv",
-    "claudecode-best-practices/article_fetcher.py"
+    "claudecode-best-practices/sources.csv"
   ]
 }

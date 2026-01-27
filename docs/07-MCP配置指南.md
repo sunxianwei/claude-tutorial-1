@@ -1465,7 +1465,7 @@ GITLAB_PROJECT_ID=your_project_id
 
 ## 下一章
 
-👉 **[第 5 章：SubAgents 使用](03-子代理使用.md)** - 智能代理系统
+👉 **[第 5 章：SubAgents 使用](13-子代理使用.md)** - 智能代理系统
 
 ---
 
